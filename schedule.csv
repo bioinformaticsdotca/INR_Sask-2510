@@ -1,13 +1,21 @@
-day_label,date,activity,type,time_1,timezone_1_label,time_2,timezone_2_label
-"Day 1","July 7, 2025","Arrivals & Check-in & Breakfast","Break","7:30","MOUNTAIN","9:30","EASTERN"
-"Day 1","July 7, 2025","Welcome","other","8:00","MOUNTAIN","10:00","EASTERN"
-"Day 2","July 8, 2025","Module 2","Lecture","8:30","MOUNTAIN","10:30","EASTERN"
-"Day 3","July 8, 2025","Module 2","Lecture","8:30","MOUNTAIN","10:30","EASTERN"
-"Day 4","July 8, 2025","Module 2","Lecture","8:30","MOUNTAIN","10:30","EASTERN"
-"Day 5","July 8, 2025","Module 2","Lecture","8:30","MOUNTAIN","10:30","EASTERN"
-"Day 6","July 8, 2025","Module 2","Lecture","8:30","MOUNTAIN","10:30","EASTERN"
-"Day 7","August 12, 2025","Module 2","Lecture","8:30","MOUNTAIN","10:30","EASTERN"
-"Day 7","August 12, 2025","Welcome","other","8:00","MOUNTAIN","10:00","EASTERN"
-"Day 7","August 12, 2025","Welcome","Lecture","8:00","MOUNTAIN","10:00","EASTERN"
-
-
+day_label,date,activity,type,time_1,timezone_1_label,,
+October 6,2025-10-06,Arrivals & Check-in,break,09:00,Time (CST),,
+October 6,2025-10-06,Welcome (Coordinator),activity,09:00,Time (CST),,
+October 6,2025-10-06,Module 1 (Part A),activity,09:15,Time (CST),,
+October 6,2025-10-06,Break (30min),break,10:30,Time (CST),,
+October 6,2025-10-06,Module 1 (Part B),activity,11:00,Time (CST),,
+October 6,2025-10-06,Lunch (1h),break,12:30,Time (CST),,
+October 6,2025-10-06,Module 2,activity,13:30,Time (CST),,
+October 6,2025-10-06,Break (30min),break,15:00,Time (CST),,
+October 6,2025-10-06,Module 2,activity,15:30,Time (CST),,
+October 6,2025-10-06,Finished,break,17:30,Time (CST),,
+October 7,2025-10-07,Arrivals,break,08:45,Time (CST),,
+October 7,2025-10-07,Module 3 (Part A),activity,09:00,Time (CST),,
+October 7,2025-10-07,Break (30min),break,10:30,Time (CST),,
+October 7,2025-10-07,Module 3 (Part B),activity,11:00,Time (CST),,
+October 7,2025-10-07,Class photo + Lunch (1h),break,12:30,Time (CST),,
+October 7,2025-10-07,Module 4 (Part A),activity,13:30,Time (CST),,
+October 7,2025-10-07,Break (30min),break,15:00,Time (CST),,
+October 7,2025-10-07,Module 4 (Part B),activity,15:30,Time (CST),,
+October 7,2025-10-07,Survey & Closing Remarks,activity,17:00,Time (CST),,
+October 7,2025-10-07,Finished,break,17:30,Time (CST),,
