@@ -22,7 +22,7 @@ Welcome to the 2025 Introduction to R Canadian Bioinformatics Workshop webpage!
 
 ## Pre-work
 
-<!--[You can find your pre-work here.](LINK TO PREWORK)-->
+[You can find your pre-work here.](https://docs.google.com/forms/d/e/1FAIpQLSeJxCyYGuRbbbmOsibx7BnSH3F1SY_IheVu5ira-5uoDMZ_xA/viewform?usp=dialog)
 
 ## Class Photo
 
