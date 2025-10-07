@@ -6,7 +6,6 @@ schedule
 meet-your-faculty
 mohamed-helmy
 sylvia-li
-data-and-compute-setup
 course-data-downloads
 compute-setup
 part-modules

@@ -8,7 +8,7 @@ IF YOUR WORKSHOP INCLUDES COMPUTE:
 - IF IT IS MORE APPROPRIATE, YOU CAN INCLUDE THE DATA DOWNLOAD LINKS IN EACH OF THE MODULES.
 -->
 
-# Data and Compute Setup
+Data and Compute Setup
 
 #### Course data downloads
 Coming soon!
