@@ -12,3 +12,25 @@ LOCATION
 
 BIO GOES HERE-->
 
+#### Mohamed Helmy
+
+<img src="./img/faculty/Mo.jpg" width="200" alt="Photo of NAME">
+
+Principal Scientist and Adjunct Professor <br>
+Vaccine and Infectious Disease Organization (VIDO), University of Saskatchewan <br>
+Saskatoon, Saskatchewan, Canada
+
+mohamed.helmy@usask.ca
+
+Mohamed is a Computational Systems Biologist and Principal Scientist leading the Bioinformatics and Systems Biology Lab (BSBL) at the Vaccine and Infectious Disease Organization (VIDO), University of Saskatchewan. He received his MSc and PhD in Computational Systems Biology from Keio University (Tokyo, Japan) and completed his postdoctoral training in bioinformatics at Kyoto University and the University of Toronto. Mohamed’s interdisciplinary research profile bridges biology, computer science, and public health.
+
+
+#### Sylvia Li
+
+<img src="./img/faculty/Sylvia.png" width="200" alt="Photo of NAME">
+
+Graduate student <br>
+Vaccine and Infectious Disease Organization (VIDO), University of Saskatchewan <br>
+Saskatoon, Saskatchewan, Canada
+
+Sylvia is a Computer science MSc student at the University of Saskatchewan, supervised by Dr. Helmy. She holds dual BSc degrees in Bioinformatics and Computer science. Currently her work focuses on bacterial genomic data.
