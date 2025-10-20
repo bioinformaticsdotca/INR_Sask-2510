@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Module 2 | Introduction to R 2025</title>
+  <title>Vector | Introduction to R 2025</title>
   <meta name="description" content="Workshop website for the 2025 Introduction to R Canadian Bioinformatics Workshop" />
   <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Module 2 | Introduction to R 2025" />
+  <meta property="og:title" content="Vector | Introduction to R 2025" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="https://bioinformaticsdotca.github.io/INR_Sask-2510/img/bioinformatics_logo.png" />
   <meta property="og:description" content="Workshop website for the 2025 Introduction to R Canadian Bioinformatics Workshop" />
   <meta name="github-repo" content="bioinformaticsdotca/INR_Sask-2510" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Module 2 | Introduction to R 2025" />
+  <meta name="twitter:title" content="Vector | Introduction to R 2025" />
   
   <meta name="twitter:description" content="Workshop website for the 2025 Introduction to R Canadian Bioinformatics Workshop" />
   <meta name="twitter:image" content="https://bioinformaticsdotca.github.io/INR_Sask-2510/img/bioinformatics_logo.png" />
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="module-1.html"/>
-<link rel="next" href="module-3.html"/>
+<link rel="prev" href="data-structures.html"/>
+<link rel="next" href="install-bioconductot-packages.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -186,13 +186,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="module-1.html"><a href="module-1.html#a"><i class="fa fa-check"></i>1A</a></li>
 <li class="chapter" data-level="" data-path="module-1.html"><a href="module-1.html#b"><i class="fa fa-check"></i>1B</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="module-1.html"><a href="module-1.html#lab-1a"><i class="fa fa-check"></i>Lab 1A</a>
-<ul>
-<li class="chapter" data-level="" data-path="module-1.html"><a href="module-1.html#variables"><i class="fa fa-check"></i>Variables</a></li>
-<li class="chapter" data-level="" data-path="module-1.html"><a href="module-1.html#data-structures"><i class="fa fa-check"></i>Data Structures</a></li>
-<li class="chapter" data-level="" data-path="module-1.html"><a href="module-1.html#install-bioconductor-packages"><i class="fa fa-check"></i>Install BioconductoR packages</a></li>
+<li class="chapter" data-level="" data-path="module-1.html"><a href="module-1.html#lab-1a"><i class="fa fa-check"></i>Lab 1A</a></li>
 </ul></li>
-</ul></li>
+<li class="chapter" data-level="" data-path="calculate-the-sum-of-them.html"><a href="calculate-the-sum-of-them.html"><i class="fa fa-check"></i>Calculate the sum of them</a></li>
+<li class="chapter" data-level="" data-path="calculate-the-square-root-of-the-total.html"><a href="calculate-the-square-root-of-the-total.html"><i class="fa fa-check"></i>Calculate the square root of the total</a></li>
+<li class="chapter" data-level="" data-path="data-structures.html"><a href="data-structures.html"><i class="fa fa-check"></i>Data Structures</a></li>
+<li class="chapter" data-level="" data-path="vector.html"><a href="vector.html"><i class="fa fa-check"></i>Vector</a></li>
+<li class="chapter" data-level="" data-path="install-bioconductot-packages.html"><a href="install-bioconductot-packages.html"><i class="fa fa-check"></i>Install BioconductoT packages</a></li>
 <li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html"><i class="fa fa-check"></i>Module 2</a>
 <ul>
 <li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#lecture-1"><i class="fa fa-check"></i>Lecture</a></li>
@@ -237,23 +237,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="module-2" class="section level1 hasAnchor">
-<h1>Module 2<a href="module-2.html#module-2" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="lecture-1" class="section level2 hasAnchor">
-<h2>Lecture<a href="module-2.html#lecture-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-</div>
-<div id="lab" class="section level2 hasAnchor">
-<h2>Lab<a href="module-2.html#lab" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-
-</div>
+<div id="vector" class="section level1 hasAnchor">
+<h1>Vector<a href="vector.html#vector" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>v &lt;- c(1,2,3,4)
+#Matrix
+m &lt;- matrix(1:6, nrow = 2)
+#Dataframe
+df &lt;- data.frame(age=c(25,30), name=c(“Mo”,“Tom”), group=c(“A”, “B”))
+#List
+lst &lt;- list(numbers=v, info=df)</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="module-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="module-3.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="data-structures.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="install-bioconductot-packages.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -284,7 +284,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/bioinformaticsdotca/INR_Sask-2510/blob/main/020-module-2.Rmd",
+    "link": "https://github.com/bioinformaticsdotca/INR_Sask-2510/blob/main/010-module-1.Rmd",
     "text": "Edit"
   },
   "history": {
