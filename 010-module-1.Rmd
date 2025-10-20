@@ -13,4 +13,10 @@
 ### 1B
 <iframe src="https://docs.google.com/presentation/d/1U1PHHxf_9nJbht6ZWAm9-XpDARuTRPD5/preview" width="640" height="480" allow="autoplay"></iframe>  
 
-## Lab
+## Lecture Slides
+
+
+## Lab (Scripts)
+<!--<iframe src="https://github.com/bioinformaticsdotca/INR_Sask-2510/blob/main/docs/content-files/Day1-Mod1A_Examples.R">Day1-Mod1A_Examples.R</iframe> <br> 
+<!--<iframe src="https://github.com/bioinformaticsdotca/INR_Sask-2510/blob/main/docs/content-files/Day1-Mod1B_Examples.R">Day1-Mod1B_Examples.R</iframe> <br>
+<!--<iframe src="https://github.com/bioinformaticsdotca/INR_Sask-2510/blob/main/docs/content-files/Day1-Mod1B_Tasks.R">Day1-Mod1B_Tasks.R</iframe> <br>
