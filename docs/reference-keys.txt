@@ -19,6 +19,8 @@ data-structures
 install-bioconductor-packages
 module-2
 lecture-1
+a-1
+b-1
 lab
 module-3
 lecture-2
