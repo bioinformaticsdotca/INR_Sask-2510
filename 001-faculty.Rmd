@@ -14,7 +14,7 @@ BIO GOES HERE-->
 
 #### Mohamed Helmy
 
-<img src="./img/faculty/Mo.jpg" width="200" alt="Photo of NAME">
+<img src="./img/faculty/Mo.jpg" width="200" alt="Photo of Mohamed Helmy">
 
 Principal Scientist and Adjunct Professor <br>
 Vaccine and Infectious Disease Organization (VIDO), University of Saskatchewan <br>
@@ -27,7 +27,7 @@ Mohamed is a Computational Systems Biologist and Principal Scientist leading the
 
 #### Sylvia Li
 
-<img src="./img/faculty/Sylvia.png" width="200" alt="Photo of NAME">
+<img src="./img/faculty/Sylvia.png" width="200" alt="Photo of Sylvia Li">
 
 Graduate student <br>
 Vaccine and Infectious Disease Organization (VIDO), University of Saskatchewan <br>
