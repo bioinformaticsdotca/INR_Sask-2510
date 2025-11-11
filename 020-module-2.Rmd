@@ -10,6 +10,9 @@
 
 ### 2B
 <iframe src="https://docs.google.com/presentation/d/1Dd5Dow29sairtG8tTLhsYChQV3qZGc5o/preview" width="640" height="480" allow="autoplay"></iframe>  
+```{r}
+
+```
 
 
 
