@@ -17,6 +17,7 @@ lab-1a
 variables
 data-structures
 install-bioconductor-packages
+lab-1b
 module-2
 lecture-1
 a-1
