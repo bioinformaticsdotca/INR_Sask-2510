@@ -549,7 +549,22 @@ data(ALL)
 ## Lecture
 
 
-## Lab
+<!--<iframe width="640" height="360" src="YOUTUBE EMBED LINK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>-->
+
+### 4A
+<iframe src="https://docs.google.com/presentation/d/1nUW-fN5kYR54YkVQShvNiW8WGXjGsPRG/preview" width="640" height="480" allow="autoplay"></iframe>  
+
+### 4B
+<iframe src="https://docs.google.com/presentation/d/1fQXC4YI7SkF28jHUF7wlzawYssiXtvEd/preview" width="640" height="480" allow="autoplay"></iframe>  
+
+
+
+
+
+
+
+
+## Lab 
 
 <!--chapter:end:040-module-4.Rmd-->
 
