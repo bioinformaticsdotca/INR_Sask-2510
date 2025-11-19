@@ -462,6 +462,833 @@ List
 ##  NA's   :5                 (Other):13
 \end{verbatim}
 
+\subsection{Patients older than 40}\label{patients-older-than-40}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{older\_patients }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(df2, age }\SpecialCharTok{\textgreater{}} \DecValTok{40}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Patients who relapsed}\label{patients-who-relapsed}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{relapsed\_patients }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(df2, relapse }\SpecialCharTok{==} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Subsetting and Filtering}\label{subsetting-and-filtering}
+
+\subsubsection{subset()}\label{subset}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{subset}\NormalTok{(df2, age }\SpecialCharTok{\textgreater{}} \DecValTok{40} \SpecialCharTok{\&}\NormalTok{ relapse }\SpecialCharTok{==} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         cod  diagnosis sex age BT remission CR    date.cr t(4;11) t(9;22)
+## 03002  3002  6/24/1998   F  52 B4        CR CR  8/17/1998      NA      NA
+## 04007  4007  7/22/1997   M  57 B2        CR CR  9/17/1997   FALSE   FALSE
+## 08012  8012 10/22/1998   M  55 B3        CR CR   1/9/1999   FALSE   FALSE
+## 15004 15004  2/10/2000   M  44 B1        CR CR   4/3/2000    TRUE   FALSE
+## 16004 16004  4/19/1997   F  58 B1        CR CR  7/15/1997    TRUE   FALSE
+## 19005 19005 11/15/1997   F  48 B1        CR CR   2/3/1998   FALSE   FALSE
+## 20002 20002   5/9/1997   F  58 B2        CR CR  8/19/1997   FALSE    TRUE
+## 24005 24005   1/3/1997   F  45 B1        CR CR   4/8/1997    TRUE   FALSE
+## 24017 24017  9/15/1998   M  57 B2        CR CR  12/7/1998   FALSE    TRUE
+## 26003 26003  2/18/1998   F  49 B4        CR CR  4/21/1998   FALSE   FALSE
+## 28028 28028   7/8/1998   M  47 B1        CR CR   9/3/1998    TRUE   FALSE
+## 28036 28036 12/23/1998   M  52 B3        CR CR   3/8/1999   FALSE    TRUE
+## 43001 43001 11/14/1996   M  41 B1        CR CR  1/30/1997   FALSE    TRUE
+## 49006 49006  8/12/1998   F  43 B2        CR CR 11/19/1998      NA      NA
+## 62003 62003  12/4/1998   M  53 B4        CR CR  1/28/1999   FALSE    TRUE
+## 63001 63001   7/8/1997   M  49 B1        CR CR   9/2/1997      NA      NA
+## 84004 84004  9/25/1998   M  50  B        CR CR  12/1/1998      NA      NA
+## 16002 16002  4/10/1997   M  50 T3        CR CR  6/10/1997      NA      NA
+## 43015 43015  2/29/2000   M  52 T2        CR CR   6/8/2000   FALSE   FALSE
+##       cyto.normal         citog mol.biol fusion protein mdr   kinet   ccr
+## 03002          NA          <NA>  BCR/ABL           p190 NEG dyploid FALSE
+## 04007       FALSE       del(6q)      NEG           <NA> NEG dyploid FALSE
+## 08012       FALSE   simple alt.      NEG           <NA> NEG dyploid FALSE
+## 15004       FALSE       t(4;11) ALL1/AF4           <NA> NEG dyploid FALSE
+## 16004       FALSE       t(4;11) ALL1/AF4           <NA> NEG dyploid FALSE
+## 19005        TRUE        normal ALL1/AF4           <NA> NEG dyploid FALSE
+## 20002       FALSE t(9;22)+other  BCR/ABL           p190 NEG dyploid FALSE
+## 24005       FALSE       t(4;11) ALL1/AF4           <NA> NEG dyploid FALSE
+## 24017       FALSE t(9;22)+other  BCR/ABL           p190 NEG hyperd. FALSE
+## 26003       FALSE  del(p15/p16)  BCR/ABL           p210 NEG dyploid FALSE
+## 28028       FALSE       t(4;11) ALL1/AF4           <NA> NEG dyploid FALSE
+## 28036       FALSE       t(9;22)  BCR/ABL           p190 NEG dyploid FALSE
+## 43001       FALSE       t(9;22)  BCR/ABL      p190/p210 POS dyploid FALSE
+## 49006          NA          <NA>  BCR/ABL           p210 NEG dyploid FALSE
+## 62003       FALSE t(9;22)+other  BCR/ABL           p210 NEG hyperd. FALSE
+## 63001          NA          <NA> ALL1/AF4           <NA> NEG dyploid FALSE
+## 84004          NA          <NA>  BCR/ABL           p190 NEG dyploid FALSE
+## 16002          NA          <NA>      NEG           <NA> NEG hyperd. FALSE
+## 43015        TRUE        normal      NEG           <NA> NEG dyploid FALSE
+##       relapse transplant f.u date last seen
+## 03002    TRUE      FALSE REL     10/15/1999
+## 04007    TRUE      FALSE REL      11/4/1997
+## 08012    TRUE      FALSE REL       4/9/1999
+## 15004    TRUE      FALSE REL     12/19/2000
+## 16004    TRUE      FALSE REL      12/9/1997
+## 19005    TRUE      FALSE REL       2/4/1998
+## 20002    TRUE      FALSE REL     12/15/1997
+## 24005    TRUE      FALSE REL      8/28/1997
+## 24017    TRUE      FALSE REL      2/22/2000
+## 26003    TRUE      FALSE REL       7/1/1998
+## 28028    TRUE      FALSE REL     10/20/1999
+## 28036    TRUE      FALSE REL      3/15/1999
+## 43001    TRUE      FALSE REL      6/28/1998
+## 49006    TRUE      FALSE REL      4/26/1999
+## 62003    TRUE      FALSE REL       8/8/2000
+## 63001    TRUE      FALSE REL      6/10/1998
+## 84004    TRUE      FALSE REL      1/25/1999
+## 16002    TRUE      FALSE REL      12/7/1999
+## 43015    TRUE      FALSE REL      3/15/2002
+\end{verbatim}
+
+\subsection{Indexing with}\label{indexing-with}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df2[df2}\SpecialCharTok{$}\NormalTok{age }\SpecialCharTok{\textgreater{}} \DecValTok{40}\NormalTok{, ]                }\CommentTok{\# filter rows}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         cod  diagnosis  sex age   BT remission                 CR    date.cr
+## 01005  1005  5/21/1997    M  53   B2        CR                 CR   8/6/1997
+## 03002  3002  6/24/1998    F  52   B4        CR                 CR  8/17/1998
+## 04007  4007  7/22/1997    M  57   B2        CR                 CR  9/17/1997
+## 08012  8012 10/22/1998    M  55   B3        CR                 CR   1/9/1999
+## 09008  9008 12/17/1999    M  41   B3        CR                 CR  2/15/2000
+## 12006 12006  2/20/1997    M  46   B3       REF                REF       <NA>
+## 12019 12019   9/4/1997    M  53   B2        CR                 CR 11/11/1997
+## 14016 14016  5/27/1999    M  53   B2      <NA>               <NA>       <NA>
+## 15004 15004  2/10/2000    M  44   B1        CR                 CR   4/3/2000
+## 16004 16004  4/19/1997    F  58   B1        CR                 CR  7/15/1997
+## 16009 16009  7/11/2000    F  43   B2      <NA>               <NA>       <NA>
+## 19005 19005 11/15/1997    F  48   B1        CR                 CR   2/3/1998
+## 20002 20002   5/9/1997    F  58   B2        CR                 CR  8/19/1997
+## 24005 24005   1/3/1997    F  45   B1        CR                 CR   4/8/1997
+## 24011 24011   8/5/1997    F  51   B2      <NA> DEATH IN INDUCTION       <NA>
+## 24017 24017  9/15/1998    M  57   B2        CR                 CR  12/7/1998
+## NA     <NA>       <NA> <NA>  NA <NA>      <NA>               <NA>       <NA>
+## 26003 26003  2/18/1998    F  49   B4        CR                 CR  4/21/1998
+## 27004 27004 10/20/1998    F  48   B2       REF                REF       <NA>
+## 28007 28007  2/21/1997    F  47   B3        CR                 CR   4/7/1997
+## 28021 28021  3/18/1998    F  54   B3        CR        DEATH IN CR  5/22/1998
+## 28028 28028   7/8/1998    M  47   B1        CR                 CR   9/3/1998
+## 28032 28032  9/26/1998    F  52   B1        CR                 CR 10/30/1998
+## 28036 28036 12/23/1998    M  52   B3        CR                 CR   3/8/1999
+## NA.1   <NA>       <NA> <NA>  NA <NA>      <NA>               <NA>       <NA>
+## 30001 30001  1/16/1997    F  54   B3      <NA> DEATH IN INDUCTION       <NA>
+## NA.2   <NA>       <NA> <NA>  NA <NA>      <NA>               <NA>       <NA>
+## 43001 43001 11/14/1996    M  41   B1        CR                 CR  1/30/1997
+## 43007 43007 10/14/1997    M  54   B4        CR                 CR 12/30/1997
+## 49006 49006  8/12/1998    F  43   B2        CR                 CR 11/19/1998
+## 57001 57001  1/29/1997    F  53   B3      <NA> DEATH IN INDUCTION       <NA>
+## 62001 62001 11/11/1997    F  50   B4       REF                REF       <NA>
+## 62002 62002  1/15/1998    M  54   B4      <NA> DEATH IN INDUCTION       <NA>
+## 62003 62003  12/4/1998    M  53   B4        CR                 CR  1/28/1999
+## 63001 63001   7/8/1997    M  49   B1        CR                 CR   9/2/1997
+## 84004 84004  9/25/1998    M  50    B        CR                 CR  12/1/1998
+## NA.3   <NA>       <NA> <NA>  NA <NA>      <NA>               <NA>       <NA>
+## 02020  2020  3/23/2000    F  48   T2      <NA> DEATH IN INDUCTION       <NA>
+## 16002 16002  4/10/1997    M  50   T3        CR                 CR  6/10/1997
+## 16007 16007  11/1/1998    M  41   T3        CR                 CR  11/5/1998
+## 31015 31015  12/3/1998    M  48   T2      <NA> DEATH IN INDUCTION       <NA>
+## 43006 43006  6/17/1997    M  41   T2       REF                REF       <NA>
+## 43015 43015  2/29/2000    M  52   T2        CR                 CR   6/8/2000
+## NA.4   <NA>       <NA> <NA>  NA <NA>      <NA>               <NA>       <NA>
+##       t(4;11) t(9;22) cyto.normal            citog mol.biol fusion protein  mdr
+## 01005   FALSE    TRUE       FALSE          t(9;22)  BCR/ABL           p210  NEG
+## 03002      NA      NA          NA             <NA>  BCR/ABL           p190  NEG
+## 04007   FALSE   FALSE       FALSE          del(6q)      NEG           <NA>  NEG
+## 08012   FALSE   FALSE       FALSE      simple alt.      NEG           <NA>  NEG
+## 09008   FALSE    TRUE       FALSE    t(9;22)+other  BCR/ABL           p190  NEG
+## 12006   FALSE    TRUE       FALSE          t(9;22)  BCR/ABL           p210  NEG
+## 12019   FALSE   FALSE        TRUE           normal      NEG           <NA>  POS
+## 14016   FALSE    TRUE       FALSE          t(9;22)  BCR/ABL           p210  NEG
+## 15004    TRUE   FALSE       FALSE          t(4;11) ALL1/AF4           <NA>  NEG
+## 16004    TRUE   FALSE       FALSE          t(4;11) ALL1/AF4           <NA>  NEG
+## 16009      NA      NA          NA             <NA>      NEG           <NA>  POS
+## 19005   FALSE   FALSE        TRUE           normal ALL1/AF4           <NA>  NEG
+## 20002   FALSE    TRUE       FALSE    t(9;22)+other  BCR/ABL           p190  NEG
+## 24005    TRUE   FALSE       FALSE          t(4;11) ALL1/AF4           <NA>  NEG
+## 24011   FALSE    TRUE       FALSE          t(9;22)  BCR/ABL           p210  POS
+## 24017   FALSE    TRUE       FALSE    t(9;22)+other  BCR/ABL           p190  NEG
+## NA         NA      NA          NA             <NA>     <NA>           <NA> <NA>
+## 26003   FALSE   FALSE       FALSE     del(p15/p16)  BCR/ABL           p210  NEG
+## 27004   FALSE    TRUE       FALSE t(9;22)+del(p15)  BCR/ABL           p190  NEG
+## 28007   FALSE   FALSE        TRUE           normal      NEG           <NA>  NEG
+## 28021   FALSE    TRUE       FALSE    t(9;22)+other  BCR/ABL      p190/p210  NEG
+## 28028    TRUE   FALSE       FALSE          t(4;11) ALL1/AF4           <NA>  NEG
+## 28032    TRUE   FALSE       FALSE          t(4;11) ALL1/AF4           <NA>  NEG
+## 28036   FALSE    TRUE       FALSE          t(9;22)  BCR/ABL           p190  NEG
+## NA.1       NA      NA          NA             <NA>     <NA>           <NA> <NA>
+## 30001   FALSE    TRUE       FALSE    t(9;22)+other  BCR/ABL           p190  NEG
+## NA.2       NA      NA          NA             <NA>     <NA>           <NA> <NA>
+## 43001   FALSE    TRUE       FALSE          t(9;22)  BCR/ABL      p190/p210  POS
+## 43007   FALSE   FALSE        TRUE           normal      NEG           <NA>  NEG
+## 49006      NA      NA          NA             <NA>  BCR/ABL           p210  NEG
+## 57001   FALSE   FALSE        TRUE           normal      NEG           <NA>  NEG
+## 62001   FALSE    TRUE       FALSE    t(9;22)+other  BCR/ABL           <NA>  NEG
+## 62002   FALSE    TRUE       FALSE    t(9;22)+other  BCR/ABL           <NA>  NEG
+## 62003   FALSE    TRUE       FALSE    t(9;22)+other  BCR/ABL           p210  NEG
+## 63001      NA      NA          NA             <NA> ALL1/AF4           <NA>  NEG
+## 84004      NA      NA          NA             <NA>  BCR/ABL           p190  NEG
+## NA.3       NA      NA          NA             <NA>     <NA>           <NA> <NA>
+## 02020   FALSE   FALSE       FALSE     complex alt.      NEG           <NA>  NEG
+## 16002      NA      NA          NA             <NA>      NEG           <NA>  NEG
+## 16007      NA      NA          NA             <NA>      NEG           <NA>  NEG
+## 31015      NA      NA          NA             <NA>      NEG           <NA>  POS
+## 43006   FALSE   FALSE       FALSE      simple alt.      NEG           <NA>  POS
+## 43015   FALSE   FALSE        TRUE           normal      NEG           <NA>  NEG
+## NA.4       NA      NA          NA             <NA>     <NA>           <NA> <NA>
+##         kinet   ccr relapse transplant               f.u date last seen
+## 01005 dyploid FALSE   FALSE       TRUE BMT / DEATH IN CR           <NA>
+## 03002 dyploid FALSE    TRUE      FALSE               REL     10/15/1999
+## 04007 dyploid FALSE    TRUE      FALSE               REL      11/4/1997
+## 08012 dyploid FALSE    TRUE      FALSE               REL       4/9/1999
+## 09008 hyperd.  TRUE   FALSE       TRUE         BMT / CCR       00/09/01
+## 12006 dyploid    NA      NA         NA              <NA>           <NA>
+## 12019 dyploid  TRUE   FALSE      FALSE               CCR       6/6/2002
+## 14016    <NA>    NA      NA         NA              <NA>           <NA>
+## 15004 dyploid FALSE    TRUE      FALSE               REL     12/19/2000
+## 16004 dyploid FALSE    TRUE      FALSE               REL      12/9/1997
+## 16009 dyploid  TRUE   FALSE      FALSE         CCR / OFF      5/23/2002
+## 19005 dyploid FALSE    TRUE      FALSE               REL       2/4/1998
+## 20002 dyploid FALSE    TRUE      FALSE               REL     12/15/1997
+## 24005 dyploid FALSE    TRUE      FALSE               REL      8/28/1997
+## 24011 dyploid    NA      NA         NA              <NA>           <NA>
+## 24017 hyperd. FALSE    TRUE      FALSE               REL      2/22/2000
+## NA       <NA>    NA      NA         NA              <NA>           <NA>
+## 26003 dyploid FALSE    TRUE      FALSE               REL       7/1/1998
+## 27004 dyploid    NA      NA         NA              <NA>           <NA>
+## 28007 dyploid  TRUE   FALSE      FALSE               CCR      3/22/2002
+## 28021 hyperd. FALSE   FALSE      FALSE DEATH IN CR (ICR)           <NA>
+## 28028 dyploid FALSE    TRUE      FALSE               REL     10/20/1999
+## 28032 dyploid  TRUE   FALSE      FALSE               CCR      5/16/2002
+## 28036 dyploid FALSE    TRUE      FALSE               REL      3/15/1999
+## NA.1     <NA>    NA      NA         NA              <NA>           <NA>
+## 30001 hyperd.    NA      NA         NA              <NA>           <NA>
+## NA.2     <NA>    NA      NA         NA              <NA>           <NA>
+## 43001 dyploid FALSE    TRUE      FALSE               REL      6/28/1998
+## 43007 hyperd.  TRUE   FALSE      FALSE               CCR      5/29/2002
+## 49006 dyploid FALSE    TRUE      FALSE               REL      4/26/1999
+## 57001 hyperd.    NA      NA         NA              <NA>           <NA>
+## 62001 hyperd.    NA      NA         NA              <NA>           <NA>
+## 62002 hyperd.    NA      NA         NA              <NA>           <NA>
+## 62003 hyperd. FALSE    TRUE      FALSE               REL       8/8/2000
+## 63001 dyploid FALSE    TRUE      FALSE               REL      6/10/1998
+## 84004 dyploid FALSE    TRUE      FALSE               REL      1/25/1999
+## NA.3     <NA>    NA      NA         NA              <NA>           <NA>
+## 02020 dyploid    NA      NA         NA              <NA>           <NA>
+## 16002 hyperd. FALSE    TRUE      FALSE               REL      12/7/1999
+## 16007 dyploid  TRUE   FALSE      FALSE               CCR       1/8/2002
+## 31015 dyploid    NA      NA         NA              <NA>           <NA>
+## 43006 dyploid    NA      NA         NA              <NA>           <NA>
+## 43015 dyploid FALSE    TRUE      FALSE               REL      3/15/2002
+## NA.4     <NA>    NA      NA         NA              <NA>           <NA>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df2[df2}\SpecialCharTok{$}\NormalTok{age }\SpecialCharTok{\textgreater{}} \DecValTok{40} \SpecialCharTok{\&}\NormalTok{ df2}\SpecialCharTok{$}\NormalTok{relapse, ]   }\CommentTok{\# multiple conditions (same as df$Relapse == T)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         cod  diagnosis  sex age   BT remission   CR    date.cr t(4;11) t(9;22)
+## 03002  3002  6/24/1998    F  52   B4        CR   CR  8/17/1998      NA      NA
+## 04007  4007  7/22/1997    M  57   B2        CR   CR  9/17/1997   FALSE   FALSE
+## 08012  8012 10/22/1998    M  55   B3        CR   CR   1/9/1999   FALSE   FALSE
+## NA     <NA>       <NA> <NA>  NA <NA>      <NA> <NA>       <NA>      NA      NA
+## NA.1   <NA>       <NA> <NA>  NA <NA>      <NA> <NA>       <NA>      NA      NA
+## 15004 15004  2/10/2000    M  44   B1        CR   CR   4/3/2000    TRUE   FALSE
+## 16004 16004  4/19/1997    F  58   B1        CR   CR  7/15/1997    TRUE   FALSE
+## 19005 19005 11/15/1997    F  48   B1        CR   CR   2/3/1998   FALSE   FALSE
+## 20002 20002   5/9/1997    F  58   B2        CR   CR  8/19/1997   FALSE    TRUE
+## 24005 24005   1/3/1997    F  45   B1        CR   CR   4/8/1997    TRUE   FALSE
+## NA.2   <NA>       <NA> <NA>  NA <NA>      <NA> <NA>       <NA>      NA      NA
+## 24017 24017  9/15/1998    M  57   B2        CR   CR  12/7/1998   FALSE    TRUE
+## 26003 26003  2/18/1998    F  49   B4        CR   CR  4/21/1998   FALSE   FALSE
+## NA.3   <NA>       <NA> <NA>  NA <NA>      <NA> <NA>       <NA>      NA      NA
+## 28028 28028   7/8/1998    M  47   B1        CR   CR   9/3/1998    TRUE   FALSE
+## 28036 28036 12/23/1998    M  52   B3        CR   CR   3/8/1999   FALSE    TRUE
+## NA.4   <NA>       <NA> <NA>  NA <NA>      <NA> <NA>       <NA>      NA      NA
+## NA.5   <NA>       <NA> <NA>  NA <NA>      <NA> <NA>       <NA>      NA      NA
+## NA.6   <NA>       <NA> <NA>  NA <NA>      <NA> <NA>       <NA>      NA      NA
+## 43001 43001 11/14/1996    M  41   B1        CR   CR  1/30/1997   FALSE    TRUE
+## 49006 49006  8/12/1998    F  43   B2        CR   CR 11/19/1998      NA      NA
+## NA.7   <NA>       <NA> <NA>  NA <NA>      <NA> <NA>       <NA>      NA      NA
+## NA.8   <NA>       <NA> <NA>  NA <NA>      <NA> <NA>       <NA>      NA      NA
+## NA.9   <NA>       <NA> <NA>  NA <NA>      <NA> <NA>       <NA>      NA      NA
+## 62003 62003  12/4/1998    M  53   B4        CR   CR  1/28/1999   FALSE    TRUE
+## 63001 63001   7/8/1997    M  49   B1        CR   CR   9/2/1997      NA      NA
+## 84004 84004  9/25/1998    M  50    B        CR   CR  12/1/1998      NA      NA
+## NA.10  <NA>       <NA> <NA>  NA <NA>      <NA> <NA>       <NA>      NA      NA
+## NA.11  <NA>       <NA> <NA>  NA <NA>      <NA> <NA>       <NA>      NA      NA
+## 16002 16002  4/10/1997    M  50   T3        CR   CR  6/10/1997      NA      NA
+## NA.12  <NA>       <NA> <NA>  NA <NA>      <NA> <NA>       <NA>      NA      NA
+## NA.13  <NA>       <NA> <NA>  NA <NA>      <NA> <NA>       <NA>      NA      NA
+## 43015 43015  2/29/2000    M  52   T2        CR   CR   6/8/2000   FALSE   FALSE
+## NA.14  <NA>       <NA> <NA>  NA <NA>      <NA> <NA>       <NA>      NA      NA
+##       cyto.normal         citog mol.biol fusion protein  mdr   kinet   ccr
+## 03002          NA          <NA>  BCR/ABL           p190  NEG dyploid FALSE
+## 04007       FALSE       del(6q)      NEG           <NA>  NEG dyploid FALSE
+## 08012       FALSE   simple alt.      NEG           <NA>  NEG dyploid FALSE
+## NA             NA          <NA>     <NA>           <NA> <NA>    <NA>    NA
+## NA.1           NA          <NA>     <NA>           <NA> <NA>    <NA>    NA
+## 15004       FALSE       t(4;11) ALL1/AF4           <NA>  NEG dyploid FALSE
+## 16004       FALSE       t(4;11) ALL1/AF4           <NA>  NEG dyploid FALSE
+## 19005        TRUE        normal ALL1/AF4           <NA>  NEG dyploid FALSE
+## 20002       FALSE t(9;22)+other  BCR/ABL           p190  NEG dyploid FALSE
+## 24005       FALSE       t(4;11) ALL1/AF4           <NA>  NEG dyploid FALSE
+## NA.2           NA          <NA>     <NA>           <NA> <NA>    <NA>    NA
+## 24017       FALSE t(9;22)+other  BCR/ABL           p190  NEG hyperd. FALSE
+## 26003       FALSE  del(p15/p16)  BCR/ABL           p210  NEG dyploid FALSE
+## NA.3           NA          <NA>     <NA>           <NA> <NA>    <NA>    NA
+## 28028       FALSE       t(4;11) ALL1/AF4           <NA>  NEG dyploid FALSE
+## 28036       FALSE       t(9;22)  BCR/ABL           p190  NEG dyploid FALSE
+## NA.4           NA          <NA>     <NA>           <NA> <NA>    <NA>    NA
+## NA.5           NA          <NA>     <NA>           <NA> <NA>    <NA>    NA
+## NA.6           NA          <NA>     <NA>           <NA> <NA>    <NA>    NA
+## 43001       FALSE       t(9;22)  BCR/ABL      p190/p210  POS dyploid FALSE
+## 49006          NA          <NA>  BCR/ABL           p210  NEG dyploid FALSE
+## NA.7           NA          <NA>     <NA>           <NA> <NA>    <NA>    NA
+## NA.8           NA          <NA>     <NA>           <NA> <NA>    <NA>    NA
+## NA.9           NA          <NA>     <NA>           <NA> <NA>    <NA>    NA
+## 62003       FALSE t(9;22)+other  BCR/ABL           p210  NEG hyperd. FALSE
+## 63001          NA          <NA> ALL1/AF4           <NA>  NEG dyploid FALSE
+## 84004          NA          <NA>  BCR/ABL           p190  NEG dyploid FALSE
+## NA.10          NA          <NA>     <NA>           <NA> <NA>    <NA>    NA
+## NA.11          NA          <NA>     <NA>           <NA> <NA>    <NA>    NA
+## 16002          NA          <NA>      NEG           <NA>  NEG hyperd. FALSE
+## NA.12          NA          <NA>     <NA>           <NA> <NA>    <NA>    NA
+## NA.13          NA          <NA>     <NA>           <NA> <NA>    <NA>    NA
+## 43015        TRUE        normal      NEG           <NA>  NEG dyploid FALSE
+## NA.14          NA          <NA>     <NA>           <NA> <NA>    <NA>    NA
+##       relapse transplant  f.u date last seen
+## 03002    TRUE      FALSE  REL     10/15/1999
+## 04007    TRUE      FALSE  REL      11/4/1997
+## 08012    TRUE      FALSE  REL       4/9/1999
+## NA         NA         NA <NA>           <NA>
+## NA.1       NA         NA <NA>           <NA>
+## 15004    TRUE      FALSE  REL     12/19/2000
+## 16004    TRUE      FALSE  REL      12/9/1997
+## 19005    TRUE      FALSE  REL       2/4/1998
+## 20002    TRUE      FALSE  REL     12/15/1997
+## 24005    TRUE      FALSE  REL      8/28/1997
+## NA.2       NA         NA <NA>           <NA>
+## 24017    TRUE      FALSE  REL      2/22/2000
+## 26003    TRUE      FALSE  REL       7/1/1998
+## NA.3       NA         NA <NA>           <NA>
+## 28028    TRUE      FALSE  REL     10/20/1999
+## 28036    TRUE      FALSE  REL      3/15/1999
+## NA.4       NA         NA <NA>           <NA>
+## NA.5       NA         NA <NA>           <NA>
+## NA.6       NA         NA <NA>           <NA>
+## 43001    TRUE      FALSE  REL      6/28/1998
+## 49006    TRUE      FALSE  REL      4/26/1999
+## NA.7       NA         NA <NA>           <NA>
+## NA.8       NA         NA <NA>           <NA>
+## NA.9       NA         NA <NA>           <NA>
+## 62003    TRUE      FALSE  REL       8/8/2000
+## 63001    TRUE      FALSE  REL      6/10/1998
+## 84004    TRUE      FALSE  REL      1/25/1999
+## NA.10      NA         NA <NA>           <NA>
+## NA.11      NA         NA <NA>           <NA>
+## 16002    TRUE      FALSE  REL      12/7/1999
+## NA.12      NA         NA <NA>           <NA>
+## NA.13      NA         NA <NA>           <NA>
+## 43015    TRUE      FALSE  REL      3/15/2002
+## NA.14      NA         NA <NA>           <NA>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df2[, }\FunctionTok{c}\NormalTok{(}\StringTok{"age"}\NormalTok{, }\StringTok{"BT"}\NormalTok{)]             }\CommentTok{\# select columns}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       age BT
+## 01005  53 B2
+## 01010  19 B2
+## 03002  52 B4
+## 04006  38 B1
+## 04007  57 B2
+## 04008  17 B1
+## 04010  18 B1
+## 04016  16 B1
+## 06002  15 B2
+## 08001  40 B2
+## 08011  33 B3
+## 08012  55 B3
+## 08018   5 B3
+## 08024  18 B2
+## 09008  41 B3
+## 09017  27  B
+## 11005  27 B2
+## 12006  46 B3
+## 12007  37 B2
+## 12012  36 B3
+## 12019  53 B2
+## 12026  39 B2
+## 14016  53 B2
+## 15001  20 B1
+## 15004  44 B1
+## 15005  28 B2
+## 16004  58 B1
+## 16009  43 B2
+## 19005  48 B1
+## 20002  58 B2
+## 22009  19  B
+## 22010  26  B
+## 22011  19 B2
+## 22013  32 B2
+## 24001  17 B2
+## 24005  45 B1
+## 24008  20 B2
+## 24010  16 B2
+## 24011  51 B2
+## 24017  57 B2
+## 24018  29 B2
+## 24019  16 B4
+## 24022  32 B4
+## 25003  15 B2
+## 25006  NA B2
+## 26001  21 B2
+## 26003  49 B4
+## 26005  38 B2
+## 26008  17 B1
+## 27003  26 B2
+## 27004  48 B2
+## 28001  16 B3
+## 28003  18 B4
+## 28005  17 B3
+## 28006  22 B3
+## 28007  47 B3
+## 28019  21 B4
+## 28021  54 B3
+## 28023  26 B3
+## 28024  19 B1
+## 28028  47 B1
+## 28031  18 B1
+## 28032  52 B1
+## 28035  27 B3
+## 28036  52 B3
+## 28037  18 B3
+## 28042  18 B3
+## 28043  23 B3
+## 28044  16 B3
+## 28047  NA B3
+## 30001  54 B3
+## 31007  25 B1
+## 31011  31 B3
+## 33005  19 B1
+## 36001  24 B4
+## 36002  23 B2
+## 37013  NA B2
+## 43001  41 B1
+## 43004  37 B3
+## 43007  54 B4
+## 43012  18 B4
+## 48001  19 B2
+## 49006  43 B2
+## 57001  53 B3
+## 62001  50 B4
+## 62002  54 B4
+## 62003  53 B4
+## 63001  49 B1
+## 64001  20 B2
+## 64002  26 B2
+## 65005  22 B2
+## 68001  36 B1
+## 68003  27 B2
+## 84004  50  B
+## LAL5   NA  B
+## 01003  31  T
+## 01007  16 T3
+## 02020  48 T2
+## 04018  17 T2
+## 09002  40 T3
+## 10005  22 T2
+## 11002  30  T
+## 12008  18 T4
+## 15006  22 T2
+## 16002  50 T3
+## 16007  41 T3
+## 17003  40  T
+## 18001  28 T2
+## 19002  25 T3
+## 19008  16 T2
+## 19014  31 T2
+## 19017  14 T2
+## 20005  24 T1
+## 24006  19 T4
+## 26009  37  T
+## 28008  23 T2
+## 28009  30 T3
+## 31015  48 T2
+## 37001  22 T2
+## 43006  41 T2
+## 43015  52 T2
+## 44001  32 T3
+## 49004  24 T3
+## 56007  37 T3
+## 64005  19 T2
+## 65003  30 T3
+## 83001  29 T2
+## LAL4   NA  T
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\OtherTok{\textless{}{-}}\NormalTok{ df2[df2}\SpecialCharTok{$}\NormalTok{sex }\SpecialCharTok{==} \StringTok{"F"}\NormalTok{, ] }\CommentTok{\# female patients only (\#Assignment with condition)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{with()}\label{with}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dfrt2 }\OtherTok{\textless{}{-}} \FunctionTok{with}\NormalTok{(df2, df2[age }\SpecialCharTok{\textgreater{}} \DecValTok{40} \SpecialCharTok{\&}\NormalTok{ relapse }\SpecialCharTok{==} \ConstantTok{TRUE}\NormalTok{, ]) }\CommentTok{\#for cleaner syntax}
+\NormalTok{df2[}\FunctionTok{which}\NormalTok{(df2}\SpecialCharTok{$}\NormalTok{age }\SpecialCharTok{\textgreater{}} \DecValTok{40} \SpecialCharTok{\&}\NormalTok{ df2}\SpecialCharTok{$}\NormalTok{relapse }\SpecialCharTok{==} \ConstantTok{TRUE}\NormalTok{), ] }\CommentTok{\# more cleanr syntax}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         cod  diagnosis sex age BT remission CR    date.cr t(4;11) t(9;22)
+## 03002  3002  6/24/1998   F  52 B4        CR CR  8/17/1998      NA      NA
+## 04007  4007  7/22/1997   M  57 B2        CR CR  9/17/1997   FALSE   FALSE
+## 08012  8012 10/22/1998   M  55 B3        CR CR   1/9/1999   FALSE   FALSE
+## 15004 15004  2/10/2000   M  44 B1        CR CR   4/3/2000    TRUE   FALSE
+## 16004 16004  4/19/1997   F  58 B1        CR CR  7/15/1997    TRUE   FALSE
+## 19005 19005 11/15/1997   F  48 B1        CR CR   2/3/1998   FALSE   FALSE
+## 20002 20002   5/9/1997   F  58 B2        CR CR  8/19/1997   FALSE    TRUE
+## 24005 24005   1/3/1997   F  45 B1        CR CR   4/8/1997    TRUE   FALSE
+## 24017 24017  9/15/1998   M  57 B2        CR CR  12/7/1998   FALSE    TRUE
+## 26003 26003  2/18/1998   F  49 B4        CR CR  4/21/1998   FALSE   FALSE
+## 28028 28028   7/8/1998   M  47 B1        CR CR   9/3/1998    TRUE   FALSE
+## 28036 28036 12/23/1998   M  52 B3        CR CR   3/8/1999   FALSE    TRUE
+## 43001 43001 11/14/1996   M  41 B1        CR CR  1/30/1997   FALSE    TRUE
+## 49006 49006  8/12/1998   F  43 B2        CR CR 11/19/1998      NA      NA
+## 62003 62003  12/4/1998   M  53 B4        CR CR  1/28/1999   FALSE    TRUE
+## 63001 63001   7/8/1997   M  49 B1        CR CR   9/2/1997      NA      NA
+## 84004 84004  9/25/1998   M  50  B        CR CR  12/1/1998      NA      NA
+## 16002 16002  4/10/1997   M  50 T3        CR CR  6/10/1997      NA      NA
+## 43015 43015  2/29/2000   M  52 T2        CR CR   6/8/2000   FALSE   FALSE
+##       cyto.normal         citog mol.biol fusion protein mdr   kinet   ccr
+## 03002          NA          <NA>  BCR/ABL           p190 NEG dyploid FALSE
+## 04007       FALSE       del(6q)      NEG           <NA> NEG dyploid FALSE
+## 08012       FALSE   simple alt.      NEG           <NA> NEG dyploid FALSE
+## 15004       FALSE       t(4;11) ALL1/AF4           <NA> NEG dyploid FALSE
+## 16004       FALSE       t(4;11) ALL1/AF4           <NA> NEG dyploid FALSE
+## 19005        TRUE        normal ALL1/AF4           <NA> NEG dyploid FALSE
+## 20002       FALSE t(9;22)+other  BCR/ABL           p190 NEG dyploid FALSE
+## 24005       FALSE       t(4;11) ALL1/AF4           <NA> NEG dyploid FALSE
+## 24017       FALSE t(9;22)+other  BCR/ABL           p190 NEG hyperd. FALSE
+## 26003       FALSE  del(p15/p16)  BCR/ABL           p210 NEG dyploid FALSE
+## 28028       FALSE       t(4;11) ALL1/AF4           <NA> NEG dyploid FALSE
+## 28036       FALSE       t(9;22)  BCR/ABL           p190 NEG dyploid FALSE
+## 43001       FALSE       t(9;22)  BCR/ABL      p190/p210 POS dyploid FALSE
+## 49006          NA          <NA>  BCR/ABL           p210 NEG dyploid FALSE
+## 62003       FALSE t(9;22)+other  BCR/ABL           p210 NEG hyperd. FALSE
+## 63001          NA          <NA> ALL1/AF4           <NA> NEG dyploid FALSE
+## 84004          NA          <NA>  BCR/ABL           p190 NEG dyploid FALSE
+## 16002          NA          <NA>      NEG           <NA> NEG hyperd. FALSE
+## 43015        TRUE        normal      NEG           <NA> NEG dyploid FALSE
+##       relapse transplant f.u date last seen
+## 03002    TRUE      FALSE REL     10/15/1999
+## 04007    TRUE      FALSE REL      11/4/1997
+## 08012    TRUE      FALSE REL       4/9/1999
+## 15004    TRUE      FALSE REL     12/19/2000
+## 16004    TRUE      FALSE REL      12/9/1997
+## 19005    TRUE      FALSE REL       2/4/1998
+## 20002    TRUE      FALSE REL     12/15/1997
+## 24005    TRUE      FALSE REL      8/28/1997
+## 24017    TRUE      FALSE REL      2/22/2000
+## 26003    TRUE      FALSE REL       7/1/1998
+## 28028    TRUE      FALSE REL     10/20/1999
+## 28036    TRUE      FALSE REL      3/15/1999
+## 43001    TRUE      FALSE REL      6/28/1998
+## 49006    TRUE      FALSE REL      4/26/1999
+## 62003    TRUE      FALSE REL       8/8/2000
+## 63001    TRUE      FALSE REL      6/10/1998
+## 84004    TRUE      FALSE REL      1/25/1999
+## 16002    TRUE      FALSE REL      12/7/1999
+## 43015    TRUE      FALSE REL      3/15/2002
+\end{verbatim}
+
+\subsection{match() / \%in\% (matching values)}\label{match-in-matching-values}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dfrt }\OtherTok{\textless{}{-}}\NormalTok{ df2[df2}\SpecialCharTok{$}\NormalTok{BT }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"B2"}\NormalTok{, }\StringTok{"B3"}\NormalTok{), ]}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Logical indexing directly}\label{logical-indexing-directly}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df2[df2}\SpecialCharTok{$}\NormalTok{relapse }\SpecialCharTok{==}\NormalTok{ F }\SpecialCharTok{|}\NormalTok{ df2}\SpecialCharTok{$}\NormalTok{sex }\SpecialCharTok{==} \StringTok{"F"}\NormalTok{, ]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         cod  diagnosis  sex age   BT remission                 CR    date.cr
+## 01005  1005  5/21/1997    M  53   B2        CR                 CR   8/6/1997
+## 03002  3002  6/24/1998    F  52   B4        CR                 CR  8/17/1998
+## 04010  4010 10/30/1997    F  18   B1        CR                 CR   1/7/1998
+## 08011  8011  8/21/1998    M  33   B3        CR                 CR  10/8/1998
+## NA     <NA>       <NA> <NA>  NA <NA>      <NA>               <NA>       <NA>
+## 09008  9008 12/17/1999    M  41   B3        CR                 CR  2/15/2000
+## 09017  9017   2/3/2000    F  27    B        CR                 CR  3/23/2000
+## 11005 11005   6/1/1998    M  27   B2        CR        DEATH IN CR   8/3/1998
+## NA.1   <NA>       <NA> <NA>  NA <NA>      <NA>               <NA>       <NA>
+## 12012 12012  5/21/1997    F  36   B3       REF                REF       <NA>
+## 12019 12019   9/4/1997    M  53   B2        CR                 CR 11/11/1997
+## 12026 12026  5/29/1998    M  39   B2       REF                REF       <NA>
+## NA.2   <NA>       <NA> <NA>  NA <NA>      <NA>               <NA>       <NA>
+## 15001 15001   9/3/1997    M  20   B1        CR                 CR 11/11/1997
+## 16004 16004  4/19/1997    F  58   B1        CR                 CR  7/15/1997
+## 16009 16009  7/11/2000    F  43   B2      <NA>               <NA>       <NA>
+## 19005 19005 11/15/1997    F  48   B1        CR                 CR   2/3/1998
+## 20002 20002   5/9/1997    F  58   B2        CR                 CR  8/19/1997
+## 22009 22009  8/10/1999    F  19    B      <NA>               <NA>       <NA>
+## 22010 22010 12/31/1999    F  26    B      <NA>               <NA>       <NA>
+## 22011 22011   4/7/2000    M  19   B2        CR                 CR  5/19/2000
+## NA.3   <NA>       <NA> <NA>  NA <NA>      <NA>               <NA>       <NA>
+## 24001 24001  10/4/1996    F  17   B2        CR                 CR 12/20/1996
+## 24005 24005   1/3/1997    F  45   B1        CR                 CR   4/8/1997
+## 24008 24008  5/14/1997    F  20   B2        CR                 CR  7/31/1997
+## 24010 24010   6/3/1997    F  16   B2        CR                 CR  8/11/1997
+## 24011 24011   8/5/1997    F  51   B2      <NA> DEATH IN INDUCTION       <NA>
+## 24018 24018  2/18/1999    F  29   B2        CR                 CR   5/4/1999
+## 24022 24022 12/21/1999    F  32   B4       REF                REF       <NA>
+## 25003 25003  5/22/1998    M  15   B2        CR                 CR   8/4/1998
+## 25006 25006  3/18/2000 <NA>  NA   B2        CR                 CR   5/8/2000
+## 26001 26001  9/27/1997    M  21   B2        CR                 CR 12/11/1997
+## 26003 26003  2/18/1998    F  49   B4        CR                 CR  4/21/1998
+## 26008 26008  8/25/1999    F  17   B1        CR                 CR 10/14/1999
+## 27003 27003  1/17/1998    F  26   B2        CR                 CR  3/16/1998
+## 27004 27004 10/20/1998    F  48   B2       REF                REF       <NA>
+## NA.4   <NA>       <NA> <NA>  NA <NA>      <NA>               <NA>       <NA>
+## 28003 28003 11/28/1996    M  18   B4        CR                 CR  1/17/1997
+## 28007 28007  2/21/1997    F  47   B3        CR                 CR   4/7/1997
+## 28019 28019  2/10/1998    M  21   B4        CR                 CR   4/2/1998
+## 28021 28021  3/18/1998    F  54   B3        CR        DEATH IN CR  5/22/1998
+## 28024 28024  4/19/1998    F  19   B1        CR                 CR  6/17/1998
+## 28032 28032  9/26/1998    F  52   B1        CR                 CR 10/30/1998
+## 28035 28035 12/21/1998    M  27   B3        CR                 CR  2/12/1999
+## 30001 30001  1/16/1997    F  54   B3      <NA> DEATH IN INDUCTION       <NA>
+## 33005 33005  2/10/1998    F  19   B1        CR                 CR  4/29/1998
+## 36001 36001  9/29/1997    F  24   B4        CR                 CR  12/5/1997
+## NA.5   <NA>       <NA> <NA>  NA <NA>      <NA>               <NA>       <NA>
+## 43004 43004   2/4/1997    F  37   B3        CR                 CR   4/1/1997
+## 43007 43007 10/14/1997    M  54   B4        CR                 CR 12/30/1997
+## 48001 48001  3/22/1997    M  19   B2        CR                 CR  5/20/1997
+## 49006 49006  8/12/1998    F  43   B2        CR                 CR 11/19/1998
+## 57001 57001  1/29/1997    F  53   B3      <NA> DEATH IN INDUCTION       <NA>
+## 62001 62001 11/11/1997    F  50   B4       REF                REF       <NA>
+## NA.6   <NA>       <NA> <NA>  NA <NA>      <NA>               <NA>       <NA>
+## 64002 64002 10/21/1997    F  26   B2        CR                 CR  1/21/1998
+## NA.7   <NA>       <NA> <NA>  NA <NA>      <NA>               <NA>       <NA>
+## 68001 68001  5/15/1997    M  36   B1        CR                 CR  7/22/1997
+## 68003 68003  4/11/2000    F  27   B2      <NA> DEATH IN INDUCTION       <NA>
+## NA.8   <NA>       <NA> <NA>  NA <NA>      <NA>               <NA>       <NA>
+## 01007  1007  9/30/1998    F  16   T3        CR                 CR 11/30/1998
+## 02020  2020  3/23/2000    F  48   T2      <NA> DEATH IN INDUCTION       <NA>
+## 04018  4018  3/24/2000    M  17   T2        CR                 CR  5/23/2000
+## 09002  9002  5/14/1998    F  40   T3        CR                 CR  7/21/1998
+## NA.9   <NA>       <NA> <NA>  NA <NA>      <NA>               <NA>       <NA>
+## 16007 16007  11/1/1998    M  41   T3        CR                 CR  11/5/1998
+## 17003 17003   4/8/1997    F  40    T       REF                REF       <NA>
+## 18001 18001  4/23/1997    F  28   T2       REF                REF       <NA>
+## 19008 19008  4/29/1998    F  16   T2       REF                REF       <NA>
+## 20005 20005  3/15/2000    M  24   T1        CR                 CR   5/5/2000
+## 24006 24006  1/14/1997    F  19   T4        CR                 CR  not known
+## 28008 28008  3/27/1997    M  23   T2        CR                 CR  5/27/1997
+## 28009 28009  4/19/1997    F  30   T3        CR                 CR  6/13/1997
+## NA.10  <NA>       <NA> <NA>  NA <NA>      <NA>               <NA>       <NA>
+## NA.11  <NA>       <NA> <NA>  NA <NA>      <NA>               <NA>       <NA>
+## 49004 49004  9/18/1997    M  24   T3        CR                 CR 11/11/1997
+## 56007 56007   8/6/1999    M  37   T3        CR                 CR  9/24/1999
+## NA.12  <NA>       <NA> <NA>  NA <NA>      <NA>               <NA>       <NA>
+## 83001 83001 10/23/1998    M  29   T2        CR                 CR 12/21/1998
+## NA.13  <NA>       <NA> <NA>  NA <NA>      <NA>               <NA>       <NA>
+##       t(4;11) t(9;22) cyto.normal            citog mol.biol fusion protein  mdr
+## 01005   FALSE    TRUE       FALSE          t(9;22)  BCR/ABL           p210  NEG
+## 03002      NA      NA          NA             <NA>  BCR/ABL           p190  NEG
+## 04010   FALSE   FALSE       FALSE     complex alt.      NEG           <NA>  POS
+## 08011   FALSE   FALSE       FALSE     del(p15/p16)  BCR/ABL      p190/p210  NEG
+## NA         NA      NA          NA             <NA>     <NA>           <NA> <NA>
+## 09008   FALSE    TRUE       FALSE    t(9;22)+other  BCR/ABL           p190  NEG
+## 09017   FALSE   FALSE        TRUE           normal      NEG           <NA>  NEG
+## 11005   FALSE   FALSE       FALSE  del(7q) + altro  BCR/ABL           p190  NEG
+## NA.1       NA      NA          NA             <NA>     <NA>           <NA> <NA>
+## 12012   FALSE    TRUE       FALSE          t(9;22)  BCR/ABL           p190  NEG
+## 12019   FALSE   FALSE        TRUE           normal      NEG           <NA>  POS
+## 12026   FALSE    TRUE       FALSE          t(9;22)  BCR/ABL      p190/p210 <NA>
+## NA.2       NA      NA          NA             <NA>     <NA>           <NA> <NA>
+## 15001   FALSE   FALSE        TRUE           normal      NEG           <NA>  NEG
+## 16004    TRUE   FALSE       FALSE          t(4;11) ALL1/AF4           <NA>  NEG
+## 16009      NA      NA          NA             <NA>      NEG           <NA>  POS
+## 19005   FALSE   FALSE        TRUE           normal ALL1/AF4           <NA>  NEG
+## 20002   FALSE    TRUE       FALSE    t(9;22)+other  BCR/ABL           p190  NEG
+## 22009   FALSE   FALSE       FALSE      simple alt.      NEG           <NA>  NEG
+## 22010   FALSE    TRUE       FALSE          t(9;22)  BCR/ABL      p190/p210  NEG
+## 22011   FALSE   FALSE        TRUE           normal      NEG           <NA>  NEG
+## NA.3       NA      NA          NA             <NA>     <NA>           <NA> <NA>
+## 24001      NA      NA          NA             <NA>  BCR/ABL           p190  NEG
+## 24005    TRUE   FALSE       FALSE          t(4;11) ALL1/AF4           <NA>  NEG
+## 24008      NA      NA          NA             <NA>      NEG           <NA>  NEG
+## 24010   FALSE    TRUE       FALSE          t(9;22)  BCR/ABL      p190/p210  NEG
+## 24011   FALSE    TRUE       FALSE          t(9;22)  BCR/ABL           p210  POS
+## 24018      NA      NA          NA             <NA>      NEG           <NA>  POS
+## 24022   FALSE    TRUE       FALSE          t(9;22)  BCR/ABL           p190  POS
+## 25003   FALSE   FALSE       FALSE      simple alt.      NEG           <NA>  POS
+## 25006      NA      NA          NA             <NA>      NEG           <NA>  NEG
+## 26001      NA      NA          NA             <NA>      NEG           <NA>  POS
+## 26003   FALSE   FALSE       FALSE     del(p15/p16)  BCR/ABL           p210  NEG
+## 26008   FALSE   FALSE        TRUE           normal ALL1/AF4           <NA>  NEG
+## 27003      NA      NA          NA             <NA>  BCR/ABL      p190/p210  POS
+## 27004   FALSE    TRUE       FALSE t(9;22)+del(p15)  BCR/ABL           p190  NEG
+## NA.4       NA      NA          NA             <NA>     <NA>           <NA> <NA>
+## 28003      NA      NA          NA             <NA> E2A/PBX1           <NA>  NEG
+## 28007   FALSE   FALSE        TRUE           normal      NEG           <NA>  NEG
+## 28019      NA      NA          NA             <NA>  BCR/ABL           p190  NEG
+## 28021   FALSE    TRUE       FALSE    t(9;22)+other  BCR/ABL      p190/p210  NEG
+## 28024   FALSE   FALSE       FALSE     complex alt.      NEG           <NA>  NEG
+## 28032    TRUE   FALSE       FALSE          t(4;11) ALL1/AF4           <NA>  NEG
+## 28035      NA      NA          NA             <NA>      NEG           <NA>  POS
+## 30001   FALSE    TRUE       FALSE    t(9;22)+other  BCR/ABL           p190  NEG
+## 33005   FALSE   FALSE       FALSE     complex alt.      NEG           <NA>  NEG
+## 36001   FALSE   FALSE        TRUE           normal E2A/PBX1           <NA>  NEG
+## NA.5       NA      NA          NA             <NA>     <NA>           <NA> <NA>
+## 43004      NA      NA          NA             <NA>      NEG           <NA>  NEG
+## 43007   FALSE   FALSE        TRUE           normal      NEG           <NA>  NEG
+## 48001   FALSE   FALSE       FALSE     complex alt.      NEG           <NA>  NEG
+## 49006      NA      NA          NA             <NA>  BCR/ABL           p210  NEG
+## 57001   FALSE   FALSE        TRUE           normal      NEG           <NA>  NEG
+## 62001   FALSE    TRUE       FALSE    t(9;22)+other  BCR/ABL           <NA>  NEG
+## NA.6       NA      NA          NA             <NA>     <NA>           <NA> <NA>
+## 64002      NA      NA          NA             <NA>      NEG           <NA>  NEG
+## NA.7       NA      NA          NA             <NA>     <NA>           <NA> <NA>
+## 68001   FALSE   FALSE        TRUE           normal      NEG           <NA>  NEG
+## 68003   FALSE    TRUE       FALSE    t(9;22)+other  BCR/ABL           p190  NEG
+## NA.8       NA      NA          NA             <NA>     <NA>           <NA> <NA>
+## 01007   FALSE   FALSE       FALSE      simple alt.   NUP-98           <NA>  NEG
+## 02020   FALSE   FALSE       FALSE     complex alt.      NEG           <NA>  NEG
+## 04018   FALSE   FALSE       FALSE      simple alt.      NEG           <NA>  NEG
+## 09002      NA      NA          NA             <NA>      NEG           <NA>  NEG
+## NA.9       NA      NA          NA             <NA>     <NA>           <NA> <NA>
+## 16007      NA      NA          NA             <NA>      NEG           <NA>  NEG
+## 17003      NA      NA          NA             <NA>      NEG           <NA>  POS
+## 18001      NA      NA          NA             <NA>      NEG           <NA>  NEG
+## 19008   FALSE   FALSE        TRUE           normal      NEG           <NA>  POS
+## 20005      NA      NA          NA             <NA>      NEG           <NA>  NEG
+## 24006   FALSE   FALSE       FALSE      simple alt.      NEG           <NA>  NEG
+## 28008   FALSE   FALSE        TRUE           normal      NEG           <NA>  NEG
+## 28009      NA      NA          NA             <NA>      NEG           <NA>  NEG
+## NA.10      NA      NA          NA             <NA>     <NA>           <NA> <NA>
+## NA.11      NA      NA          NA             <NA>     <NA>           <NA> <NA>
+## 49004   FALSE   FALSE       FALSE          del(7q)      NEG           <NA>  POS
+## 56007      NA      NA          NA             <NA>      NEG           <NA>  NEG
+## NA.12      NA      NA          NA             <NA>     <NA>           <NA> <NA>
+## 83001   FALSE   FALSE       FALSE     complex alt.      NEG           <NA>  NEG
+## NA.13      NA      NA          NA             <NA>     <NA>           <NA> <NA>
+##         kinet   ccr relapse transplant               f.u  date last seen
+## 01005 dyploid FALSE   FALSE       TRUE BMT / DEATH IN CR            <NA>
+## 03002 dyploid FALSE    TRUE      FALSE               REL      10/15/1999
+## 04010 hyperd. FALSE    TRUE      FALSE               REL        3/5/1998
+## 08011 dyploid FALSE   FALSE       TRUE BMT / DEATH IN CR            <NA>
+## NA       <NA>    NA      NA         NA              <NA>            <NA>
+## 09008 hyperd.  TRUE   FALSE       TRUE         BMT / CCR        00/09/01
+## 09017 dyploid FALSE    TRUE      FALSE               REL       9/11/2001
+## 11005 dyploid FALSE   FALSE      FALSE       DEATH IN CR            <NA>
+## NA.1     <NA>    NA      NA         NA              <NA>            <NA>
+## 12012 dyploid    NA      NA         NA              <NA>            <NA>
+## 12019 dyploid  TRUE   FALSE      FALSE               CCR        6/6/2002
+## 12026 dyploid FALSE   FALSE      FALSE       DEATH IN CR            <NA>
+## NA.2     <NA>    NA      NA         NA              <NA>            <NA>
+## 15001 dyploid  TRUE   FALSE      FALSE               CCR       6/21/2002
+## 16004 dyploid FALSE    TRUE      FALSE               REL       12/9/1997
+## 16009 dyploid  TRUE   FALSE      FALSE         CCR / OFF       5/23/2002
+## 19005 dyploid FALSE    TRUE      FALSE               REL        2/4/1998
+## 20002 dyploid FALSE    TRUE      FALSE               REL      12/15/1997
+## 22009 dyploid    NA      NA         NA              <NA>            <NA>
+## 22010 dyploid    NA      NA         NA              <NA>            <NA>
+## 22011 dyploid  TRUE   FALSE      FALSE               CCR       7/31/2002
+## NA.3     <NA>    NA      NA         NA              <NA>            <NA>
+## 24001 dyploid FALSE    TRUE      FALSE               REL       2/10/1997
+## 24005 dyploid FALSE    TRUE      FALSE               REL       8/28/1997
+## 24008 dyploid FALSE   FALSE       TRUE         BMT / CCR 00/09/20+T12501
+## 24010 dyploid FALSE    TRUE       TRUE         BMT / REL       8/24/1998
+## 24011 dyploid    NA      NA         NA              <NA>            <NA>
+## 24018 dyploid FALSE    TRUE      FALSE               REL       7/22/2000
+## 24022 dyploid    NA      NA         NA              <NA>            <NA>
+## 25003 dyploid  TRUE   FALSE      FALSE               CCR       6/10/2002
+## 25006    <NA>  TRUE   FALSE      FALSE               CCR        3/3/2002
+## 26001 dyploid  TRUE   FALSE      FALSE               CCR       7/31/2002
+## 26003 dyploid FALSE    TRUE      FALSE               REL        7/1/1998
+## 26008 dyploid FALSE    TRUE      FALSE               REL       6/26/2000
+## 27003 dyploid FALSE    TRUE      FALSE               REL        5/6/1998
+## 27004 dyploid    NA      NA         NA              <NA>            <NA>
+## NA.4     <NA>    NA      NA         NA              <NA>            <NA>
+## 28003 hyperd.  TRUE   FALSE      FALSE               CCR      12/31/2002
+## 28007 dyploid  TRUE   FALSE      FALSE               CCR       3/22/2002
+## 28019 hyperd.  TRUE   FALSE       TRUE         BMT / CCR       3/21/2001
+## 28021 hyperd. FALSE   FALSE      FALSE DEATH IN CR (ICR)            <NA>
+## 28024 hyperd.  TRUE   FALSE      FALSE               CCR      12/31/2002
+## 28032 dyploid  TRUE   FALSE      FALSE               CCR       5/16/2002
+## 28035 hyperd.  TRUE   FALSE      FALSE               CCR       5/20/2002
+## 30001 hyperd.    NA      NA         NA              <NA>            <NA>
+## 33005 dyploid  TRUE   FALSE      FALSE               CCR       6/28/2002
+## 36001 dyploid FALSE    TRUE      FALSE               REL        1/7/1998
+## NA.5     <NA>    NA      NA         NA              <NA>            <NA>
+## 43004 dyploid  TRUE   FALSE      FALSE               CCR       3/20/2001
+## 43007 hyperd.  TRUE   FALSE      FALSE               CCR       5/29/2002
+## 48001 hyperd. FALSE   FALSE      FALSE MUD / DEATH IN CR      12/18/1998
+## 49006 dyploid FALSE    TRUE      FALSE               REL       4/26/1999
+## 57001 hyperd.    NA      NA         NA              <NA>            <NA>
+## 62001 hyperd.    NA      NA         NA              <NA>            <NA>
+## NA.6     <NA>    NA      NA         NA              <NA>            <NA>
+## 64002 hyperd. FALSE   FALSE       TRUE BMT / DEATH IN CR            <NA>
+## NA.7     <NA>    NA      NA         NA              <NA>            <NA>
+## 68001 dyploid  TRUE   FALSE      FALSE               CCR       5/10/2002
+## 68003    <NA>    NA      NA         NA              <NA>            <NA>
+## NA.8     <NA>    NA      NA         NA              <NA>            <NA>
+## 01007 hyperd. FALSE   FALSE       TRUE BMT / DEATH IN CR            <NA>
+## 02020 dyploid    NA      NA         NA              <NA>            <NA>
+## 04018 dyploid  TRUE   FALSE      FALSE               CCR       5/14/2001
+## 09002 dyploid FALSE    TRUE      FALSE         REL / SNC       9/14/1999
+## NA.9     <NA>    NA      NA         NA              <NA>            <NA>
+## 16007 dyploid  TRUE   FALSE      FALSE               CCR        1/8/2002
+## 17003 dyploid    NA      NA         NA              <NA>            <NA>
+## 18001 hyperd.    NA      NA         NA              <NA>            <NA>
+## 19008 dyploid    NA      NA         NA              <NA>            <NA>
+## 20005 dyploid  TRUE   FALSE      FALSE               CCR       3/20/2002
+## 24006 dyploid  TRUE   FALSE      FALSE               CCR        6/5/2002
+## 28008 hyperd.  TRUE   FALSE      FALSE               CCR        4/9/2002
+## 28009 dyploid FALSE    TRUE      FALSE               REL       6/30/1998
+## NA.10    <NA>    NA      NA         NA              <NA>            <NA>
+## NA.11    <NA>    NA      NA         NA              <NA>            <NA>
+## 49004 dyploid  TRUE   FALSE      FALSE               CCR       6/14/2001
+## 56007 dyploid  TRUE   FALSE      FALSE               CCR       1/26/2001
+## NA.12    <NA>    NA      NA         NA              <NA>            <NA>
+## 83001 hyperd.  TRUE   FALSE      FALSE               CCR       5/24/2002
+## NA.13    <NA>    NA      NA         NA              <NA>            <NA>
+\end{verbatim}
+
 \chapter{Module 2}\label{module-2}
 
 \section{Lecture}\label{lecture-1}

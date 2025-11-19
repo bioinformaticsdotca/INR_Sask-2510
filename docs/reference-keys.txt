@@ -26,6 +26,14 @@ standard-deviation-and-variance
 extremes
 table-and-frequency
 quick-summary-1
+patients-older-than-40
+patients-who-relapsed
+subsetting-and-filtering
+subset
+indexing-with
+with
+match-in-matching-values
+logical-indexing-directly
 module-2
 lecture-1
 a-1
