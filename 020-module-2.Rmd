@@ -10,13 +10,23 @@
 
 ### 2B
 <iframe src="https://docs.google.com/presentation/d/1Dd5Dow29sairtG8tTLhsYChQV3qZGc5o/preview" width="640" height="480" allow="autoplay"></iframe>  
+
+
+## Lab 2A
+### Read data in to R
+### read CSV - base functions
+
 ```{r}
-
-```
-
-
-
+bp <- read.csv2("Desktop/R/data/BloodPressure_Data.csv") # no sepqration
+# take a quick look at the data
+head(bp)
 
 
 
-## Lab 
+
+
+
+
+
+
+

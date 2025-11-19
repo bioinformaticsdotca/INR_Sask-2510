@@ -13,7 +13,7 @@ df2 <- pData(ALL)
 #summary(pData(ALL)[, c("age", "sex", "BT", "relapse")])
 summary(df2[, c("age", "sex", "BT", "relapse")])
 
-# str() and dim() functions 
+# str() and dim() functions
 dim(df2)
 str(df2)
 
@@ -50,7 +50,7 @@ older_patients <- subset(df2, age > 40)
 # Patients who relapsed
 relapsed_patients <- subset(df2, relapse == TRUE)
 
-# Subsetting and Filtering 
+# Subsetting and Filtering
 # subset()
 subset(df2, age > 40 & relapse == TRUE)
 
@@ -59,14 +59,14 @@ df2[df2$age > 40, ]                # filter rows
 df2[df2$age > 40 & df2$relapse, ]   # multiple conditions (same as df$Relapse == T)
 df2[, c("age", "BT")]             # select columns
 df <- df2[df2$sex == "F", ] # female patients only (#Assignment with condition)
-  
+
 # with()
 dfrt2 <- with(df2, df2[age > 40 & relapse == TRUE, ]) #for cleaner syntax
-df2[which(df2$age > 40 & df2$relapse == TRUE), ] # more cleanr syntax 
-  
+df2[which(df2$age > 40 & df2$relapse == TRUE), ] # more cleanr syntax
+
 #match() / %in% (matching values)
 dfrt <- df2[df2$BT %in% c("B2", "B3"), ]
-  
+
 # Logical indexing directly
 df2[df2$relapse == F | df2$sex == "F", ]
-  
+

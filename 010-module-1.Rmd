@@ -66,12 +66,85 @@ lst
 ```
 
 
+## Lab 1B
 ### Install BioconductoR packages
 ```{r, eval=FALSE}
 install.packages("BiocManager")
 library(BiocManager)
 BiocManager::install("ALL")
-library("ALL")
+library(ALL)
 data(ALL)
+df2 <- pData(ALL)
 ```
-## Lab 1B
+
+###View patient metadata
+```{r}
+data(ALL)
+df2 <- pData(ALL)
+```
+
+###Quick summary
+```{r}
+#summary(pData(ALL)[, c("age", "sex", "BT", "relapse")])
+summary(df2[, c("age", "sex", "BT", "relapse")])
+
+```
+
+### str() and dim() functions 
+```{r}
+dim(df2)
+str(df2)
+```
+### the table() function
+```{r}
+af <- table(df2$age)
+barplot(af, main = "Age frec.")
+```
+### mean and median age
+```{r}
+mn <- mean(df2$age) # this will return NA
+md <- median(df2$age) # this will return NA
+
+mn <- mean(df2$age, na.rm = TRUE) # this will work
+md <- median(df2$age, na.rm = TRUE) # this will work
+```
+
+### standard deviation and variance
+```{r}
+std <- sd(df2$age, na.rm = TRUE)
+vr <- var(df2$age, na.rm = TRUE)
+```
+
+### Extremes
+```{r}
+mxx <- max(df2$age, na.rm = T)
+mnn <- min(df2$age, na.rm = T)
+```
+
+### Table and (Frequency)
+```{r}
+age_dit <- table(df2$age)
+```
+
+###Quick summary
+```{r}
+summary(df2[, c("age", "sex", "BT", "relapse")])
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
