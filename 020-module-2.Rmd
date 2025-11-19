@@ -16,10 +16,6 @@
 ### Read data in to R
 ### read CSV - base functions
 
-```{r}
-bp <- read.csv2("Desktop/R/data/BloodPressure_Data.csv") # no sepqration
-# take a quick look at the data
-head(bp)
 
 
 

@@ -310,19 +310,157 @@ List
 ## 2  30  Tom     B
 \end{verbatim}
 
+\section{Lab 1B}\label{lab-1b}
+
 \subsection{Install BioconductoR packages}\label{install-bioconductor-packages}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{install.packages}\NormalTok{(}\StringTok{"BiocManager"}\NormalTok{)}
-\FunctionTok{library}\NormalTok{(BiocManager)}
 \NormalTok{BiocManager}\SpecialCharTok{::}\FunctionTok{install}\NormalTok{(}\StringTok{"ALL"}\NormalTok{)}
-\FunctionTok{library}\NormalTok{(}\StringTok{"ALL"}\NormalTok{)}
-\FunctionTok{data}\NormalTok{(ALL)}
 \end{Highlighting}
 \end{Shaded}
 
-\section{Lab 1B}\label{lab-1b}
+\subsection{View patient metadata}\label{view-patient-metadata}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(BiocManager)}
+\FunctionTok{library}\NormalTok{(ALL)}
+\FunctionTok{data}\NormalTok{(ALL)}
+\NormalTok{df2 }\OtherTok{\textless{}{-}} \FunctionTok{pData}\NormalTok{(ALL)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Quick summary}\label{quick-summary}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#summary(pData(ALL)[, c("age", "sex", "BT", "relapse")])}
+\FunctionTok{summary}\NormalTok{(df2[, }\FunctionTok{c}\NormalTok{(}\StringTok{"age"}\NormalTok{, }\StringTok{"sex"}\NormalTok{, }\StringTok{"BT"}\NormalTok{, }\StringTok{"relapse"}\NormalTok{)])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       age          sex           BT      relapse       
+##  Min.   : 5.00   F   :42   B2     :36   Mode :logical  
+##  1st Qu.:19.00   M   :83   B3     :23   FALSE:35       
+##  Median :29.00   NA's: 3   B1     :19   TRUE :65       
+##  Mean   :32.37             T2     :15   NA's :28       
+##  3rd Qu.:45.50             B4     :12                  
+##  Max.   :58.00             T3     :10                  
+##  NA's   :5                 (Other):13
+\end{verbatim}
+
+\subsection{str() and dim() functions}\label{str-and-dim-functions}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dim}\NormalTok{(df2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 128  21
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(df2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    128 obs. of  21 variables:
+##  $ cod           : chr  "1005" "1010" "3002" "4006" ...
+##  $ diagnosis     : chr  "5/21/1997" "3/29/2000" "6/24/1998" "7/17/1997" ...
+##  $ sex           : Factor w/ 2 levels "F","M": 2 2 1 2 2 2 1 2 2 2 ...
+##  $ age           : int  53 19 52 38 57 17 18 16 15 40 ...
+##  $ BT            : Factor w/ 10 levels "B","B1","B2",..: 3 3 5 2 3 2 2 2 3 3 ...
+##  $ remission     : Factor w/ 2 levels "CR","REF": 1 1 1 1 1 1 1 1 1 1 ...
+##  $ CR            : chr  "CR" "CR" "CR" "CR" ...
+##  $ date.cr       : chr  "8/6/1997" "6/27/2000" "8/17/1998" "9/8/1997" ...
+##  $ t(4;11)       : logi  FALSE FALSE NA TRUE FALSE FALSE ...
+##  $ t(9;22)       : logi  TRUE FALSE NA FALSE FALSE FALSE ...
+##  $ cyto.normal   : logi  FALSE FALSE NA FALSE FALSE FALSE ...
+##  $ citog         : chr  "t(9;22)" "simple alt." NA "t(4;11)" ...
+##  $ mol.biol      : Factor w/ 6 levels "ALL1/AF4","BCR/ABL",..: 2 4 2 1 4 4 4 4 4 2 ...
+##  $ fusion protein: Factor w/ 3 levels "p190","p190/p210",..: 3 NA 1 NA NA NA NA NA NA 1 ...
+##  $ mdr           : Factor w/ 2 levels "NEG","POS": 1 2 1 1 1 1 2 1 1 1 ...
+##  $ kinet         : Factor w/ 2 levels "dyploid","hyperd.": 1 1 1 1 1 2 2 1 1 NA ...
+##  $ ccr           : logi  FALSE FALSE FALSE FALSE FALSE FALSE ...
+##  $ relapse       : logi  FALSE TRUE TRUE TRUE TRUE TRUE ...
+##  $ transplant    : logi  TRUE FALSE FALSE FALSE FALSE FALSE ...
+##  $ f.u           : chr  "BMT / DEATH IN CR" "REL" "REL" "REL" ...
+##  $ date last seen: chr  NA "8/28/2000" "10/15/1999" "1/23/1998" ...
+\end{verbatim}
+
+\subsection{the table() function}\label{the-table-function}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{af }\OtherTok{\textless{}{-}} \FunctionTok{table}\NormalTok{(df2}\SpecialCharTok{$}\NormalTok{age)}
+\FunctionTok{barplot}\NormalTok{(af, }\AttributeTok{main =} \StringTok{"Age frec."}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{_main_files/figure-latex/unnamed-chunk-12-1.pdf}
+\#\#\# mean and median age
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mn }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(df2}\SpecialCharTok{$}\NormalTok{age) }\CommentTok{\# this will return NA}
+\NormalTok{md }\OtherTok{\textless{}{-}} \FunctionTok{median}\NormalTok{(df2}\SpecialCharTok{$}\NormalTok{age) }\CommentTok{\# this will return NA}
+
+\NormalTok{mn }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(df2}\SpecialCharTok{$}\NormalTok{age, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{) }\CommentTok{\# this will work}
+\NormalTok{md }\OtherTok{\textless{}{-}} \FunctionTok{median}\NormalTok{(df2}\SpecialCharTok{$}\NormalTok{age, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{) }\CommentTok{\# this will work}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{standard deviation and variance}\label{standard-deviation-and-variance}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{std }\OtherTok{\textless{}{-}} \FunctionTok{sd}\NormalTok{(df2}\SpecialCharTok{$}\NormalTok{age, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{vr }\OtherTok{\textless{}{-}} \FunctionTok{var}\NormalTok{(df2}\SpecialCharTok{$}\NormalTok{age, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Extremes}\label{extremes}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mxx }\OtherTok{\textless{}{-}} \FunctionTok{max}\NormalTok{(df2}\SpecialCharTok{$}\NormalTok{age, }\AttributeTok{na.rm =}\NormalTok{ T)}
+\NormalTok{mnn }\OtherTok{\textless{}{-}} \FunctionTok{min}\NormalTok{(df2}\SpecialCharTok{$}\NormalTok{age, }\AttributeTok{na.rm =}\NormalTok{ T)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Table and (Frequency)}\label{table-and-frequency}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{age\_dit }\OtherTok{\textless{}{-}} \FunctionTok{table}\NormalTok{(df2}\SpecialCharTok{$}\NormalTok{age)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Quick summary}\label{quick-summary-1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(df2[, }\FunctionTok{c}\NormalTok{(}\StringTok{"age"}\NormalTok{, }\StringTok{"sex"}\NormalTok{, }\StringTok{"BT"}\NormalTok{, }\StringTok{"relapse"}\NormalTok{)])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       age          sex           BT      relapse       
+##  Min.   : 5.00   F   :42   B2     :36   Mode :logical  
+##  1st Qu.:19.00   M   :83   B3     :23   FALSE:35       
+##  Median :29.00   NA's: 3   B1     :19   TRUE :65       
+##  Mean   :32.37             T2     :15   NA's :28       
+##  3rd Qu.:45.50             B4     :12                  
+##  Max.   :58.00             T3     :10                  
+##  NA's   :5                 (Other):13
+\end{verbatim}
 
 \chapter{Module 2}\label{module-2}
 
@@ -332,7 +470,11 @@ List
 
 \subsection{2B}\label{b-1}
 
-\section{Lab}\label{lab}
+\section{Lab 2A}\label{lab-2a}
+
+\subsection{Read data in to R}\label{read-data-in-to-r}
+
+\subsection{read CSV - base functions}\label{read-csv---base-functions}
 
 \chapter{Module 3}\label{module-3}
 
@@ -342,7 +484,7 @@ List
 
 \subsection{3B}\label{b-2}
 
-\section{Lab}\label{lab-1}
+\section{Lab}\label{lab}
 
 \chapter{Module 4}\label{module-4}
 
@@ -352,7 +494,7 @@ List
 
 \subsection{4B}\label{b-3}
 
-\section{Lab}\label{lab-2}
+\section{Lab}\label{lab-1}
 
   \bibliography{book.bib,packages.bib}
 
