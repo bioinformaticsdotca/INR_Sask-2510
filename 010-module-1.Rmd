@@ -135,19 +135,19 @@ older_patients <- subset(df2, age > 40)
 ```
 
 ### Patients who relapsed
-```{r}
+```{r, message=FALSE}
 relapsed_patients <- subset(df2, relapse == TRUE)
 ```
 
 ### Subsetting and Filtering
 #### subset()
 
-```{r}
+```{r, message=FALSE}
 subset(df2, age > 40 & relapse == TRUE)
 ```
 
 ### Indexing with 
-```{r}
+```{r, message=FALSE}
 df2[df2$age > 40, ]                # filter rows
 df2[df2$age > 40 & df2$relapse, ]   # multiple conditions (same as df$Relapse == T)
 df2[, c("age", "BT")]             # select columns
@@ -156,18 +156,18 @@ df <- df2[df2$sex == "F", ] # female patients only (#Assignment with condition)
 
 ### with()
 
-```{r}
+```{r, message=FALSE}
 dfrt2 <- with(df2, df2[age > 40 & relapse == TRUE, ]) #for cleaner syntax
 df2[which(df2$age > 40 & df2$relapse == TRUE), ] # more cleanr syntax
 ```
 
 ### match() / %in% (matching values)
-```{r}
+```{r, message=FALSE}
 dfrt <- df2[df2$BT %in% c("B2", "B3"), ]
 ```
 
 ### Logical indexing directly
-```{r}
+```{r, message=FALSE}
 df2[df2$relapse == F | df2$sex == "F", ]
 ```
 
