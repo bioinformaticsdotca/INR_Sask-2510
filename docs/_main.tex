@@ -1372,6 +1372,146 @@ List
 \end{Highlighting}
 \end{Shaded}
 
+\subsection{Conditions and loops}\label{conditions-and-loops}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# If \{\} else \{\} statement }
+\ControlFlowTok{if}\NormalTok{ (condition) \{}
+  \CommentTok{\# code if TRUE}
+\NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}
+  \CommentTok{\# code if FALSE}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# If else example}
+\NormalTok{age }\OtherTok{\textless{}{-}} \DecValTok{55}
+\ControlFlowTok{if}\NormalTok{ (age }\SpecialCharTok{\textgreater{}} \DecValTok{50}\NormalTok{) \{}
+  \FunctionTok{print}\NormalTok{(}\StringTok{"Older patient"}\NormalTok{)}
+\NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}
+  \FunctionTok{print}\NormalTok{(}\StringTok{"Younger patient"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# If \{\} else if \{\} else statement }
+
+\ControlFlowTok{if}\NormalTok{ (condition1) \{}
+  \CommentTok{\# code if condition1 is TRUE}
+\NormalTok{\} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (condition2) \{}
+  \CommentTok{\# code if condition2 is TRUE}
+\NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}
+  \CommentTok{\# code if none are TRUE}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# If else if example}
+\NormalTok{age }\OtherTok{\textless{}{-}} \DecValTok{35}
+
+\ControlFlowTok{if}\NormalTok{ (age }\SpecialCharTok{\textless{}} \DecValTok{18}\NormalTok{) \{}
+  \FunctionTok{print}\NormalTok{(}\StringTok{"Child"}\NormalTok{)}
+\NormalTok{\} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (age }\SpecialCharTok{\textgreater{}=} \DecValTok{18} \SpecialCharTok{\&}\NormalTok{ age }\SpecialCharTok{\textless{}} \DecValTok{60}\NormalTok{) \{}
+  \FunctionTok{print}\NormalTok{(}\StringTok{"Adult"}\NormalTok{)}
+\NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}
+  \FunctionTok{print}\NormalTok{(}\StringTok{"Senior"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# for loops}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{) \{}
+  \FunctionTok{print}\NormalTok{(i)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# for loop example}
+\NormalTok{patients }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"P1"}\NormalTok{, }\StringTok{"P2"}\NormalTok{, }\StringTok{"P3"}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{ (p }\ControlFlowTok{in}\NormalTok{ patients) \{}
+  \FunctionTok{print}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Processing:"}\NormalTok{, p))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# the apply () family vs. loops}
+\CommentTok{\# Using a for loop}
+\NormalTok{m }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{9}\NormalTok{, }\AttributeTok{nrow=}\DecValTok{3}\NormalTok{)}
+\NormalTok{row\_sums }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{()}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(m)) \{}
+\NormalTok{  row\_sums[i] }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(m[i, ])}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Using apply()}
+\NormalTok{row\_sums2 }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(m, }\DecValTok{1}\NormalTok{, sum)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# the apply() family}
+\CommentTok{\# apply()}
+\FunctionTok{apply}\NormalTok{(m, }\DecValTok{1}\NormalTok{, sum)   }\CommentTok{\# row sums}
+\FunctionTok{apply}\NormalTok{(m, }\DecValTok{2}\NormalTok{, mean)  }\CommentTok{\# column means}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# lapply()}
+\FunctionTok{lapply}\NormalTok{(}\FunctionTok{list}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{, }\DecValTok{4}\SpecialCharTok{:}\DecValTok{6}\NormalTok{), mean)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# sapply()}
+\FunctionTok{sapply}\NormalTok{(}\FunctionTok{list}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{, }\DecValTok{4}\SpecialCharTok{:}\DecValTok{6}\NormalTok{), mean)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# lapply()}
+\FunctionTok{lapply}\NormalTok{(}\FunctionTok{list}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{, }\DecValTok{4}\SpecialCharTok{:}\DecValTok{6}\NormalTok{), mean)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# tapply()}
+\NormalTok{ages }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{21}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{40}\NormalTok{, }\DecValTok{35}\NormalTok{)}
+\NormalTok{gender }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"M"}\NormalTok{, }\StringTok{"M"}\NormalTok{, }\StringTok{"F"}\NormalTok{, }\StringTok{"F"}\NormalTok{, }\StringTok{"M"}\NormalTok{)}
+\FunctionTok{tapply}\NormalTok{(ages, gender, mean)   }\CommentTok{\# mean age by gender}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# mapply()}
+\NormalTok{nums1 }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{5}
+\NormalTok{nums2 }\OtherTok{\textless{}{-}} \DecValTok{6}\SpecialCharTok{:}\DecValTok{10}
+\FunctionTok{mapply}\NormalTok{(sum, nums1, nums2)   }\CommentTok{\# adds 1+6, 2+7, … 5+10}
+\end{Highlighting}
+\end{Shaded}
+
 \chapter{Module 3}\label{module-3}
 
 \section{Lecture}\label{lecture-2}

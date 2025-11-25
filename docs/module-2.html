@@ -221,6 +221,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#read-data-in-to-r"><i class="fa fa-check"></i>Read data in to R</a></li>
 <li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#read-csv---base-functions"><i class="fa fa-check"></i>read CSV - base functions</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#conditions-and-loops"><i class="fa fa-check"></i>Conditions and loops</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="module-3.html"><a href="module-3.html"><i class="fa fa-check"></i>Module 3</a>
@@ -317,6 +318,77 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb52-3"><a href="module-2.html#cb52-3" tabindex="-1"></a>bp<span class="sc">$</span>Year <span class="ot">&lt;-</span> <span class="fu">year</span>(bp<span class="sc">$</span>Date)</span></code></pre></div>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="module-2.html#cb53-1" tabindex="-1"></a><span class="co"># Filtering blood pressure patients by year and gender</span></span>
 <span id="cb53-2"><a href="module-2.html#cb53-2" tabindex="-1"></a><span class="fu">subset</span>(bp, Year <span class="sc">==</span> <span class="dv">2003</span> <span class="sc">&amp;</span> Gender <span class="sc">==</span> <span class="st">&quot;f&quot;</span>)</span></code></pre></div>
+</div>
+<div id="conditions-and-loops" class="section level3 hasAnchor">
+<h3>Conditions and loops<a href="module-2.html#conditions-and-loops" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="module-2.html#cb54-1" tabindex="-1"></a><span class="co"># If {} else {} statement </span></span>
+<span id="cb54-2"><a href="module-2.html#cb54-2" tabindex="-1"></a><span class="cf">if</span> (condition) {</span>
+<span id="cb54-3"><a href="module-2.html#cb54-3" tabindex="-1"></a>  <span class="co"># code if TRUE</span></span>
+<span id="cb54-4"><a href="module-2.html#cb54-4" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb54-5"><a href="module-2.html#cb54-5" tabindex="-1"></a>  <span class="co"># code if FALSE</span></span>
+<span id="cb54-6"><a href="module-2.html#cb54-6" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="module-2.html#cb55-1" tabindex="-1"></a><span class="co"># If else example</span></span>
+<span id="cb55-2"><a href="module-2.html#cb55-2" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="dv">55</span></span>
+<span id="cb55-3"><a href="module-2.html#cb55-3" tabindex="-1"></a><span class="cf">if</span> (age <span class="sc">&gt;</span> <span class="dv">50</span>) {</span>
+<span id="cb55-4"><a href="module-2.html#cb55-4" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Older patient&quot;</span>)</span>
+<span id="cb55-5"><a href="module-2.html#cb55-5" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb55-6"><a href="module-2.html#cb55-6" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Younger patient&quot;</span>)</span>
+<span id="cb55-7"><a href="module-2.html#cb55-7" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="module-2.html#cb56-1" tabindex="-1"></a><span class="co"># If {} else if {} else statement </span></span>
+<span id="cb56-2"><a href="module-2.html#cb56-2" tabindex="-1"></a></span>
+<span id="cb56-3"><a href="module-2.html#cb56-3" tabindex="-1"></a><span class="cf">if</span> (condition1) {</span>
+<span id="cb56-4"><a href="module-2.html#cb56-4" tabindex="-1"></a>  <span class="co"># code if condition1 is TRUE</span></span>
+<span id="cb56-5"><a href="module-2.html#cb56-5" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (condition2) {</span>
+<span id="cb56-6"><a href="module-2.html#cb56-6" tabindex="-1"></a>  <span class="co"># code if condition2 is TRUE</span></span>
+<span id="cb56-7"><a href="module-2.html#cb56-7" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb56-8"><a href="module-2.html#cb56-8" tabindex="-1"></a>  <span class="co"># code if none are TRUE</span></span>
+<span id="cb56-9"><a href="module-2.html#cb56-9" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="module-2.html#cb57-1" tabindex="-1"></a><span class="co"># If else if example</span></span>
+<span id="cb57-2"><a href="module-2.html#cb57-2" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="dv">35</span></span>
+<span id="cb57-3"><a href="module-2.html#cb57-3" tabindex="-1"></a></span>
+<span id="cb57-4"><a href="module-2.html#cb57-4" tabindex="-1"></a><span class="cf">if</span> (age <span class="sc">&lt;</span> <span class="dv">18</span>) {</span>
+<span id="cb57-5"><a href="module-2.html#cb57-5" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Child&quot;</span>)</span>
+<span id="cb57-6"><a href="module-2.html#cb57-6" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> age <span class="sc">&lt;</span> <span class="dv">60</span>) {</span>
+<span id="cb57-7"><a href="module-2.html#cb57-7" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Adult&quot;</span>)</span>
+<span id="cb57-8"><a href="module-2.html#cb57-8" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb57-9"><a href="module-2.html#cb57-9" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Senior&quot;</span>)</span>
+<span id="cb57-10"><a href="module-2.html#cb57-10" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="module-2.html#cb58-1" tabindex="-1"></a><span class="co"># for loops</span></span>
+<span id="cb58-2"><a href="module-2.html#cb58-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) {</span>
+<span id="cb58-3"><a href="module-2.html#cb58-3" tabindex="-1"></a>  <span class="fu">print</span>(i)</span>
+<span id="cb58-4"><a href="module-2.html#cb58-4" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="module-2.html#cb59-1" tabindex="-1"></a><span class="co"># for loop example</span></span>
+<span id="cb59-2"><a href="module-2.html#cb59-2" tabindex="-1"></a>patients <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;P1&quot;</span>, <span class="st">&quot;P2&quot;</span>, <span class="st">&quot;P3&quot;</span>)</span>
+<span id="cb59-3"><a href="module-2.html#cb59-3" tabindex="-1"></a><span class="cf">for</span> (p <span class="cf">in</span> patients) {</span>
+<span id="cb59-4"><a href="module-2.html#cb59-4" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Processing:&quot;</span>, p))</span>
+<span id="cb59-5"><a href="module-2.html#cb59-5" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="module-2.html#cb60-1" tabindex="-1"></a><span class="co"># the apply () family vs. loops</span></span>
+<span id="cb60-2"><a href="module-2.html#cb60-2" tabindex="-1"></a><span class="co"># Using a for loop</span></span>
+<span id="cb60-3"><a href="module-2.html#cb60-3" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="at">nrow=</span><span class="dv">3</span>)</span>
+<span id="cb60-4"><a href="module-2.html#cb60-4" tabindex="-1"></a>row_sums <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb60-5"><a href="module-2.html#cb60-5" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(m)) {</span>
+<span id="cb60-6"><a href="module-2.html#cb60-6" tabindex="-1"></a>  row_sums[i] <span class="ot">&lt;-</span> <span class="fu">sum</span>(m[i, ])</span>
+<span id="cb60-7"><a href="module-2.html#cb60-7" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="module-2.html#cb61-1" tabindex="-1"></a><span class="co"># Using apply()</span></span>
+<span id="cb61-2"><a href="module-2.html#cb61-2" tabindex="-1"></a>row_sums2 <span class="ot">&lt;-</span> <span class="fu">apply</span>(m, <span class="dv">1</span>, sum)</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="module-2.html#cb62-1" tabindex="-1"></a><span class="co"># the apply() family</span></span>
+<span id="cb62-2"><a href="module-2.html#cb62-2" tabindex="-1"></a><span class="co"># apply()</span></span>
+<span id="cb62-3"><a href="module-2.html#cb62-3" tabindex="-1"></a><span class="fu">apply</span>(m, <span class="dv">1</span>, sum)   <span class="co"># row sums</span></span>
+<span id="cb62-4"><a href="module-2.html#cb62-4" tabindex="-1"></a><span class="fu">apply</span>(m, <span class="dv">2</span>, mean)  <span class="co"># column means</span></span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="module-2.html#cb63-1" tabindex="-1"></a><span class="co"># lapply()</span></span>
+<span id="cb63-2"><a href="module-2.html#cb63-2" tabindex="-1"></a><span class="fu">lapply</span>(<span class="fu">list</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>), mean)</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="module-2.html#cb64-1" tabindex="-1"></a><span class="co"># sapply()</span></span>
+<span id="cb64-2"><a href="module-2.html#cb64-2" tabindex="-1"></a><span class="fu">sapply</span>(<span class="fu">list</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>), mean)</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="module-2.html#cb65-1" tabindex="-1"></a><span class="co"># lapply()</span></span>
+<span id="cb65-2"><a href="module-2.html#cb65-2" tabindex="-1"></a><span class="fu">lapply</span>(<span class="fu">list</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>), mean)</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="module-2.html#cb66-1" tabindex="-1"></a><span class="co"># tapply()</span></span>
+<span id="cb66-2"><a href="module-2.html#cb66-2" tabindex="-1"></a>ages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">21</span>, <span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">35</span>)</span>
+<span id="cb66-3"><a href="module-2.html#cb66-3" tabindex="-1"></a>gender <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;M&quot;</span>, <span class="st">&quot;M&quot;</span>, <span class="st">&quot;F&quot;</span>, <span class="st">&quot;F&quot;</span>, <span class="st">&quot;M&quot;</span>)</span>
+<span id="cb66-4"><a href="module-2.html#cb66-4" tabindex="-1"></a><span class="fu">tapply</span>(ages, gender, mean)   <span class="co"># mean age by gender</span></span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="module-2.html#cb67-1" tabindex="-1"></a><span class="co"># mapply()</span></span>
+<span id="cb67-2"><a href="module-2.html#cb67-2" tabindex="-1"></a>nums1 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
+<span id="cb67-3"><a href="module-2.html#cb67-3" tabindex="-1"></a>nums2 <span class="ot">&lt;-</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb67-4"><a href="module-2.html#cb67-4" tabindex="-1"></a><span class="fu">mapply</span>(sum, nums1, nums2)   <span class="co"># adds 1+6, 2+7, … 5+10</span></span></code></pre></div>
 
 </div>
 </div>
