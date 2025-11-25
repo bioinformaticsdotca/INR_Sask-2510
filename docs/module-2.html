@@ -293,6 +293,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="read-csv---base-functions" class="section level3 hasAnchor">
 <h3>read CSV - base functions<a href="module-2.html#read-csv---base-functions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="module-2.html#cb45-1" tabindex="-1"></a>bp <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">&quot;Desktop/R/data/BloodPressure_Data.csv&quot;</span>) <span class="co"># no sepqration</span></span>
+<span id="cb45-2"><a href="module-2.html#cb45-2" tabindex="-1"></a><span class="co"># take a quick look at the data</span></span>
+<span id="cb45-3"><a href="module-2.html#cb45-3" tabindex="-1"></a><span class="fu">head</span>(bp)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="module-2.html#cb46-1" tabindex="-1"></a>bp <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">&quot;Desktop/R/data/BloodPressure_Data.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;,&quot;</span>) <span class="co"># no sepqration</span></span>
+<span id="cb46-2"><a href="module-2.html#cb46-2" tabindex="-1"></a><span class="co"># take another look at the data</span></span>
+<span id="cb46-3"><a href="module-2.html#cb46-3" tabindex="-1"></a><span class="fu">head</span>(bp)</span>
+<span id="cb46-4"><a href="module-2.html#cb46-4" tabindex="-1"></a><span class="fu">str</span>(bp)</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="module-2.html#cb47-1" tabindex="-1"></a><span class="co"># readr functions</span></span>
+<span id="cb47-2"><a href="module-2.html#cb47-2" tabindex="-1"></a><span class="fu">library</span>(readr)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="module-2.html#cb48-1" tabindex="-1"></a><span class="co"># Read the CSV file</span></span>
+<span id="cb48-2"><a href="module-2.html#cb48-2" tabindex="-1"></a>bp_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;Desktop/R/data/BloodPressure_Data.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="module-2.html#cb49-1" tabindex="-1"></a><span class="co"># Take a quick look at the data</span></span>
+<span id="cb49-2"><a href="module-2.html#cb49-2" tabindex="-1"></a><span class="fu">head</span>(bp_data)</span>
+<span id="cb49-3"><a href="module-2.html#cb49-3" tabindex="-1"></a><span class="fu">str</span>(bp_data)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="module-2.html#cb50-1" tabindex="-1"></a><span class="co"># Work with date</span></span>
+<span id="cb50-2"><a href="module-2.html#cb50-2" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb50-3"><a href="module-2.html#cb50-3" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;lubridate&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="module-2.html#cb51-1" tabindex="-1"></a><span class="co"># read ALL data</span></span>
+<span id="cb51-2"><a href="module-2.html#cb51-2" tabindex="-1"></a>bp <span class="ot">&lt;-</span>  <span class="fu">read.csv2</span>(<span class="st">&quot;Desktop/R/data/BloodPressure_wDates.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;,&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="module-2.html#cb52-1" tabindex="-1"></a><span class="co"># Convert date column and extract year</span></span>
+<span id="cb52-2"><a href="module-2.html#cb52-2" tabindex="-1"></a>bp<span class="sc">$</span>Date <span class="ot">&lt;-</span> <span class="fu">ymd</span>(bp<span class="sc">$</span>Date)</span>
+<span id="cb52-3"><a href="module-2.html#cb52-3" tabindex="-1"></a>bp<span class="sc">$</span>Year <span class="ot">&lt;-</span> <span class="fu">year</span>(bp<span class="sc">$</span>Date)</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="module-2.html#cb53-1" tabindex="-1"></a><span class="co"># Filtering blood pressure patients by year and gender</span></span>
+<span id="cb53-2"><a href="module-2.html#cb53-2" tabindex="-1"></a><span class="fu">subset</span>(bp, Year <span class="sc">==</span> <span class="dv">2003</span> <span class="sc">&amp;</span> Gender <span class="sc">==</span> <span class="st">&quot;f&quot;</span>)</span></code></pre></div>
 
 </div>
 </div>

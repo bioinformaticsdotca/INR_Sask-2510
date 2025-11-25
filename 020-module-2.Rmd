@@ -16,6 +16,63 @@
 ### Read data in to R
 ### read CSV - base functions
 
+```{r, eval=FALSE, message=FALSE}
+bp <- read.csv2("Desktop/R/data/BloodPressure_Data.csv") # no sepqration
+# take a quick look at the data
+head(bp)
+```
+
+```{r, eval=FALSE, message=FALSE}
+bp <- read.csv2("Desktop/R/data/BloodPressure_Data.csv", sep = ",") # no sepqration
+# take another look at the data
+head(bp)
+str(bp)
+```
+
+```{r, eval=FALSE, message=FALSE}
+# readr functions
+library(readr)
+```
+
+```{r, eval=FALSE, message=FALSE}
+# Read the CSV file
+bp_data <- read_csv("Desktop/R/data/BloodPressure_Data.csv")
+```
+
+```{r, eval=FALSE, message=FALSE}
+# Take a quick look at the data
+head(bp_data)
+str(bp_data)
+```
+
+```{r, eval=FALSE, message=FALSE}
+# Work with date
+library(readr)
+library("lubridate")
+```
+
+```{r, eval=FALSE, message=FALSE}
+# read ALL data
+bp <-  read.csv2("Desktop/R/data/BloodPressure_wDates.csv", sep = ",")
+```
+
+```{r, eval=FALSE, message=FALSE}
+# Convert date column and extract year
+bp$Date <- ymd(bp$Date)
+bp$Year <- year(bp$Date)
+```
+
+```{r, eval=FALSE, message=FALSE}
+# Filtering blood pressure patients by year and gender
+subset(bp, Year == 2003 & Gender == "f")
+```
+
+
+
+
+
+
+
 
 
 

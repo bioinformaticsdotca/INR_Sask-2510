@@ -1303,6 +1303,75 @@ List
 
 \subsection{read CSV - base functions}\label{read-csv---base-functions}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bp }\OtherTok{\textless{}{-}} \FunctionTok{read.csv2}\NormalTok{(}\StringTok{"Desktop/R/data/BloodPressure\_Data.csv"}\NormalTok{) }\CommentTok{\# no sepqration}
+\CommentTok{\# take a quick look at the data}
+\FunctionTok{head}\NormalTok{(bp)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bp }\OtherTok{\textless{}{-}} \FunctionTok{read.csv2}\NormalTok{(}\StringTok{"Desktop/R/data/BloodPressure\_Data.csv"}\NormalTok{, }\AttributeTok{sep =} \StringTok{","}\NormalTok{) }\CommentTok{\# no sepqration}
+\CommentTok{\# take another look at the data}
+\FunctionTok{head}\NormalTok{(bp)}
+\FunctionTok{str}\NormalTok{(bp)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# readr functions}
+\FunctionTok{library}\NormalTok{(readr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Read the CSV file}
+\NormalTok{bp\_data }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"Desktop/R/data/BloodPressure\_Data.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Take a quick look at the data}
+\FunctionTok{head}\NormalTok{(bp\_data)}
+\FunctionTok{str}\NormalTok{(bp\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Work with date}
+\FunctionTok{library}\NormalTok{(readr)}
+\FunctionTok{library}\NormalTok{(}\StringTok{"lubridate"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# read ALL data}
+\NormalTok{bp }\OtherTok{\textless{}{-}}  \FunctionTok{read.csv2}\NormalTok{(}\StringTok{"Desktop/R/data/BloodPressure\_wDates.csv"}\NormalTok{, }\AttributeTok{sep =} \StringTok{","}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Convert date column and extract year}
+\NormalTok{bp}\SpecialCharTok{$}\NormalTok{Date }\OtherTok{\textless{}{-}} \FunctionTok{ymd}\NormalTok{(bp}\SpecialCharTok{$}\NormalTok{Date)}
+\NormalTok{bp}\SpecialCharTok{$}\NormalTok{Year }\OtherTok{\textless{}{-}} \FunctionTok{year}\NormalTok{(bp}\SpecialCharTok{$}\NormalTok{Date)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Filtering blood pressure patients by year and gender}
+\FunctionTok{subset}\NormalTok{(bp, Year }\SpecialCharTok{==} \DecValTok{2003} \SpecialCharTok{\&}\NormalTok{ Gender }\SpecialCharTok{==} \StringTok{"f"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
 \chapter{Module 3}\label{module-3}
 
 \section{Lecture}\label{lecture-2}
