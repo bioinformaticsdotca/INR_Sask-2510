@@ -173,20 +173,10 @@ df2[df2$relapse == F | df2$sex == "F", ]
 
 
 
+## Lab 1B Tasks
+### Hands on Day1 Mod1B
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# Task 1
+# Patients younger than 20
+subset(ALL_df, age < 20)
 

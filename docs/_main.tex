@@ -1289,6 +1289,16 @@ List
 ## NA.13    <NA>    NA      NA         NA              <NA>            <NA>
 \end{verbatim}
 
+\section{Lab 1B Tasks}\label{lab-1b-tasks}
+
+\subsection{Hands on Day1 Mod1B}\label{hands-on-day1-mod1b}
+
+\chapter{Task 1}\label{task-1}
+
+\chapter{Patients younger than 20}\label{patients-younger-than-20}
+
+subset(ALL\_df, age \textless{} 20)
+
 \chapter{Module 2}\label{module-2}
 
 \section{Lecture}\label{lecture-1}
@@ -1296,6 +1306,45 @@ List
 \subsection{2A}\label{a-1}
 
 \subsection{2B}\label{b-1}
+
+\section{Lab 2A Tasks}\label{lab-2a-tasks}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Task 1 – Basic Filtering}
+\CommentTok{\# Use a for loop with if/else conditions}
+\CommentTok{\# Go through each row of the dataset and:}
+\CommentTok{\# Print a message if the patient has High BP (\textgreater{} 140) \# Tip: use the paste function, }
+\CommentTok{\# Print a message if the patient has Low BP (\textless{} 90)}
+\CommentTok{\# Otherwise, mark them as Normal}
+
+\CommentTok{\# read data}
+\NormalTok{bp\_data }\OtherTok{\textless{}{-}} \FunctionTok{read.csv2}\NormalTok{(}\StringTok{"Desktop/R/data/BloodPressure\_wDates.csv"}\NormalTok{, }\AttributeTok{sep =} \StringTok{","}\NormalTok{)}
+
+\CommentTok{\# Use for loop}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(bp\_data)) \{}
+  \ControlFlowTok{if}\NormalTok{ (bp\_data}\SpecialCharTok{$}\NormalTok{BloodPressure[i] }\SpecialCharTok{\textgreater{}} \DecValTok{140}\NormalTok{) \{}
+    \FunctionTok{print}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Patient"}\NormalTok{, bp\_data}\SpecialCharTok{$}\NormalTok{ID[i], }\StringTok{"has HIGH blood pressure"}\NormalTok{))}
+\NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (bp\_data}\SpecialCharTok{$}\NormalTok{BloodPressure[i] }\SpecialCharTok{\textless{}} \DecValTok{90}\NormalTok{) \{}
+    \FunctionTok{print}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Patient"}\NormalTok{, bp\_data}\SpecialCharTok{$}\NormalTok{ID[i], }\StringTok{"has LOW blood pressure"}\NormalTok{))}
+\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
+    \FunctionTok{print}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Patient"}\NormalTok{, bp\_data}\SpecialCharTok{$}\NormalTok{ID[i], }\StringTok{"is NORMAL"}\NormalTok{))}
+\NormalTok{  \}}
+\NormalTok{\}}
+
+
+\CommentTok{\# Use apply() instead of loops}
+\NormalTok{bp\_data}\SpecialCharTok{$}\NormalTok{BP\_Status }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(bp\_data, }\DecValTok{1}\NormalTok{, }\ControlFlowTok{function}\NormalTok{(row) \{}
+  \ControlFlowTok{if}\NormalTok{ (}\FunctionTok{as.numeric}\NormalTok{(row[}\StringTok{"BloodPressure"}\NormalTok{]) }\SpecialCharTok{\textgreater{}} \DecValTok{140}\NormalTok{) \{}
+    \StringTok{"HIGH"}
+\NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (}\FunctionTok{as.numeric}\NormalTok{(row[}\StringTok{"BloodPressure"}\NormalTok{]) }\SpecialCharTok{\textless{}} \DecValTok{90}\NormalTok{) \{}
+    \StringTok{"LOW"}
+\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
+    \StringTok{"NORMAL"}
+\NormalTok{  \}}
+\NormalTok{\})}
+\end{Highlighting}
+\end{Shaded}
 
 \section{Lab 2A}\label{lab-2a}
 

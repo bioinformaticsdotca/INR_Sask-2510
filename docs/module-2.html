@@ -29,7 +29,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-<link rel="prev" href="module-1.html"/>
+<link rel="prev" href="patients-younger-than-20.html"/>
 <link rel="next" href="module-3.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -209,7 +209,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="module-1.html"><a href="module-1.html#match-in-matching-values"><i class="fa fa-check"></i>match() / %in% (matching values)</a></li>
 <li class="chapter" data-level="" data-path="module-1.html"><a href="module-1.html#logical-indexing-directly"><i class="fa fa-check"></i>Logical indexing directly</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="module-1.html"><a href="module-1.html#lab-1b-tasks"><i class="fa fa-check"></i>Lab 1B Tasks</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-1.html"><a href="module-1.html#hands-on-day1-mod1b"><i class="fa fa-check"></i>Hands on Day1 Mod1B</a></li>
 </ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="task-1.html"><a href="task-1.html"><i class="fa fa-check"></i>Task 1</a></li>
+<li class="chapter" data-level="" data-path="patients-younger-than-20.html"><a href="patients-younger-than-20.html"><i class="fa fa-check"></i>Patients younger than 20</a></li>
 <li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html"><i class="fa fa-check"></i>Module 2</a>
 <ul>
 <li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#lecture-1"><i class="fa fa-check"></i>Lecture</a>
@@ -217,6 +223,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#a-1"><i class="fa fa-check"></i>2A</a></li>
 <li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#b-1"><i class="fa fa-check"></i>2B</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#lab-2a-tasks"><i class="fa fa-check"></i>Lab 2A Tasks</a></li>
 <li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#lab-2a"><i class="fa fa-check"></i>Lab 2A</a>
 <ul>
 <li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#read-data-in-to-r"><i class="fa fa-check"></i>Read data in to R</a></li>
@@ -287,6 +294,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </iframe>
 </div>
 </div>
+<div id="lab-2a-tasks" class="section level2 hasAnchor">
+<h2>Lab 2A Tasks<a href="module-2.html#lab-2a-tasks" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="module-2.html#cb45-1" tabindex="-1"></a><span class="co"># Task 1 – Basic Filtering</span></span>
+<span id="cb45-2"><a href="module-2.html#cb45-2" tabindex="-1"></a><span class="co"># Use a for loop with if/else conditions</span></span>
+<span id="cb45-3"><a href="module-2.html#cb45-3" tabindex="-1"></a><span class="co"># Go through each row of the dataset and:</span></span>
+<span id="cb45-4"><a href="module-2.html#cb45-4" tabindex="-1"></a><span class="co"># Print a message if the patient has High BP (&gt; 140) # Tip: use the paste function, </span></span>
+<span id="cb45-5"><a href="module-2.html#cb45-5" tabindex="-1"></a><span class="co"># Print a message if the patient has Low BP (&lt; 90)</span></span>
+<span id="cb45-6"><a href="module-2.html#cb45-6" tabindex="-1"></a><span class="co"># Otherwise, mark them as Normal</span></span>
+<span id="cb45-7"><a href="module-2.html#cb45-7" tabindex="-1"></a></span>
+<span id="cb45-8"><a href="module-2.html#cb45-8" tabindex="-1"></a><span class="co"># read data</span></span>
+<span id="cb45-9"><a href="module-2.html#cb45-9" tabindex="-1"></a>bp_data <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">&quot;Desktop/R/data/BloodPressure_wDates.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;,&quot;</span>)</span>
+<span id="cb45-10"><a href="module-2.html#cb45-10" tabindex="-1"></a></span>
+<span id="cb45-11"><a href="module-2.html#cb45-11" tabindex="-1"></a><span class="co"># Use for loop</span></span>
+<span id="cb45-12"><a href="module-2.html#cb45-12" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(bp_data)) {</span>
+<span id="cb45-13"><a href="module-2.html#cb45-13" tabindex="-1"></a>  <span class="cf">if</span> (bp_data<span class="sc">$</span>BloodPressure[i] <span class="sc">&gt;</span> <span class="dv">140</span>) {</span>
+<span id="cb45-14"><a href="module-2.html#cb45-14" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Patient&quot;</span>, bp_data<span class="sc">$</span>ID[i], <span class="st">&quot;has HIGH blood pressure&quot;</span>))</span>
+<span id="cb45-15"><a href="module-2.html#cb45-15" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (bp_data<span class="sc">$</span>BloodPressure[i] <span class="sc">&lt;</span> <span class="dv">90</span>) {</span>
+<span id="cb45-16"><a href="module-2.html#cb45-16" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Patient&quot;</span>, bp_data<span class="sc">$</span>ID[i], <span class="st">&quot;has LOW blood pressure&quot;</span>))</span>
+<span id="cb45-17"><a href="module-2.html#cb45-17" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb45-18"><a href="module-2.html#cb45-18" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Patient&quot;</span>, bp_data<span class="sc">$</span>ID[i], <span class="st">&quot;is NORMAL&quot;</span>))</span>
+<span id="cb45-19"><a href="module-2.html#cb45-19" tabindex="-1"></a>  }</span>
+<span id="cb45-20"><a href="module-2.html#cb45-20" tabindex="-1"></a>}</span>
+<span id="cb45-21"><a href="module-2.html#cb45-21" tabindex="-1"></a></span>
+<span id="cb45-22"><a href="module-2.html#cb45-22" tabindex="-1"></a></span>
+<span id="cb45-23"><a href="module-2.html#cb45-23" tabindex="-1"></a><span class="co"># Use apply() instead of loops</span></span>
+<span id="cb45-24"><a href="module-2.html#cb45-24" tabindex="-1"></a>bp_data<span class="sc">$</span>BP_Status <span class="ot">&lt;-</span> <span class="fu">apply</span>(bp_data, <span class="dv">1</span>, <span class="cf">function</span>(row) {</span>
+<span id="cb45-25"><a href="module-2.html#cb45-25" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">as.numeric</span>(row[<span class="st">&quot;BloodPressure&quot;</span>]) <span class="sc">&gt;</span> <span class="dv">140</span>) {</span>
+<span id="cb45-26"><a href="module-2.html#cb45-26" tabindex="-1"></a>    <span class="st">&quot;HIGH&quot;</span></span>
+<span id="cb45-27"><a href="module-2.html#cb45-27" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (<span class="fu">as.numeric</span>(row[<span class="st">&quot;BloodPressure&quot;</span>]) <span class="sc">&lt;</span> <span class="dv">90</span>) {</span>
+<span id="cb45-28"><a href="module-2.html#cb45-28" tabindex="-1"></a>    <span class="st">&quot;LOW&quot;</span></span>
+<span id="cb45-29"><a href="module-2.html#cb45-29" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb45-30"><a href="module-2.html#cb45-30" tabindex="-1"></a>    <span class="st">&quot;NORMAL&quot;</span></span>
+<span id="cb45-31"><a href="module-2.html#cb45-31" tabindex="-1"></a>  }</span>
+<span id="cb45-32"><a href="module-2.html#cb45-32" tabindex="-1"></a>})</span></code></pre></div>
+</div>
 <div id="lab-2a" class="section level2 hasAnchor">
 <h2>Lab 2A<a href="module-2.html#lab-2a" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="read-data-in-to-r" class="section level3 hasAnchor">
@@ -294,101 +336,101 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="read-csv---base-functions" class="section level3 hasAnchor">
 <h3>read CSV - base functions<a href="module-2.html#read-csv---base-functions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="module-2.html#cb45-1" tabindex="-1"></a>bp <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">&quot;Desktop/R/data/BloodPressure_Data.csv&quot;</span>) <span class="co"># no sepqration</span></span>
-<span id="cb45-2"><a href="module-2.html#cb45-2" tabindex="-1"></a><span class="co"># take a quick look at the data</span></span>
-<span id="cb45-3"><a href="module-2.html#cb45-3" tabindex="-1"></a><span class="fu">head</span>(bp)</span></code></pre></div>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="module-2.html#cb46-1" tabindex="-1"></a>bp <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">&quot;Desktop/R/data/BloodPressure_Data.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;,&quot;</span>) <span class="co"># no sepqration</span></span>
-<span id="cb46-2"><a href="module-2.html#cb46-2" tabindex="-1"></a><span class="co"># take another look at the data</span></span>
-<span id="cb46-3"><a href="module-2.html#cb46-3" tabindex="-1"></a><span class="fu">head</span>(bp)</span>
-<span id="cb46-4"><a href="module-2.html#cb46-4" tabindex="-1"></a><span class="fu">str</span>(bp)</span></code></pre></div>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="module-2.html#cb47-1" tabindex="-1"></a><span class="co"># readr functions</span></span>
-<span id="cb47-2"><a href="module-2.html#cb47-2" tabindex="-1"></a><span class="fu">library</span>(readr)</span></code></pre></div>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="module-2.html#cb48-1" tabindex="-1"></a><span class="co"># Read the CSV file</span></span>
-<span id="cb48-2"><a href="module-2.html#cb48-2" tabindex="-1"></a>bp_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;Desktop/R/data/BloodPressure_Data.csv&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="module-2.html#cb49-1" tabindex="-1"></a><span class="co"># Take a quick look at the data</span></span>
-<span id="cb49-2"><a href="module-2.html#cb49-2" tabindex="-1"></a><span class="fu">head</span>(bp_data)</span>
-<span id="cb49-3"><a href="module-2.html#cb49-3" tabindex="-1"></a><span class="fu">str</span>(bp_data)</span></code></pre></div>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="module-2.html#cb50-1" tabindex="-1"></a><span class="co"># Work with date</span></span>
-<span id="cb50-2"><a href="module-2.html#cb50-2" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb50-3"><a href="module-2.html#cb50-3" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;lubridate&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="module-2.html#cb51-1" tabindex="-1"></a><span class="co"># read ALL data</span></span>
-<span id="cb51-2"><a href="module-2.html#cb51-2" tabindex="-1"></a>bp <span class="ot">&lt;-</span>  <span class="fu">read.csv2</span>(<span class="st">&quot;Desktop/R/data/BloodPressure_wDates.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;,&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="module-2.html#cb52-1" tabindex="-1"></a><span class="co"># Convert date column and extract year</span></span>
-<span id="cb52-2"><a href="module-2.html#cb52-2" tabindex="-1"></a>bp<span class="sc">$</span>Date <span class="ot">&lt;-</span> <span class="fu">ymd</span>(bp<span class="sc">$</span>Date)</span>
-<span id="cb52-3"><a href="module-2.html#cb52-3" tabindex="-1"></a>bp<span class="sc">$</span>Year <span class="ot">&lt;-</span> <span class="fu">year</span>(bp<span class="sc">$</span>Date)</span></code></pre></div>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="module-2.html#cb53-1" tabindex="-1"></a><span class="co"># Filtering blood pressure patients by year and gender</span></span>
-<span id="cb53-2"><a href="module-2.html#cb53-2" tabindex="-1"></a><span class="fu">subset</span>(bp, Year <span class="sc">==</span> <span class="dv">2003</span> <span class="sc">&amp;</span> Gender <span class="sc">==</span> <span class="st">&quot;f&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="module-2.html#cb46-1" tabindex="-1"></a>bp <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">&quot;Desktop/R/data/BloodPressure_Data.csv&quot;</span>) <span class="co"># no sepqration</span></span>
+<span id="cb46-2"><a href="module-2.html#cb46-2" tabindex="-1"></a><span class="co"># take a quick look at the data</span></span>
+<span id="cb46-3"><a href="module-2.html#cb46-3" tabindex="-1"></a><span class="fu">head</span>(bp)</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="module-2.html#cb47-1" tabindex="-1"></a>bp <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">&quot;Desktop/R/data/BloodPressure_Data.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;,&quot;</span>) <span class="co"># no sepqration</span></span>
+<span id="cb47-2"><a href="module-2.html#cb47-2" tabindex="-1"></a><span class="co"># take another look at the data</span></span>
+<span id="cb47-3"><a href="module-2.html#cb47-3" tabindex="-1"></a><span class="fu">head</span>(bp)</span>
+<span id="cb47-4"><a href="module-2.html#cb47-4" tabindex="-1"></a><span class="fu">str</span>(bp)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="module-2.html#cb48-1" tabindex="-1"></a><span class="co"># readr functions</span></span>
+<span id="cb48-2"><a href="module-2.html#cb48-2" tabindex="-1"></a><span class="fu">library</span>(readr)</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="module-2.html#cb49-1" tabindex="-1"></a><span class="co"># Read the CSV file</span></span>
+<span id="cb49-2"><a href="module-2.html#cb49-2" tabindex="-1"></a>bp_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;Desktop/R/data/BloodPressure_Data.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="module-2.html#cb50-1" tabindex="-1"></a><span class="co"># Take a quick look at the data</span></span>
+<span id="cb50-2"><a href="module-2.html#cb50-2" tabindex="-1"></a><span class="fu">head</span>(bp_data)</span>
+<span id="cb50-3"><a href="module-2.html#cb50-3" tabindex="-1"></a><span class="fu">str</span>(bp_data)</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="module-2.html#cb51-1" tabindex="-1"></a><span class="co"># Work with date</span></span>
+<span id="cb51-2"><a href="module-2.html#cb51-2" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb51-3"><a href="module-2.html#cb51-3" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;lubridate&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="module-2.html#cb52-1" tabindex="-1"></a><span class="co"># read ALL data</span></span>
+<span id="cb52-2"><a href="module-2.html#cb52-2" tabindex="-1"></a>bp <span class="ot">&lt;-</span>  <span class="fu">read.csv2</span>(<span class="st">&quot;Desktop/R/data/BloodPressure_wDates.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;,&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="module-2.html#cb53-1" tabindex="-1"></a><span class="co"># Convert date column and extract year</span></span>
+<span id="cb53-2"><a href="module-2.html#cb53-2" tabindex="-1"></a>bp<span class="sc">$</span>Date <span class="ot">&lt;-</span> <span class="fu">ymd</span>(bp<span class="sc">$</span>Date)</span>
+<span id="cb53-3"><a href="module-2.html#cb53-3" tabindex="-1"></a>bp<span class="sc">$</span>Year <span class="ot">&lt;-</span> <span class="fu">year</span>(bp<span class="sc">$</span>Date)</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="module-2.html#cb54-1" tabindex="-1"></a><span class="co"># Filtering blood pressure patients by year and gender</span></span>
+<span id="cb54-2"><a href="module-2.html#cb54-2" tabindex="-1"></a><span class="fu">subset</span>(bp, Year <span class="sc">==</span> <span class="dv">2003</span> <span class="sc">&amp;</span> Gender <span class="sc">==</span> <span class="st">&quot;f&quot;</span>)</span></code></pre></div>
 </div>
 <div id="conditions-and-loops" class="section level3 hasAnchor">
 <h3>Conditions and loops<a href="module-2.html#conditions-and-loops" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="module-2.html#cb54-1" tabindex="-1"></a><span class="co"># If {} else {} statement </span></span>
-<span id="cb54-2"><a href="module-2.html#cb54-2" tabindex="-1"></a><span class="cf">if</span> (condition) {</span>
-<span id="cb54-3"><a href="module-2.html#cb54-3" tabindex="-1"></a>  <span class="co"># code if TRUE</span></span>
-<span id="cb54-4"><a href="module-2.html#cb54-4" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb54-5"><a href="module-2.html#cb54-5" tabindex="-1"></a>  <span class="co"># code if FALSE</span></span>
-<span id="cb54-6"><a href="module-2.html#cb54-6" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="module-2.html#cb55-1" tabindex="-1"></a><span class="co"># If else example</span></span>
-<span id="cb55-2"><a href="module-2.html#cb55-2" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="dv">55</span></span>
-<span id="cb55-3"><a href="module-2.html#cb55-3" tabindex="-1"></a><span class="cf">if</span> (age <span class="sc">&gt;</span> <span class="dv">50</span>) {</span>
-<span id="cb55-4"><a href="module-2.html#cb55-4" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Older patient&quot;</span>)</span>
-<span id="cb55-5"><a href="module-2.html#cb55-5" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb55-6"><a href="module-2.html#cb55-6" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Younger patient&quot;</span>)</span>
-<span id="cb55-7"><a href="module-2.html#cb55-7" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="module-2.html#cb56-1" tabindex="-1"></a><span class="co"># If {} else if {} else statement </span></span>
-<span id="cb56-2"><a href="module-2.html#cb56-2" tabindex="-1"></a></span>
-<span id="cb56-3"><a href="module-2.html#cb56-3" tabindex="-1"></a><span class="cf">if</span> (condition1) {</span>
-<span id="cb56-4"><a href="module-2.html#cb56-4" tabindex="-1"></a>  <span class="co"># code if condition1 is TRUE</span></span>
-<span id="cb56-5"><a href="module-2.html#cb56-5" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (condition2) {</span>
-<span id="cb56-6"><a href="module-2.html#cb56-6" tabindex="-1"></a>  <span class="co"># code if condition2 is TRUE</span></span>
-<span id="cb56-7"><a href="module-2.html#cb56-7" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb56-8"><a href="module-2.html#cb56-8" tabindex="-1"></a>  <span class="co"># code if none are TRUE</span></span>
-<span id="cb56-9"><a href="module-2.html#cb56-9" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="module-2.html#cb57-1" tabindex="-1"></a><span class="co"># If else if example</span></span>
-<span id="cb57-2"><a href="module-2.html#cb57-2" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="dv">35</span></span>
-<span id="cb57-3"><a href="module-2.html#cb57-3" tabindex="-1"></a></span>
-<span id="cb57-4"><a href="module-2.html#cb57-4" tabindex="-1"></a><span class="cf">if</span> (age <span class="sc">&lt;</span> <span class="dv">18</span>) {</span>
-<span id="cb57-5"><a href="module-2.html#cb57-5" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Child&quot;</span>)</span>
-<span id="cb57-6"><a href="module-2.html#cb57-6" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> age <span class="sc">&lt;</span> <span class="dv">60</span>) {</span>
-<span id="cb57-7"><a href="module-2.html#cb57-7" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Adult&quot;</span>)</span>
-<span id="cb57-8"><a href="module-2.html#cb57-8" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb57-9"><a href="module-2.html#cb57-9" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Senior&quot;</span>)</span>
-<span id="cb57-10"><a href="module-2.html#cb57-10" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="module-2.html#cb58-1" tabindex="-1"></a><span class="co"># for loops</span></span>
-<span id="cb58-2"><a href="module-2.html#cb58-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) {</span>
-<span id="cb58-3"><a href="module-2.html#cb58-3" tabindex="-1"></a>  <span class="fu">print</span>(i)</span>
-<span id="cb58-4"><a href="module-2.html#cb58-4" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="module-2.html#cb59-1" tabindex="-1"></a><span class="co"># for loop example</span></span>
-<span id="cb59-2"><a href="module-2.html#cb59-2" tabindex="-1"></a>patients <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;P1&quot;</span>, <span class="st">&quot;P2&quot;</span>, <span class="st">&quot;P3&quot;</span>)</span>
-<span id="cb59-3"><a href="module-2.html#cb59-3" tabindex="-1"></a><span class="cf">for</span> (p <span class="cf">in</span> patients) {</span>
-<span id="cb59-4"><a href="module-2.html#cb59-4" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Processing:&quot;</span>, p))</span>
-<span id="cb59-5"><a href="module-2.html#cb59-5" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="module-2.html#cb60-1" tabindex="-1"></a><span class="co"># the apply () family vs. loops</span></span>
-<span id="cb60-2"><a href="module-2.html#cb60-2" tabindex="-1"></a><span class="co"># Using a for loop</span></span>
-<span id="cb60-3"><a href="module-2.html#cb60-3" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="at">nrow=</span><span class="dv">3</span>)</span>
-<span id="cb60-4"><a href="module-2.html#cb60-4" tabindex="-1"></a>row_sums <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
-<span id="cb60-5"><a href="module-2.html#cb60-5" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(m)) {</span>
-<span id="cb60-6"><a href="module-2.html#cb60-6" tabindex="-1"></a>  row_sums[i] <span class="ot">&lt;-</span> <span class="fu">sum</span>(m[i, ])</span>
-<span id="cb60-7"><a href="module-2.html#cb60-7" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="module-2.html#cb61-1" tabindex="-1"></a><span class="co"># Using apply()</span></span>
-<span id="cb61-2"><a href="module-2.html#cb61-2" tabindex="-1"></a>row_sums2 <span class="ot">&lt;-</span> <span class="fu">apply</span>(m, <span class="dv">1</span>, sum)</span></code></pre></div>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="module-2.html#cb62-1" tabindex="-1"></a><span class="co"># the apply() family</span></span>
-<span id="cb62-2"><a href="module-2.html#cb62-2" tabindex="-1"></a><span class="co"># apply()</span></span>
-<span id="cb62-3"><a href="module-2.html#cb62-3" tabindex="-1"></a><span class="fu">apply</span>(m, <span class="dv">1</span>, sum)   <span class="co"># row sums</span></span>
-<span id="cb62-4"><a href="module-2.html#cb62-4" tabindex="-1"></a><span class="fu">apply</span>(m, <span class="dv">2</span>, mean)  <span class="co"># column means</span></span></code></pre></div>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="module-2.html#cb63-1" tabindex="-1"></a><span class="co"># lapply()</span></span>
-<span id="cb63-2"><a href="module-2.html#cb63-2" tabindex="-1"></a><span class="fu">lapply</span>(<span class="fu">list</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>), mean)</span></code></pre></div>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="module-2.html#cb64-1" tabindex="-1"></a><span class="co"># sapply()</span></span>
-<span id="cb64-2"><a href="module-2.html#cb64-2" tabindex="-1"></a><span class="fu">sapply</span>(<span class="fu">list</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>), mean)</span></code></pre></div>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="module-2.html#cb65-1" tabindex="-1"></a><span class="co"># lapply()</span></span>
-<span id="cb65-2"><a href="module-2.html#cb65-2" tabindex="-1"></a><span class="fu">lapply</span>(<span class="fu">list</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>), mean)</span></code></pre></div>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="module-2.html#cb66-1" tabindex="-1"></a><span class="co"># tapply()</span></span>
-<span id="cb66-2"><a href="module-2.html#cb66-2" tabindex="-1"></a>ages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">21</span>, <span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">35</span>)</span>
-<span id="cb66-3"><a href="module-2.html#cb66-3" tabindex="-1"></a>gender <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;M&quot;</span>, <span class="st">&quot;M&quot;</span>, <span class="st">&quot;F&quot;</span>, <span class="st">&quot;F&quot;</span>, <span class="st">&quot;M&quot;</span>)</span>
-<span id="cb66-4"><a href="module-2.html#cb66-4" tabindex="-1"></a><span class="fu">tapply</span>(ages, gender, mean)   <span class="co"># mean age by gender</span></span></code></pre></div>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="module-2.html#cb67-1" tabindex="-1"></a><span class="co"># mapply()</span></span>
-<span id="cb67-2"><a href="module-2.html#cb67-2" tabindex="-1"></a>nums1 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
-<span id="cb67-3"><a href="module-2.html#cb67-3" tabindex="-1"></a>nums2 <span class="ot">&lt;-</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">10</span></span>
-<span id="cb67-4"><a href="module-2.html#cb67-4" tabindex="-1"></a><span class="fu">mapply</span>(sum, nums1, nums2)   <span class="co"># adds 1+6, 2+7, … 5+10</span></span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="module-2.html#cb55-1" tabindex="-1"></a><span class="co"># If {} else {} statement </span></span>
+<span id="cb55-2"><a href="module-2.html#cb55-2" tabindex="-1"></a><span class="cf">if</span> (condition) {</span>
+<span id="cb55-3"><a href="module-2.html#cb55-3" tabindex="-1"></a>  <span class="co"># code if TRUE</span></span>
+<span id="cb55-4"><a href="module-2.html#cb55-4" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb55-5"><a href="module-2.html#cb55-5" tabindex="-1"></a>  <span class="co"># code if FALSE</span></span>
+<span id="cb55-6"><a href="module-2.html#cb55-6" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="module-2.html#cb56-1" tabindex="-1"></a><span class="co"># If else example</span></span>
+<span id="cb56-2"><a href="module-2.html#cb56-2" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="dv">55</span></span>
+<span id="cb56-3"><a href="module-2.html#cb56-3" tabindex="-1"></a><span class="cf">if</span> (age <span class="sc">&gt;</span> <span class="dv">50</span>) {</span>
+<span id="cb56-4"><a href="module-2.html#cb56-4" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Older patient&quot;</span>)</span>
+<span id="cb56-5"><a href="module-2.html#cb56-5" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb56-6"><a href="module-2.html#cb56-6" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Younger patient&quot;</span>)</span>
+<span id="cb56-7"><a href="module-2.html#cb56-7" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="module-2.html#cb57-1" tabindex="-1"></a><span class="co"># If {} else if {} else statement </span></span>
+<span id="cb57-2"><a href="module-2.html#cb57-2" tabindex="-1"></a></span>
+<span id="cb57-3"><a href="module-2.html#cb57-3" tabindex="-1"></a><span class="cf">if</span> (condition1) {</span>
+<span id="cb57-4"><a href="module-2.html#cb57-4" tabindex="-1"></a>  <span class="co"># code if condition1 is TRUE</span></span>
+<span id="cb57-5"><a href="module-2.html#cb57-5" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (condition2) {</span>
+<span id="cb57-6"><a href="module-2.html#cb57-6" tabindex="-1"></a>  <span class="co"># code if condition2 is TRUE</span></span>
+<span id="cb57-7"><a href="module-2.html#cb57-7" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb57-8"><a href="module-2.html#cb57-8" tabindex="-1"></a>  <span class="co"># code if none are TRUE</span></span>
+<span id="cb57-9"><a href="module-2.html#cb57-9" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="module-2.html#cb58-1" tabindex="-1"></a><span class="co"># If else if example</span></span>
+<span id="cb58-2"><a href="module-2.html#cb58-2" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="dv">35</span></span>
+<span id="cb58-3"><a href="module-2.html#cb58-3" tabindex="-1"></a></span>
+<span id="cb58-4"><a href="module-2.html#cb58-4" tabindex="-1"></a><span class="cf">if</span> (age <span class="sc">&lt;</span> <span class="dv">18</span>) {</span>
+<span id="cb58-5"><a href="module-2.html#cb58-5" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Child&quot;</span>)</span>
+<span id="cb58-6"><a href="module-2.html#cb58-6" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> age <span class="sc">&lt;</span> <span class="dv">60</span>) {</span>
+<span id="cb58-7"><a href="module-2.html#cb58-7" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Adult&quot;</span>)</span>
+<span id="cb58-8"><a href="module-2.html#cb58-8" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb58-9"><a href="module-2.html#cb58-9" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Senior&quot;</span>)</span>
+<span id="cb58-10"><a href="module-2.html#cb58-10" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="module-2.html#cb59-1" tabindex="-1"></a><span class="co"># for loops</span></span>
+<span id="cb59-2"><a href="module-2.html#cb59-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) {</span>
+<span id="cb59-3"><a href="module-2.html#cb59-3" tabindex="-1"></a>  <span class="fu">print</span>(i)</span>
+<span id="cb59-4"><a href="module-2.html#cb59-4" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="module-2.html#cb60-1" tabindex="-1"></a><span class="co"># for loop example</span></span>
+<span id="cb60-2"><a href="module-2.html#cb60-2" tabindex="-1"></a>patients <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;P1&quot;</span>, <span class="st">&quot;P2&quot;</span>, <span class="st">&quot;P3&quot;</span>)</span>
+<span id="cb60-3"><a href="module-2.html#cb60-3" tabindex="-1"></a><span class="cf">for</span> (p <span class="cf">in</span> patients) {</span>
+<span id="cb60-4"><a href="module-2.html#cb60-4" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Processing:&quot;</span>, p))</span>
+<span id="cb60-5"><a href="module-2.html#cb60-5" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="module-2.html#cb61-1" tabindex="-1"></a><span class="co"># the apply () family vs. loops</span></span>
+<span id="cb61-2"><a href="module-2.html#cb61-2" tabindex="-1"></a><span class="co"># Using a for loop</span></span>
+<span id="cb61-3"><a href="module-2.html#cb61-3" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="at">nrow=</span><span class="dv">3</span>)</span>
+<span id="cb61-4"><a href="module-2.html#cb61-4" tabindex="-1"></a>row_sums <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb61-5"><a href="module-2.html#cb61-5" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(m)) {</span>
+<span id="cb61-6"><a href="module-2.html#cb61-6" tabindex="-1"></a>  row_sums[i] <span class="ot">&lt;-</span> <span class="fu">sum</span>(m[i, ])</span>
+<span id="cb61-7"><a href="module-2.html#cb61-7" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="module-2.html#cb62-1" tabindex="-1"></a><span class="co"># Using apply()</span></span>
+<span id="cb62-2"><a href="module-2.html#cb62-2" tabindex="-1"></a>row_sums2 <span class="ot">&lt;-</span> <span class="fu">apply</span>(m, <span class="dv">1</span>, sum)</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="module-2.html#cb63-1" tabindex="-1"></a><span class="co"># the apply() family</span></span>
+<span id="cb63-2"><a href="module-2.html#cb63-2" tabindex="-1"></a><span class="co"># apply()</span></span>
+<span id="cb63-3"><a href="module-2.html#cb63-3" tabindex="-1"></a><span class="fu">apply</span>(m, <span class="dv">1</span>, sum)   <span class="co"># row sums</span></span>
+<span id="cb63-4"><a href="module-2.html#cb63-4" tabindex="-1"></a><span class="fu">apply</span>(m, <span class="dv">2</span>, mean)  <span class="co"># column means</span></span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="module-2.html#cb64-1" tabindex="-1"></a><span class="co"># lapply()</span></span>
+<span id="cb64-2"><a href="module-2.html#cb64-2" tabindex="-1"></a><span class="fu">lapply</span>(<span class="fu">list</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>), mean)</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="module-2.html#cb65-1" tabindex="-1"></a><span class="co"># sapply()</span></span>
+<span id="cb65-2"><a href="module-2.html#cb65-2" tabindex="-1"></a><span class="fu">sapply</span>(<span class="fu">list</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>), mean)</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="module-2.html#cb66-1" tabindex="-1"></a><span class="co"># lapply()</span></span>
+<span id="cb66-2"><a href="module-2.html#cb66-2" tabindex="-1"></a><span class="fu">lapply</span>(<span class="fu">list</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>), mean)</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="module-2.html#cb67-1" tabindex="-1"></a><span class="co"># tapply()</span></span>
+<span id="cb67-2"><a href="module-2.html#cb67-2" tabindex="-1"></a>ages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">21</span>, <span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">35</span>)</span>
+<span id="cb67-3"><a href="module-2.html#cb67-3" tabindex="-1"></a>gender <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;M&quot;</span>, <span class="st">&quot;M&quot;</span>, <span class="st">&quot;F&quot;</span>, <span class="st">&quot;F&quot;</span>, <span class="st">&quot;M&quot;</span>)</span>
+<span id="cb67-4"><a href="module-2.html#cb67-4" tabindex="-1"></a><span class="fu">tapply</span>(ages, gender, mean)   <span class="co"># mean age by gender</span></span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="module-2.html#cb68-1" tabindex="-1"></a><span class="co"># mapply()</span></span>
+<span id="cb68-2"><a href="module-2.html#cb68-2" tabindex="-1"></a>nums1 <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
+<span id="cb68-3"><a href="module-2.html#cb68-3" tabindex="-1"></a>nums2 <span class="ot">&lt;-</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb68-4"><a href="module-2.html#cb68-4" tabindex="-1"></a><span class="fu">mapply</span>(sum, nums1, nums2)   <span class="co"># adds 1+6, 2+7, … 5+10</span></span></code></pre></div>
 
 </div>
 </div>
@@ -398,7 +440,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="module-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="patients-younger-than-20.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="module-3.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
