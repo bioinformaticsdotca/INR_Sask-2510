@@ -1307,45 +1307,6 @@ subset(ALL\_df, age \textless{} 20)
 
 \subsection{2B}\label{b-1}
 
-\section{Lab 2A Tasks}\label{lab-2a-tasks}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# Task 1 – Basic Filtering}
-\CommentTok{\# Use a for loop with if/else conditions}
-\CommentTok{\# Go through each row of the dataset and:}
-\CommentTok{\# Print a message if the patient has High BP (\textgreater{} 140) \# Tip: use the paste function, }
-\CommentTok{\# Print a message if the patient has Low BP (\textless{} 90)}
-\CommentTok{\# Otherwise, mark them as Normal}
-
-\CommentTok{\# read data}
-\NormalTok{bp\_data }\OtherTok{\textless{}{-}} \FunctionTok{read.csv2}\NormalTok{(}\StringTok{"Desktop/R/data/BloodPressure\_wDates.csv"}\NormalTok{, }\AttributeTok{sep =} \StringTok{","}\NormalTok{)}
-
-\CommentTok{\# Use for loop}
-\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(bp\_data)) \{}
-  \ControlFlowTok{if}\NormalTok{ (bp\_data}\SpecialCharTok{$}\NormalTok{BloodPressure[i] }\SpecialCharTok{\textgreater{}} \DecValTok{140}\NormalTok{) \{}
-    \FunctionTok{print}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Patient"}\NormalTok{, bp\_data}\SpecialCharTok{$}\NormalTok{ID[i], }\StringTok{"has HIGH blood pressure"}\NormalTok{))}
-\NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (bp\_data}\SpecialCharTok{$}\NormalTok{BloodPressure[i] }\SpecialCharTok{\textless{}} \DecValTok{90}\NormalTok{) \{}
-    \FunctionTok{print}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Patient"}\NormalTok{, bp\_data}\SpecialCharTok{$}\NormalTok{ID[i], }\StringTok{"has LOW blood pressure"}\NormalTok{))}
-\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
-    \FunctionTok{print}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Patient"}\NormalTok{, bp\_data}\SpecialCharTok{$}\NormalTok{ID[i], }\StringTok{"is NORMAL"}\NormalTok{))}
-\NormalTok{  \}}
-\NormalTok{\}}
-
-
-\CommentTok{\# Use apply() instead of loops}
-\NormalTok{bp\_data}\SpecialCharTok{$}\NormalTok{BP\_Status }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(bp\_data, }\DecValTok{1}\NormalTok{, }\ControlFlowTok{function}\NormalTok{(row) \{}
-  \ControlFlowTok{if}\NormalTok{ (}\FunctionTok{as.numeric}\NormalTok{(row[}\StringTok{"BloodPressure"}\NormalTok{]) }\SpecialCharTok{\textgreater{}} \DecValTok{140}\NormalTok{) \{}
-    \StringTok{"HIGH"}
-\NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (}\FunctionTok{as.numeric}\NormalTok{(row[}\StringTok{"BloodPressure"}\NormalTok{]) }\SpecialCharTok{\textless{}} \DecValTok{90}\NormalTok{) \{}
-    \StringTok{"LOW"}
-\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
-    \StringTok{"NORMAL"}
-\NormalTok{  \}}
-\NormalTok{\})}
-\end{Highlighting}
-\end{Shaded}
-
 \section{Lab 2A}\label{lab-2a}
 
 \subsection{Read data in to R}\label{read-data-in-to-r}
@@ -1558,6 +1519,137 @@ subset(ALL\_df, age \textless{} 20)
 \NormalTok{nums1 }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{5}
 \NormalTok{nums2 }\OtherTok{\textless{}{-}} \DecValTok{6}\SpecialCharTok{:}\DecValTok{10}
 \FunctionTok{mapply}\NormalTok{(sum, nums1, nums2)   }\CommentTok{\# adds 1+6, 2+7, … 5+10}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Lab 2A Tasks}\label{lab-2a-tasks}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Task 1 – Basic Filtering}
+\CommentTok{\# Use a for loop with if/else conditions}
+\CommentTok{\# Go through each row of the dataset and:}
+\CommentTok{\# Print a message if the patient has High BP (\textgreater{} 140) \# Tip: use the paste function, }
+\CommentTok{\# Print a message if the patient has Low BP (\textless{} 90)}
+\CommentTok{\# Otherwise, mark them as Normal}
+
+\CommentTok{\# read data}
+\NormalTok{bp\_data }\OtherTok{\textless{}{-}} \FunctionTok{read.csv2}\NormalTok{(}\StringTok{"Desktop/R/data/BloodPressure\_wDates.csv"}\NormalTok{, }\AttributeTok{sep =} \StringTok{","}\NormalTok{)}
+
+\CommentTok{\# Use for loop}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(bp\_data)) \{}
+  \ControlFlowTok{if}\NormalTok{ (bp\_data}\SpecialCharTok{$}\NormalTok{BloodPressure[i] }\SpecialCharTok{\textgreater{}} \DecValTok{140}\NormalTok{) \{}
+    \FunctionTok{print}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Patient"}\NormalTok{, bp\_data}\SpecialCharTok{$}\NormalTok{ID[i], }\StringTok{"has HIGH blood pressure"}\NormalTok{))}
+\NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (bp\_data}\SpecialCharTok{$}\NormalTok{BloodPressure[i] }\SpecialCharTok{\textless{}} \DecValTok{90}\NormalTok{) \{}
+    \FunctionTok{print}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Patient"}\NormalTok{, bp\_data}\SpecialCharTok{$}\NormalTok{ID[i], }\StringTok{"has LOW blood pressure"}\NormalTok{))}
+\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
+    \FunctionTok{print}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"Patient"}\NormalTok{, bp\_data}\SpecialCharTok{$}\NormalTok{ID[i], }\StringTok{"is NORMAL"}\NormalTok{))}
+\NormalTok{  \}}
+\NormalTok{\}}
+
+
+\CommentTok{\# Use apply() instead of loops}
+\NormalTok{bp\_data}\SpecialCharTok{$}\NormalTok{BP\_Status }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(bp\_data, }\DecValTok{1}\NormalTok{, }\ControlFlowTok{function}\NormalTok{(row) \{}
+  \ControlFlowTok{if}\NormalTok{ (}\FunctionTok{as.numeric}\NormalTok{(row[}\StringTok{"BloodPressure"}\NormalTok{]) }\SpecialCharTok{\textgreater{}} \DecValTok{140}\NormalTok{) \{}
+    \StringTok{"HIGH"}
+\NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (}\FunctionTok{as.numeric}\NormalTok{(row[}\StringTok{"BloodPressure"}\NormalTok{]) }\SpecialCharTok{\textless{}} \DecValTok{90}\NormalTok{) \{}
+    \StringTok{"LOW"}
+\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
+    \StringTok{"NORMAL"}
+\NormalTok{  \}}
+\NormalTok{\})}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Lab 2B}\label{lab-2b}
+
+\subsection{Basic plotting in R}\label{basic-plotting-in-r}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Plot multiple panels in one plot}
+\FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow =} \FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{))}
+\FunctionTok{layout}\NormalTok{(}\FunctionTok{matrix}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{), }\AttributeTok{nrow =} \DecValTok{2}\NormalTok{, }\AttributeTok{byrow =} \ConstantTok{TRUE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Histogram of Blood Pressure}
+\FunctionTok{hist}\NormalTok{(bp\_data}\SpecialCharTok{$}\NormalTok{BloodPressure, }\AttributeTok{main=}\StringTok{"Blood Pressure Distribution"}\NormalTok{,}
+     \AttributeTok{xlab=}\StringTok{"Blood Pressure"}\NormalTok{, }\AttributeTok{col=}\StringTok{"lightblue"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Boxplot of BP by Gender}
+\FunctionTok{boxplot}\NormalTok{(BloodPressure }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Gender, }\AttributeTok{data=}\NormalTok{bp\_data,}
+        \AttributeTok{main=}\StringTok{"BP by Gender"}\NormalTok{, }\AttributeTok{xlab=}\StringTok{"Gender"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"Blood Pressure"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Scatterplot Age vs BP}
+\FunctionTok{plot}\NormalTok{(bp\_data}\SpecialCharTok{$}\NormalTok{Age, bp\_data}\SpecialCharTok{$}\NormalTok{BloodPressure,}
+     \AttributeTok{main=}\StringTok{"Age vs Blood Pressure"}\NormalTok{, }\AttributeTok{xlab=}\StringTok{"Age"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"BP"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{ggplot2}\label{ggplot2}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# example syntax }
+\CommentTok{\#ggplot(data, aes(x, y)) + geom\_*()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\CommentTok{\# Scatterplot: Age vs Blood Pressure}
+\FunctionTok{ggplot}\NormalTok{(bp\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Age, }\AttributeTok{y=}\NormalTok{BloodPressure)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# boxplot}
+\FunctionTok{ggplot}\NormalTok{(bp\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Group, }\AttributeTok{y=}\NormalTok{BloodPressure)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Customizing ggplot2}
+\FunctionTok{ggplot}\NormalTok{(bp\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Age, }\AttributeTok{y =}\NormalTok{ BloodPressure)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{color =} \StringTok{"blue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Age vs Blood Pressure"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Patient Age"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"BP (mmHg)"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Save last plot as PNG}
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"Age\_BP\_Scatter.png"}\NormalTok{, }\AttributeTok{width=}\DecValTok{6}\NormalTok{, }\AttributeTok{height=}\DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Save specific plot object}
+\NormalTok{p }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(bp\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Age, }\AttributeTok{y=}\NormalTok{BloodPressure)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"data/scatter\_plot.png"}\NormalTok{, }\AttributeTok{plot=}\NormalTok{p)}
 \end{Highlighting}
 \end{Shaded}
 

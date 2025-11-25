@@ -12,43 +12,6 @@
 <iframe src="https://docs.google.com/presentation/d/1Dd5Dow29sairtG8tTLhsYChQV3qZGc5o/preview" width="640" height="480" allow="autoplay"></iframe>  
 
 
-## Lab 2A Tasks
-
-```{r, eval=FALSE, message=FALSE}
-# Task 1 – Basic Filtering
-# Use a for loop with if/else conditions
-# Go through each row of the dataset and:
-# Print a message if the patient has High BP (> 140) # Tip: use the paste function, 
-# Print a message if the patient has Low BP (< 90)
-# Otherwise, mark them as Normal
-
-# read data
-bp_data <- read.csv2("Desktop/R/data/BloodPressure_wDates.csv", sep = ",")
-
-# Use for loop
-for (i in 1:nrow(bp_data)) {
-  if (bp_data$BloodPressure[i] > 140) {
-    print(paste("Patient", bp_data$ID[i], "has HIGH blood pressure"))
-  } else if (bp_data$BloodPressure[i] < 90) {
-    print(paste("Patient", bp_data$ID[i], "has LOW blood pressure"))
-  } else {
-    print(paste("Patient", bp_data$ID[i], "is NORMAL"))
-  }
-}
-
-
-# Use apply() instead of loops
-bp_data$BP_Status <- apply(bp_data, 1, function(row) {
-  if (as.numeric(row["BloodPressure"]) > 140) {
-    "HIGH"
-  } else if (as.numeric(row["BloodPressure"]) < 90) {
-    "LOW"
-  } else {
-    "NORMAL"
-  }
-})
-```
-
 
 
 ## Lab 2A
@@ -217,6 +180,119 @@ nums1 <- 1:5
 nums2 <- 6:10
 mapply(sum, nums1, nums2)   # adds 1+6, 2+7, … 5+10
 ```
+
+
+## Lab 2A Tasks
+
+```{r, eval=FALSE, message=FALSE}
+# Task 1 – Basic Filtering
+# Use a for loop with if/else conditions
+# Go through each row of the dataset and:
+# Print a message if the patient has High BP (> 140) # Tip: use the paste function, 
+# Print a message if the patient has Low BP (< 90)
+# Otherwise, mark them as Normal
+
+# read data
+bp_data <- read.csv2("Desktop/R/data/BloodPressure_wDates.csv", sep = ",")
+
+# Use for loop
+for (i in 1:nrow(bp_data)) {
+  if (bp_data$BloodPressure[i] > 140) {
+    print(paste("Patient", bp_data$ID[i], "has HIGH blood pressure"))
+  } else if (bp_data$BloodPressure[i] < 90) {
+    print(paste("Patient", bp_data$ID[i], "has LOW blood pressure"))
+  } else {
+    print(paste("Patient", bp_data$ID[i], "is NORMAL"))
+  }
+}
+
+
+# Use apply() instead of loops
+bp_data$BP_Status <- apply(bp_data, 1, function(row) {
+  if (as.numeric(row["BloodPressure"]) > 140) {
+    "HIGH"
+  } else if (as.numeric(row["BloodPressure"]) < 90) {
+    "LOW"
+  } else {
+    "NORMAL"
+  }
+})
+```
+
+
+## Lab 2B
+### Basic plotting in R
+
+```{r, eval=FALSE, message=FALSE}
+# Plot multiple panels in one plot
+par(mfrow = c(3, 1))
+layout(matrix(c(1, 1, 2, 3), nrow = 2, byrow = TRUE))
+```
+
+```{r, eval=FALSE, message=FALSE}
+# Histogram of Blood Pressure
+hist(bp_data$BloodPressure, main="Blood Pressure Distribution",
+     xlab="Blood Pressure", col="lightblue")
+```
+
+```{r, eval=FALSE, message=FALSE}
+# Boxplot of BP by Gender
+boxplot(BloodPressure ~ Gender, data=bp_data,
+        main="BP by Gender", xlab="Gender", ylab="Blood Pressure")
+```
+
+```{r, eval=FALSE, message=FALSE}
+# Scatterplot Age vs BP
+plot(bp_data$Age, bp_data$BloodPressure,
+     main="Age vs Blood Pressure", xlab="Age", ylab="BP")
+```
+
+
+### ggplot2
+
+```{r, eval=FALSE, message=FALSE}
+# example syntax 
+#ggplot(data, aes(x, y)) + geom_*()
+```
+
+```{r, eval=FALSE, message=FALSE}
+library(ggplot2)
+# Scatterplot: Age vs Blood Pressure
+ggplot(bp_data, aes(x=Age, y=BloodPressure)) +
+  geom_point()
+```
+
+```{r, eval=FALSE, message=FALSE}
+# boxplot
+ggplot(bp_data, aes(x=Group, y=BloodPressure)) +
+  geom_boxplot()
+```
+
+```{r, eval=FALSE, message=FALSE}
+# Customizing ggplot2
+ggplot(bp_data, aes(x = Age, y = BloodPressure)) +
+  geom_point(color = "blue") +
+  labs(
+    title = "Age vs Blood Pressure",
+    x = "Patient Age",
+    y = "BP (mmHg)"
+  ) +
+  theme_minimal() 
+```
+
+
+```{r, eval=FALSE, message=FALSE}
+# Save last plot as PNG
+ggsave("Age_BP_Scatter.png", width=6, height=4)
+```
+
+```{r, eval=FALSE, message=FALSE}
+# Save specific plot object
+p <- ggplot(bp_data, aes(x=Age, y=BloodPressure)) +
+  geom_point()
+ggsave("data/scatter_plot.png", plot=p)
+```
+
 
 
 
