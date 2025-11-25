@@ -294,7 +294,7 @@ ggsave("data/scatter_plot.png", plot=p)
 ```
 
 
-
+## Lab 2B Tasks
 
 
 

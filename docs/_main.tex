@@ -1291,13 +1291,31 @@ List
 
 \section{Lab 1B Tasks}\label{lab-1b-tasks}
 
-\subsection{Hands on Day1 Mod1B}\label{hands-on-day1-mod1b}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Task 1}
+\CommentTok{\# Patients younger than 20}
+\FunctionTok{subset}\NormalTok{(ALL\_df, age }\SpecialCharTok{\textless{}} \DecValTok{20}\NormalTok{)}
 
-\chapter{Task 1}\label{task-1}
+\CommentTok{\# Task 2}
+\CommentTok{\# Age and Sex for patients with BT = "B2"}
+\FunctionTok{subset}\NormalTok{(ALL\_df, BT }\SpecialCharTok{==} \StringTok{"B2"}\NormalTok{, }\AttributeTok{select =} \FunctionTok{c}\NormalTok{(age, sex))}
 
-\chapter{Patients younger than 20}\label{patients-younger-than-20}
+\CommentTok{\# Task 3}
+\CommentTok{\# Male patients older than 40}
+\FunctionTok{subset}\NormalTok{(ALL\_df, sex }\SpecialCharTok{==} \StringTok{"M"} \SpecialCharTok{\&}\NormalTok{ age }\SpecialCharTok{\textgreater{}} \DecValTok{40}\NormalTok{)}
 
-subset(ALL\_df, age \textless{} 20)
+\CommentTok{\# Female OR Relapse = Yes}
+\FunctionTok{subset}\NormalTok{(ALL\_df, sex }\SpecialCharTok{==} \StringTok{"F"} \SpecialCharTok{|}\NormalTok{ relapse }\SpecialCharTok{==}\NormalTok{ T)}
+
+\CommentTok{\# Mini{-}Challenge}
+\CommentTok{\# Male + Relapse + Age \textgreater{} 30}
+\FunctionTok{subset}\NormalTok{(ALL\_df, sex }\SpecialCharTok{==} \StringTok{"M"} \SpecialCharTok{\&}\NormalTok{ relapse }\SpecialCharTok{==}\NormalTok{ T }\SpecialCharTok{\&}\NormalTok{ age }\SpecialCharTok{\textgreater{}} \DecValTok{30}\NormalTok{)}
+
+\CommentTok{\#OR}
+\NormalTok{ALL\_df[ALL\_df}\SpecialCharTok{$}\NormalTok{sex }\SpecialCharTok{==} \StringTok{"M"} \SpecialCharTok{\&}\NormalTok{ ALL\_df}\SpecialCharTok{$}\NormalTok{relapse }\SpecialCharTok{==}\NormalTok{ T }\SpecialCharTok{\&}\NormalTok{ ALL\_df}\SpecialCharTok{$}\NormalTok{age }\SpecialCharTok{\textgreater{}} \DecValTok{30}\NormalTok{, ]}
+\end{Highlighting}
+\end{Shaded}
 
 \chapter{Module 2}\label{module-2}
 
@@ -1652,6 +1670,8 @@ subset(ALL\_df, age \textless{} 20)
 \FunctionTok{ggsave}\NormalTok{(}\StringTok{"data/scatter\_plot.png"}\NormalTok{, }\AttributeTok{plot=}\NormalTok{p)}
 \end{Highlighting}
 \end{Shaded}
+
+\section{Lab 2B Tasks}\label{lab-2b-tasks}
 
 \chapter{Module 3}\label{module-3}
 

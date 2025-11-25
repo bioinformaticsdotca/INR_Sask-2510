@@ -35,9 +35,6 @@ with
 match-in-matching-values
 logical-indexing-directly
 lab-1b-tasks
-hands-on-day1-mod1b
-task-1
-patients-younger-than-20
 module-2
 lecture-1
 a-1
@@ -50,6 +47,7 @@ lab-2a-tasks
 lab-2b
 basic-plotting-in-r
 ggplot2
+lab-2b-tasks
 module-3
 lecture-2
 a-2

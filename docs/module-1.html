@@ -30,7 +30,7 @@
   
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
 <link rel="prev" href="meet-your-faculty.html"/>
-<link rel="next" href="task-1.html"/>
+<link rel="next" href="module-2.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -209,13 +209,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="module-1.html"><a href="module-1.html#match-in-matching-values"><i class="fa fa-check"></i>match() / %in% (matching values)</a></li>
 <li class="chapter" data-level="" data-path="module-1.html"><a href="module-1.html#logical-indexing-directly"><i class="fa fa-check"></i>Logical indexing directly</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="module-1.html"><a href="module-1.html#lab-1b-tasks"><i class="fa fa-check"></i>Lab 1B Tasks</a>
-<ul>
-<li class="chapter" data-level="" data-path="module-1.html"><a href="module-1.html#hands-on-day1-mod1b"><i class="fa fa-check"></i>Hands on Day1 Mod1B</a></li>
+<li class="chapter" data-level="" data-path="module-1.html"><a href="module-1.html#lab-1b-tasks"><i class="fa fa-check"></i>Lab 1B Tasks</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="task-1.html"><a href="task-1.html"><i class="fa fa-check"></i>Task 1</a></li>
-<li class="chapter" data-level="" data-path="patients-younger-than-20.html"><a href="patients-younger-than-20.html"><i class="fa fa-check"></i>Patients younger than 20</a></li>
 <li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html"><i class="fa fa-check"></i>Module 2</a>
 <ul>
 <li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#lecture-1"><i class="fa fa-check"></i>Lecture</a>
@@ -235,6 +230,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#basic-plotting-in-r"><i class="fa fa-check"></i>Basic plotting in R</a></li>
 <li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#ggplot2"><i class="fa fa-check"></i>ggplot2</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#lab-2b-tasks"><i class="fa fa-check"></i>Lab 2B Tasks</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="module-3.html"><a href="module-3.html"><i class="fa fa-check"></i>Module 3</a>
 <ul>
@@ -1208,9 +1204,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="lab-1b-tasks" class="section level2 hasAnchor">
 <h2>Lab 1B Tasks<a href="module-1.html#lab-1b-tasks" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="hands-on-day1-mod1b" class="section level3 hasAnchor">
-<h3>Hands on Day1 Mod1B<a href="module-1.html#hands-on-day1-mod1b" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-</div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="module-1.html#cb45-1" tabindex="-1"></a><span class="co"># Task 1</span></span>
+<span id="cb45-2"><a href="module-1.html#cb45-2" tabindex="-1"></a><span class="co"># Patients younger than 20</span></span>
+<span id="cb45-3"><a href="module-1.html#cb45-3" tabindex="-1"></a><span class="fu">subset</span>(ALL_df, age <span class="sc">&lt;</span> <span class="dv">20</span>)</span>
+<span id="cb45-4"><a href="module-1.html#cb45-4" tabindex="-1"></a></span>
+<span id="cb45-5"><a href="module-1.html#cb45-5" tabindex="-1"></a><span class="co"># Task 2</span></span>
+<span id="cb45-6"><a href="module-1.html#cb45-6" tabindex="-1"></a><span class="co"># Age and Sex for patients with BT = &quot;B2&quot;</span></span>
+<span id="cb45-7"><a href="module-1.html#cb45-7" tabindex="-1"></a><span class="fu">subset</span>(ALL_df, BT <span class="sc">==</span> <span class="st">&quot;B2&quot;</span>, <span class="at">select =</span> <span class="fu">c</span>(age, sex))</span>
+<span id="cb45-8"><a href="module-1.html#cb45-8" tabindex="-1"></a></span>
+<span id="cb45-9"><a href="module-1.html#cb45-9" tabindex="-1"></a><span class="co"># Task 3</span></span>
+<span id="cb45-10"><a href="module-1.html#cb45-10" tabindex="-1"></a><span class="co"># Male patients older than 40</span></span>
+<span id="cb45-11"><a href="module-1.html#cb45-11" tabindex="-1"></a><span class="fu">subset</span>(ALL_df, sex <span class="sc">==</span> <span class="st">&quot;M&quot;</span> <span class="sc">&amp;</span> age <span class="sc">&gt;</span> <span class="dv">40</span>)</span>
+<span id="cb45-12"><a href="module-1.html#cb45-12" tabindex="-1"></a></span>
+<span id="cb45-13"><a href="module-1.html#cb45-13" tabindex="-1"></a><span class="co"># Female OR Relapse = Yes</span></span>
+<span id="cb45-14"><a href="module-1.html#cb45-14" tabindex="-1"></a><span class="fu">subset</span>(ALL_df, sex <span class="sc">==</span> <span class="st">&quot;F&quot;</span> <span class="sc">|</span> relapse <span class="sc">==</span> T)</span>
+<span id="cb45-15"><a href="module-1.html#cb45-15" tabindex="-1"></a></span>
+<span id="cb45-16"><a href="module-1.html#cb45-16" tabindex="-1"></a><span class="co"># Mini-Challenge</span></span>
+<span id="cb45-17"><a href="module-1.html#cb45-17" tabindex="-1"></a><span class="co"># Male + Relapse + Age &gt; 30</span></span>
+<span id="cb45-18"><a href="module-1.html#cb45-18" tabindex="-1"></a><span class="fu">subset</span>(ALL_df, sex <span class="sc">==</span> <span class="st">&quot;M&quot;</span> <span class="sc">&amp;</span> relapse <span class="sc">==</span> T <span class="sc">&amp;</span> age <span class="sc">&gt;</span> <span class="dv">30</span>)</span>
+<span id="cb45-19"><a href="module-1.html#cb45-19" tabindex="-1"></a></span>
+<span id="cb45-20"><a href="module-1.html#cb45-20" tabindex="-1"></a><span class="co">#OR</span></span>
+<span id="cb45-21"><a href="module-1.html#cb45-21" tabindex="-1"></a>ALL_df[ALL_df<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">&quot;M&quot;</span> <span class="sc">&amp;</span> ALL_df<span class="sc">$</span>relapse <span class="sc">==</span> T <span class="sc">&amp;</span> ALL_df<span class="sc">$</span>age <span class="sc">&gt;</span> <span class="dv">30</span>, ]</span></code></pre></div>
+
 </div>
 </div>
             </section>
@@ -1219,7 +1234,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="meet-your-faculty.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="task-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="module-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
