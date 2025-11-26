@@ -16,8 +16,8 @@
 
 ## Lab 2A
 ### Read data in to R
-### read CSV - base functions
 
+read CSV - base functions
 ```{r, eval=FALSE, message=FALSE}
 bp <- read.csv2("Desktop/R/data/BloodPressure_Data.csv") # no sepqration
 # take a quick look at the data
@@ -31,48 +31,48 @@ head(bp)
 str(bp)
 ```
 
+readr functions
 ```{r, eval=FALSE, message=FALSE}
-# readr functions
 library(readr)
 ```
 
+Read the CSV file
 ```{r, eval=FALSE, message=FALSE}
-# Read the CSV file
 bp_data <- read_csv("Desktop/R/data/BloodPressure_Data.csv")
 ```
 
+Take a quick look at the data
 ```{r, eval=FALSE, message=FALSE}
-# Take a quick look at the data
 head(bp_data)
 str(bp_data)
 ```
 
+Work with date
 ```{r, eval=FALSE, message=FALSE}
-# Work with date
 library(readr)
 library("lubridate")
 ```
 
+read ALL data
 ```{r, eval=FALSE, message=FALSE}
-# read ALL data
 bp <-  read.csv2("Desktop/R/data/BloodPressure_wDates.csv", sep = ",")
 ```
 
+Convert date column and extract year
 ```{r, eval=FALSE, message=FALSE}
-# Convert date column and extract year
 bp$Date <- ymd(bp$Date)
 bp$Year <- year(bp$Date)
 ```
 
+Filtering blood pressure patients by year and gender
 ```{r, eval=FALSE, message=FALSE}
-# Filtering blood pressure patients by year and gender
 subset(bp, Year == 2003 & Gender == "f")
 ```
 
 ### Conditions and loops
 
+If {} else {} statement 
 ```{r, eval=FALSE, message=FALSE}
-# If {} else {} statement 
 if (condition) {
   # code if TRUE
 } else {
@@ -184,14 +184,15 @@ mapply(sum, nums1, nums2)   # adds 1+6, 2+7, … 5+10
 
 ## Lab 2A Tasks
 
-```{r, eval=FALSE, message=FALSE}
-# Task 1 – Basic Filtering
-# Use a for loop with if/else conditions
-# Go through each row of the dataset and:
-# Print a message if the patient has High BP (> 140) # Tip: use the paste function, 
-# Print a message if the patient has Low BP (< 90)
-# Otherwise, mark them as Normal
 
+Task 1 – Basic Filtering
+
+```{r, eval=FALSE, message=FALSE}
+#Use a for loop with if/else conditions
+Go through each row of the dataset and:
+Print a message if the patient has High BP (> 140) # Tip: use the paste function, 
+Print a message if the patient has Low BP (< 90)
+Otherwise, mark them as Normal
 # read data
 bp_data <- read.csv2("Desktop/R/data/BloodPressure_wDates.csv", sep = ",")
 
@@ -223,26 +224,27 @@ bp_data$BP_Status <- apply(bp_data, 1, function(row) {
 ## Lab 2B
 ### Basic plotting in R
 
+Plot multiple panels in one plot
 ```{r, eval=FALSE, message=FALSE}
-# Plot multiple panels in one plot
 par(mfrow = c(3, 1))
 layout(matrix(c(1, 1, 2, 3), nrow = 2, byrow = TRUE))
 ```
 
+Histogram of Blood Pressure
 ```{r, eval=FALSE, message=FALSE}
-# Histogram of Blood Pressure
 hist(bp_data$BloodPressure, main="Blood Pressure Distribution",
      xlab="Blood Pressure", col="lightblue")
 ```
 
+Boxplot of BP by Gender
 ```{r, eval=FALSE, message=FALSE}
-# Boxplot of BP by Gender
 boxplot(BloodPressure ~ Gender, data=bp_data,
         main="BP by Gender", xlab="Gender", ylab="Blood Pressure")
 ```
 
+Scatterplot Age vs BP
 ```{r, eval=FALSE, message=FALSE}
-# Scatterplot Age vs BP
+
 plot(bp_data$Age, bp_data$BloodPressure,
      main="Age vs Blood Pressure", xlab="Age", ylab="BP")
 ```
@@ -262,14 +264,15 @@ ggplot(bp_data, aes(x=Age, y=BloodPressure)) +
   geom_point()
 ```
 
+
+boxplot
 ```{r, eval=FALSE, message=FALSE}
-# boxplot
 ggplot(bp_data, aes(x=Group, y=BloodPressure)) +
   geom_boxplot()
 ```
 
+Customizing ggplot2
 ```{r, eval=FALSE, message=FALSE}
-# Customizing ggplot2
 ggplot(bp_data, aes(x = Age, y = BloodPressure)) +
   geom_point(color = "blue") +
   labs(
@@ -295,6 +298,96 @@ ggsave("data/scatter_plot.png", plot=p)
 
 
 ## Lab 2B Tasks
+
+ggplot hands on tasks
+```{r, eval=FALSE, message=FALSE}
+library(lubridate)
+library(ggplot2)
+library(patchwork)
+```
+
+Load data
+```{r, eval=FALSE, message=FALSE}
+bp_data <- read.csv2("data/BloodPressure_wDates.csv", sep = ",")
+```
+
+Get the year in a new column
+```{r, eval=FALSE, message=FALSE}
+bp_data$Year <- year(bp_data$Date)
+```
+
+
+1. Bar plot: patient counts per group
+```{r, eval=FALSE, message=FALSE}
+# ggplot hands on tasks
+ggplot(bp_data, aes(x=Group)) +
+  geom_bar(fill="steelblue") +
+  labs(title="Number of Patients per Group", x="Group", y="Count")
+```
+
+2. Histogram: Age distribution
+```{r, eval=FALSE, message=FALSE}
+ggplot(bp_data, aes(x=as.numeric(Age)))  +
+  geom_histogram(binwidth=5, fill="lightgreen", color="black") +
+  labs(title="Age Distribution of Patients", x="Age", y="Frequency")
+```
+
+3. Scatterplot: Age vs BloodPressure, colored by Group
+```{r, eval=FALSE, message=FALSE}
+ggplot(bp_data, aes(x=Age, y=BloodPressure, color=Group)) +
+  geom_point() +
+  labs(title="Age vs Blood Pressure by Group", 
+       x="Age", y="Blood Pressure")
+```
+
+
+Bonus hands on
+```{r, eval=FALSE, message=FALSE}
+library(ggplot2)
+library(patchwork)   # install.packages("patchwork") if needed
+```
+
+1. Bar plot
+```{r, eval=FALSE, message=FALSE}
+p1 <- ggplot(bp_data, aes(x = Gender, y = BloodPressure, fill = Gender)) +
+  stat_summary(fun = "mean", geom = "bar") +
+  labs(title = "Average BP by Gender") +
+  theme_minimal()
+```
+
+2. Histogram
+```{r, eval=FALSE, message=FALSE}
+p2 <- ggplot(bp_data, aes(x=as.numeric(Age)))  +
+  geom_histogram(binwidth=5, fill="lightgreen", color="black") +
+  labs(title="Age Distribution of Patients", x="Age", y="Frequency")
+```
+
+3. Boxplot
+```{r, eval=FALSE, message=FALSE}
+p3 <- ggplot(bp_data, aes(x = Group, y = BloodPressure, fill = Group)) +
+  geom_boxplot() +
+  labs(title = "BP by Group") +
+  theme_minimal()
+```
+
+Combine plots into one figure
+```{r, eval=FALSE, message=FALSE}
+# horizontal layout
+(p1 | p2 | p3) 
+
+# vertical layout
+(p1 / p2 / p3)  
+
+# 2x2 grid
+(p1 | p2) / p3
+```
+
+  
+
+ 
+
+
+
 
 
 

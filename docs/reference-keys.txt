@@ -41,7 +41,6 @@ a-1
 b-1
 lab-2a
 read-data-in-to-r
-read-csv---base-functions
 conditions-and-loops
 lab-2a-tasks
 lab-2b

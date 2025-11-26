@@ -1329,7 +1329,7 @@ List
 
 \subsection{Read data in to R}\label{read-data-in-to-r}
 
-\subsection{read CSV - base functions}\label{read-csv---base-functions}
+read CSV - base functions
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1348,63 +1348,71 @@ List
 \end{Highlighting}
 \end{Shaded}
 
+readr functions
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# readr functions}
 \FunctionTok{library}\NormalTok{(readr)}
 \end{Highlighting}
 \end{Shaded}
 
+Read the CSV file
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Read the CSV file}
 \NormalTok{bp\_data }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"Desktop/R/data/BloodPressure\_Data.csv"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
+Take a quick look at the data
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Take a quick look at the data}
 \FunctionTok{head}\NormalTok{(bp\_data)}
 \FunctionTok{str}\NormalTok{(bp\_data)}
 \end{Highlighting}
 \end{Shaded}
 
+Work with date
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Work with date}
 \FunctionTok{library}\NormalTok{(readr)}
 \FunctionTok{library}\NormalTok{(}\StringTok{"lubridate"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
+read ALL data
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# read ALL data}
 \NormalTok{bp }\OtherTok{\textless{}{-}}  \FunctionTok{read.csv2}\NormalTok{(}\StringTok{"Desktop/R/data/BloodPressure\_wDates.csv"}\NormalTok{, }\AttributeTok{sep =} \StringTok{","}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
+Convert date column and extract year
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Convert date column and extract year}
 \NormalTok{bp}\SpecialCharTok{$}\NormalTok{Date }\OtherTok{\textless{}{-}} \FunctionTok{ymd}\NormalTok{(bp}\SpecialCharTok{$}\NormalTok{Date)}
 \NormalTok{bp}\SpecialCharTok{$}\NormalTok{Year }\OtherTok{\textless{}{-}} \FunctionTok{year}\NormalTok{(bp}\SpecialCharTok{$}\NormalTok{Date)}
 \end{Highlighting}
 \end{Shaded}
 
+Filtering blood pressure patients by year and gender
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Filtering blood pressure patients by year and gender}
 \FunctionTok{subset}\NormalTok{(bp, Year }\SpecialCharTok{==} \DecValTok{2003} \SpecialCharTok{\&}\NormalTok{ Gender }\SpecialCharTok{==} \StringTok{"f"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \subsection{Conditions and loops}\label{conditions-and-loops}
 
+If \{\} else \{\} statement
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# If \{\} else \{\} statement }
 \ControlFlowTok{if}\NormalTok{ (condition) \{}
   \CommentTok{\# code if TRUE}
 \NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}
@@ -1542,15 +1550,15 @@ List
 
 \section{Lab 2A Tasks}\label{lab-2a-tasks}
 
+Task 1 -- Basic Filtering
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Task 1 – Basic Filtering}
-\CommentTok{\# Use a for loop with if/else conditions}
-\CommentTok{\# Go through each row of the dataset and:}
-\CommentTok{\# Print a message if the patient has High BP (\textgreater{} 140) \# Tip: use the paste function, }
-\CommentTok{\# Print a message if the patient has Low BP (\textless{} 90)}
-\CommentTok{\# Otherwise, mark them as Normal}
-
+\CommentTok{\#Use a for loop with if/else conditions}
+\NormalTok{Go through each row of the dataset and}\SpecialCharTok{:}
+\NormalTok{Print a message }\ControlFlowTok{if}\NormalTok{ the patient has High }\FunctionTok{BP}\NormalTok{ (}\SpecialCharTok{\textgreater{}} \DecValTok{140}\NormalTok{) }\CommentTok{\# Tip: use the paste function, }
+\NormalTok{Print a message }\ControlFlowTok{if}\NormalTok{ the patient has Low }\FunctionTok{BP}\NormalTok{ (}\SpecialCharTok{\textless{}} \DecValTok{90}\NormalTok{)}
+\NormalTok{Otherwise, mark them as Normal}
 \CommentTok{\# read data}
 \NormalTok{bp\_data }\OtherTok{\textless{}{-}} \FunctionTok{read.csv2}\NormalTok{(}\StringTok{"Desktop/R/data/BloodPressure\_wDates.csv"}\NormalTok{, }\AttributeTok{sep =} \StringTok{","}\NormalTok{)}
 
@@ -1583,33 +1591,37 @@ List
 
 \subsection{Basic plotting in R}\label{basic-plotting-in-r}
 
+Plot multiple panels in one plot
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Plot multiple panels in one plot}
 \FunctionTok{par}\NormalTok{(}\AttributeTok{mfrow =} \FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{))}
 \FunctionTok{layout}\NormalTok{(}\FunctionTok{matrix}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{), }\AttributeTok{nrow =} \DecValTok{2}\NormalTok{, }\AttributeTok{byrow =} \ConstantTok{TRUE}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
+Histogram of Blood Pressure
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Histogram of Blood Pressure}
 \FunctionTok{hist}\NormalTok{(bp\_data}\SpecialCharTok{$}\NormalTok{BloodPressure, }\AttributeTok{main=}\StringTok{"Blood Pressure Distribution"}\NormalTok{,}
      \AttributeTok{xlab=}\StringTok{"Blood Pressure"}\NormalTok{, }\AttributeTok{col=}\StringTok{"lightblue"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
+Boxplot of BP by Gender
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Boxplot of BP by Gender}
 \FunctionTok{boxplot}\NormalTok{(BloodPressure }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Gender, }\AttributeTok{data=}\NormalTok{bp\_data,}
         \AttributeTok{main=}\StringTok{"BP by Gender"}\NormalTok{, }\AttributeTok{xlab=}\StringTok{"Gender"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"Blood Pressure"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
+Scatterplot Age vs BP
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Scatterplot Age vs BP}
 \FunctionTok{plot}\NormalTok{(bp\_data}\SpecialCharTok{$}\NormalTok{Age, bp\_data}\SpecialCharTok{$}\NormalTok{BloodPressure,}
      \AttributeTok{main=}\StringTok{"Age vs Blood Pressure"}\NormalTok{, }\AttributeTok{xlab=}\StringTok{"Age"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"BP"}\NormalTok{)}
 \end{Highlighting}
@@ -1633,17 +1645,19 @@ List
 \end{Highlighting}
 \end{Shaded}
 
+boxplot
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# boxplot}
 \FunctionTok{ggplot}\NormalTok{(bp\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Group, }\AttributeTok{y=}\NormalTok{BloodPressure)) }\SpecialCharTok{+}
   \FunctionTok{geom\_boxplot}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
+Customizing ggplot2
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Customizing ggplot2}
 \FunctionTok{ggplot}\NormalTok{(bp\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Age, }\AttributeTok{y =}\NormalTok{ BloodPressure)) }\SpecialCharTok{+}
   \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{color =} \StringTok{"blue"}\NormalTok{) }\SpecialCharTok{+}
   \FunctionTok{labs}\NormalTok{(}
@@ -1672,6 +1686,154 @@ List
 \end{Shaded}
 
 \section{Lab 2B Tasks}\label{lab-2b-tasks}
+
+ggplot hands on tasks
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(lubridate)}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(patchwork)}
+\end{Highlighting}
+\end{Shaded}
+
+Load data
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bp\_data }\OtherTok{\textless{}{-}} \FunctionTok{read.csv2}\NormalTok{(}\StringTok{"data/BloodPressure\_wDates.csv"}\NormalTok{, }\AttributeTok{sep =} \StringTok{","}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Get the year in a new column
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{bp\_data}\SpecialCharTok{$}\NormalTok{Year }\OtherTok{\textless{}{-}} \FunctionTok{year}\NormalTok{(bp\_data}\SpecialCharTok{$}\NormalTok{Date)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Bar plot: patient counts per group
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# ggplot hands on tasks}
+\FunctionTok{ggplot}\NormalTok{(bp\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Group)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{fill=}\StringTok{"steelblue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title=}\StringTok{"Number of Patients per Group"}\NormalTok{, }\AttributeTok{x=}\StringTok{"Group"}\NormalTok{, }\AttributeTok{y=}\StringTok{"Count"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Histogram: Age distribution
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(bp\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\FunctionTok{as.numeric}\NormalTok{(Age)))  }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth=}\DecValTok{5}\NormalTok{, }\AttributeTok{fill=}\StringTok{"lightgreen"}\NormalTok{, }\AttributeTok{color=}\StringTok{"black"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title=}\StringTok{"Age Distribution of Patients"}\NormalTok{, }\AttributeTok{x=}\StringTok{"Age"}\NormalTok{, }\AttributeTok{y=}\StringTok{"Frequency"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Scatterplot: Age vs BloodPressure, colored by Group
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(bp\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Age, }\AttributeTok{y=}\NormalTok{BloodPressure, }\AttributeTok{color=}\NormalTok{Group)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title=}\StringTok{"Age vs Blood Pressure by Group"}\NormalTok{, }
+       \AttributeTok{x=}\StringTok{"Age"}\NormalTok{, }\AttributeTok{y=}\StringTok{"Blood Pressure"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Bonus hands on
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(patchwork)   }\CommentTok{\# install.packages("patchwork") if needed}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Bar plot
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p1 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(bp\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Gender, }\AttributeTok{y =}\NormalTok{ BloodPressure, }\AttributeTok{fill =}\NormalTok{ Gender)) }\SpecialCharTok{+}
+  \FunctionTok{stat\_summary}\NormalTok{(}\AttributeTok{fun =} \StringTok{"mean"}\NormalTok{, }\AttributeTok{geom =} \StringTok{"bar"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Average BP by Gender"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Histogram
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p2 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(bp\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\FunctionTok{as.numeric}\NormalTok{(Age)))  }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth=}\DecValTok{5}\NormalTok{, }\AttributeTok{fill=}\StringTok{"lightgreen"}\NormalTok{, }\AttributeTok{color=}\StringTok{"black"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title=}\StringTok{"Age Distribution of Patients"}\NormalTok{, }\AttributeTok{x=}\StringTok{"Age"}\NormalTok{, }\AttributeTok{y=}\StringTok{"Frequency"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Boxplot
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p3 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(bp\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Group, }\AttributeTok{y =}\NormalTok{ BloodPressure, }\AttributeTok{fill =}\NormalTok{ Group)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"BP by Group"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+Combine plots into one figure
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# horizontal layout}
+\NormalTok{(p1 }\SpecialCharTok{|}\NormalTok{ p2 }\SpecialCharTok{|}\NormalTok{ p3) }
+
+\CommentTok{\# vertical layout}
+\NormalTok{(p1 }\SpecialCharTok{/}\NormalTok{ p2 }\SpecialCharTok{/}\NormalTok{ p3)  }
+
+\CommentTok{\# 2x2 grid}
+\NormalTok{(p1 }\SpecialCharTok{|}\NormalTok{ p2) }\SpecialCharTok{/}\NormalTok{ p3}
+\end{Highlighting}
+\end{Shaded}
 
 \chapter{Module 3}\label{module-3}
 
