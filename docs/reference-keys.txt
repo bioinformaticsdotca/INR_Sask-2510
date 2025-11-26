@@ -51,9 +51,12 @@ module-3
 lecture-2
 a-2
 b-2
-lab
+lab-3a
+lab-3a-tasks
+lab-3b
+lab-3b-tasks
 module-4
 lecture-3
 a-3
 b-3
-lab-1
+lab

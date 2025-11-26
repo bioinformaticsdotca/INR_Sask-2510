@@ -238,7 +238,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="module-3.html"><a href="module-3.html#a-2"><i class="fa fa-check"></i>3A</a></li>
 <li class="chapter" data-level="" data-path="module-3.html"><a href="module-3.html#b-2"><i class="fa fa-check"></i>3B</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="module-3.html"><a href="module-3.html#lab"><i class="fa fa-check"></i>Lab</a></li>
+<li class="chapter" data-level="" data-path="module-3.html"><a href="module-3.html#lab-3a"><i class="fa fa-check"></i>Lab 3A</a></li>
+<li class="chapter" data-level="" data-path="module-3.html"><a href="module-3.html#lab-3a-tasks"><i class="fa fa-check"></i>Lab 3A Tasks</a></li>
+<li class="chapter" data-level="" data-path="module-3.html"><a href="module-3.html#lab-3b"><i class="fa fa-check"></i>Lab 3B</a></li>
+<li class="chapter" data-level="" data-path="module-3.html"><a href="module-3.html#lab-3b-tasks"><i class="fa fa-check"></i>Lab 3B Tasks</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="module-4.html"><a href="module-4.html"><i class="fa fa-check"></i>Module 4</a>
 <ul>
@@ -247,7 +250,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="module-4.html"><a href="module-4.html#a-3"><i class="fa fa-check"></i>4A</a></li>
 <li class="chapter" data-level="" data-path="module-4.html"><a href="module-4.html#b-3"><i class="fa fa-check"></i>4B</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="module-4.html"><a href="module-4.html#lab-1"><i class="fa fa-check"></i>Lab</a></li>
+<li class="chapter" data-level="" data-path="module-4.html"><a href="module-4.html#lab"><i class="fa fa-check"></i>Lab</a></li>
 </ul></li>
 <li class="divider"></li>
 <h1 id="sponsors">Sponsors</h1>
@@ -294,8 +297,191 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </iframe>
 </div>
 </div>
-<div id="lab" class="section level2 hasAnchor">
-<h2>Lab<a href="module-3.html#lab" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="lab-3a" class="section level2 hasAnchor">
+<h2>Lab 3A<a href="module-3.html#lab-3a" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Install a package, e.g. GenomicRanges</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="module-3.html#cb91-1" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;GenomicRanges&quot;</span>)</span></code></pre></div>
+<p>Load a package</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="module-3.html#cb92-1" tabindex="-1"></a><span class="fu">library</span>(GenomicRanges)</span>
+<span id="cb92-2"><a href="module-3.html#cb92-2" tabindex="-1"></a><span class="fu">library</span>(SummarizedExperiment)</span></code></pre></div>
+<p>Create simple SummarizedExperiment</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="module-3.html#cb93-1" tabindex="-1"></a>counts <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rpois</span>(<span class="dv">20</span>, <span class="dv">10</span>), <span class="at">ncol=</span><span class="dv">4</span>)</span>
+<span id="cb93-2"><a href="module-3.html#cb93-2" tabindex="-1"></a>colData <span class="ot">&lt;-</span> <span class="fu">DataFrame</span>(<span class="at">condition=</span><span class="fu">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;B&quot;</span>))</span>
+<span id="cb93-3"><a href="module-3.html#cb93-3" tabindex="-1"></a>rowData <span class="ot">&lt;-</span> <span class="fu">DataFrame</span>(<span class="at">gene=</span>letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span>
+<span id="cb93-4"><a href="module-3.html#cb93-4" tabindex="-1"></a></span>
+<span id="cb93-5"><a href="module-3.html#cb93-5" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="fu">SummarizedExperiment</span>(<span class="at">assays=</span><span class="fu">list</span>(<span class="at">counts=</span>counts),</span>
+<span id="cb93-6"><a href="module-3.html#cb93-6" tabindex="-1"></a>                           <span class="at">colData=</span>colData,</span>
+<span id="cb93-7"><a href="module-3.html#cb93-7" tabindex="-1"></a>                           <span class="at">rowData=</span>rowData)</span>
+<span id="cb93-8"><a href="module-3.html#cb93-8" tabindex="-1"></a></span>
+<span id="cb93-9"><a href="module-3.html#cb93-9" tabindex="-1"></a>se</span></code></pre></div>
+<p>Demo 2: ALL dataset</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="module-3.html#cb94-1" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;ALL&quot;</span>)</span>
+<span id="cb94-2"><a href="module-3.html#cb94-2" tabindex="-1"></a><span class="fu">library</span>(ALL)</span>
+<span id="cb94-3"><a href="module-3.html#cb94-3" tabindex="-1"></a><span class="fu">data</span>(ALL)</span>
+<span id="cb94-4"><a href="module-3.html#cb94-4" tabindex="-1"></a>ALL</span></code></pre></div>
+</div>
+<div id="lab-3a-tasks" class="section level2 hasAnchor">
+<h2>Lab 3A Tasks<a href="module-3.html#lab-3a-tasks" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Extract and preview sample (patient) metadata</p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="module-3.html#cb95-1" tabindex="-1"></a>meta <span class="ot">&lt;-</span> <span class="fu">pData</span>(ALL)</span>
+<span id="cb95-2"><a href="module-3.html#cb95-2" tabindex="-1"></a><span class="fu">head</span>(meta)   <span class="co"># first 6 rows</span></span>
+<span id="cb95-3"><a href="module-3.html#cb95-3" tabindex="-1"></a></span>
+<span id="cb95-4"><a href="module-3.html#cb95-4" tabindex="-1"></a><span class="co"># Gender distribution</span></span>
+<span id="cb95-5"><a href="module-3.html#cb95-5" tabindex="-1"></a><span class="fu">table</span>(meta<span class="sc">$</span>sex)</span>
+<span id="cb95-6"><a href="module-3.html#cb95-6" tabindex="-1"></a></span>
+<span id="cb95-7"><a href="module-3.html#cb95-7" tabindex="-1"></a><span class="co"># Mean age (ignoring missing values)</span></span>
+<span id="cb95-8"><a href="module-3.html#cb95-8" tabindex="-1"></a><span class="fu">mean</span>(meta<span class="sc">$</span>age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>Visualization in Bioconductor</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="module-3.html#cb96-1" tabindex="-1"></a><span class="fu">boxplot</span>(<span class="fu">exprs</span>(ALL)[,<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>], <span class="at">las=</span><span class="dv">2</span>, <span class="at">main=</span><span class="st">&quot;Expression values (first 10 samples)&quot;</span>)</span></code></pre></div>
+<p>Load All package and data</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="module-3.html#cb97-1" tabindex="-1"></a><span class="co"># BiocManager::install(&quot;ALL&quot;)</span></span>
+<span id="cb97-2"><a href="module-3.html#cb97-2" tabindex="-1"></a><span class="fu">library</span>(SummarizedExperiment)</span>
+<span id="cb97-3"><a href="module-3.html#cb97-3" tabindex="-1"></a><span class="fu">library</span>(ALL)</span>
+<span id="cb97-4"><a href="module-3.html#cb97-4" tabindex="-1"></a><span class="fu">data</span>(ALL)</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="module-3.html#cb98-1" tabindex="-1"></a><span class="co"># Subset patients &lt; 20</span></span>
+<span id="cb98-2"><a href="module-3.html#cb98-2" tabindex="-1"></a>young_patients <span class="ot">&lt;-</span> ALL[, <span class="fu">pData</span>(ALL)<span class="sc">$</span>age <span class="sc">&lt;</span> <span class="dv">20</span>]</span>
+<span id="cb98-3"><a href="module-3.html#cb98-3" tabindex="-1"></a><span class="fu">dim</span>(young_patients)</span>
+<span id="cb98-4"><a href="module-3.html#cb98-4" tabindex="-1"></a></span>
+<span id="cb98-5"><a href="module-3.html#cb98-5" tabindex="-1"></a><span class="co"># Count patients by Immunophenotype (BT)</span></span>
+<span id="cb98-6"><a href="module-3.html#cb98-6" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">table</span>(<span class="fu">pData</span>(ALL)<span class="sc">$</span>BT), <span class="at">main=</span><span class="st">&quot;Patients by Immunophenotype (BT)&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;Patients&quot;</span>, <span class="at">xlab=</span><span class="st">&quot;Immunophenotype (BT)&quot;</span>)</span>
+<span id="cb98-7"><a href="module-3.html#cb98-7" tabindex="-1"></a></span>
+<span id="cb98-8"><a href="module-3.html#cb98-8" tabindex="-1"></a><span class="co"># PCA on first 50 genes</span></span>
+<span id="cb98-9"><a href="module-3.html#cb98-9" tabindex="-1"></a>expr <span class="ot">&lt;-</span> <span class="fu">exprs</span>(ALL)[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, ]</span>
+<span id="cb98-10"><a href="module-3.html#cb98-10" tabindex="-1"></a>pca <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(<span class="fu">t</span>(expr), <span class="at">scale. =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb98-11"><a href="module-3.html#cb98-11" tabindex="-1"></a><span class="fu">plot</span>(pca<span class="sc">$</span>x[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">col =</span> <span class="fu">as.factor</span>(<span class="fu">pData</span>(ALL)<span class="sc">$</span>BT),</span>
+<span id="cb98-12"><a href="module-3.html#cb98-12" tabindex="-1"></a>     <span class="at">pch=</span><span class="dv">19</span>, <span class="at">main=</span><span class="st">&quot;PCA of 50 genes&quot;</span>)</span>
+<span id="cb98-13"><a href="module-3.html#cb98-13" tabindex="-1"></a></span>
+<span id="cb98-14"><a href="module-3.html#cb98-14" tabindex="-1"></a></span>
+<span id="cb98-15"><a href="module-3.html#cb98-15" tabindex="-1"></a><span class="co">#Boxplot of Age by Sex</span></span>
+<span id="cb98-16"><a href="module-3.html#cb98-16" tabindex="-1"></a><span class="fu">boxplot</span>(age <span class="sc">~</span> sex, <span class="at">data =</span> <span class="fu">pData</span>(ALL),</span>
+<span id="cb98-17"><a href="module-3.html#cb98-17" tabindex="-1"></a>        <span class="at">main=</span><span class="st">&quot;Age Distribution by Sex&quot;</span>, <span class="at">xlab=</span><span class="st">&quot;Sex&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;Age&quot;</span>)</span>
+<span id="cb98-18"><a href="module-3.html#cb98-18" tabindex="-1"></a></span>
+<span id="cb98-19"><a href="module-3.html#cb98-19" tabindex="-1"></a><span class="co"># Challenge (Filter missing age &amp; re-run PCA)</span></span>
+<span id="cb98-20"><a href="module-3.html#cb98-20" tabindex="-1"></a>ALL_clean <span class="ot">&lt;-</span> ALL[, <span class="sc">!</span><span class="fu">is.na</span>(<span class="fu">pData</span>(ALL)<span class="sc">$</span>age)]</span>
+<span id="cb98-21"><a href="module-3.html#cb98-21" tabindex="-1"></a>expr_clean <span class="ot">&lt;-</span> <span class="fu">exprs</span>(ALL_clean)[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, ]</span>
+<span id="cb98-22"><a href="module-3.html#cb98-22" tabindex="-1"></a>pca_clean <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(<span class="fu">t</span>(expr_clean), <span class="at">scale. =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb98-23"><a href="module-3.html#cb98-23" tabindex="-1"></a><span class="fu">plot</span>(pca_clean<span class="sc">$</span>x[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">col =</span> <span class="fu">as.factor</span>(<span class="fu">pData</span>(ALL_clean)<span class="sc">$</span>BT),</span>
+<span id="cb98-24"><a href="module-3.html#cb98-24" tabindex="-1"></a>     <span class="at">pch=</span><span class="dv">19</span>, <span class="at">main=</span><span class="st">&quot;PCA after removing NA ages&quot;</span>)</span></code></pre></div>
+</div>
+<div id="lab-3b" class="section level2 hasAnchor">
+<h2>Lab 3B<a href="module-3.html#lab-3b" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Bioconductor Packages and Data sets</strong></p>
+<p>Install airway package</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="module-3.html#cb99-1" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;airway&quot;</span>)</span>
+<span id="cb99-2"><a href="module-3.html#cb99-2" tabindex="-1"></a></span>
+<span id="cb99-3"><a href="module-3.html#cb99-3" tabindex="-1"></a><span class="co"># load package and data</span></span>
+<span id="cb99-4"><a href="module-3.html#cb99-4" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;airway&quot;</span>)</span>
+<span id="cb99-5"><a href="module-3.html#cb99-5" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;airway&quot;</span>)   <span class="co"># loads the dataset into your environment</span></span>
+<span id="cb99-6"><a href="module-3.html#cb99-6" tabindex="-1"></a>airway</span></code></pre></div>
+<p>Explore airway package</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="module-3.html#cb100-1" tabindex="-1"></a>ex <span class="ot">&lt;-</span> <span class="fu">assay</span>(airway)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]   <span class="co"># expression counts</span></span>
+<span id="cb100-2"><a href="module-3.html#cb100-2" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">colData</span>(airway)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, ]    <span class="co"># sample metadata</span></span>
+<span id="cb100-3"><a href="module-3.html#cb100-3" tabindex="-1"></a>rows <span class="ot">&lt;-</span> <span class="fu">rowData</span>(airway)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, ]    <span class="co"># gene metadata</span></span></code></pre></div>
+<p><strong>Hands on tasks</strong></p>
+<p>Subsetting treated vs untreated</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="module-3.html#cb101-1" tabindex="-1"></a>treated <span class="ot">&lt;-</span> airway[, airway<span class="sc">$</span>dex <span class="sc">==</span> <span class="st">&quot;trt&quot;</span>]</span>
+<span id="cb101-2"><a href="module-3.html#cb101-2" tabindex="-1"></a>untreated <span class="ot">&lt;-</span> airway[, airway<span class="sc">$</span>dex <span class="sc">==</span> <span class="st">&quot;untrt&quot;</span>]</span>
+<span id="cb101-3"><a href="module-3.html#cb101-3" tabindex="-1"></a></span>
+<span id="cb101-4"><a href="module-3.html#cb101-4" tabindex="-1"></a><span class="fu">dim</span>(treated)</span>
+<span id="cb101-5"><a href="module-3.html#cb101-5" tabindex="-1"></a><span class="fu">dim</span>(untreated)</span></code></pre></div>
+<p>Count treated vs untreated</p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="module-3.html#cb102-1" tabindex="-1"></a><span class="fu">table</span>(airway<span class="sc">$</span>dex)</span></code></pre></div>
+<p>Extract samples from a specific cell line</p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="module-3.html#cb103-1" tabindex="-1"></a>subset_cell <span class="ot">&lt;-</span> airway[, airway<span class="sc">$</span>cell <span class="sc">==</span> <span class="st">&quot;N061011&quot;</span>]</span></code></pre></div>
+<p>Get number of genes</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="module-3.html#cb104-1" tabindex="-1"></a><span class="fu">nrow</span>(airway)</span></code></pre></div>
+<p>ExperimentHub Demo</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="module-3.html#cb105-1" tabindex="-1"></a><span class="co"># Load ExperimentHub</span></span>
+<span id="cb105-2"><a href="module-3.html#cb105-2" tabindex="-1"></a><span class="fu">library</span>(ExperimentHub)</span>
+<span id="cb105-3"><a href="module-3.html#cb105-3" tabindex="-1"></a></span>
+<span id="cb105-4"><a href="module-3.html#cb105-4" tabindex="-1"></a><span class="co"># Create a hub object</span></span>
+<span id="cb105-5"><a href="module-3.html#cb105-5" tabindex="-1"></a>eh <span class="ot">&lt;-</span> <span class="fu">ExperimentHub</span>()</span>
+<span id="cb105-6"><a href="module-3.html#cb105-6" tabindex="-1"></a></span>
+<span id="cb105-7"><a href="module-3.html#cb105-7" tabindex="-1"></a><span class="co"># Search for RNA-seq datasets</span></span>
+<span id="cb105-8"><a href="module-3.html#cb105-8" tabindex="-1"></a><span class="fu">query</span>(eh, <span class="st">&quot;RNA-seq&quot;</span>)</span>
+<span id="cb105-9"><a href="module-3.html#cb105-9" tabindex="-1"></a></span>
+<span id="cb105-10"><a href="module-3.html#cb105-10" tabindex="-1"></a><span class="co"># Access a specific dataset by ID (example)</span></span>
+<span id="cb105-11"><a href="module-3.html#cb105-11" tabindex="-1"></a>eh[[<span class="st">&quot;EH1234&quot;</span>]]   <span class="co"># Loads dataset into R</span></span></code></pre></div>
+<p>AnnotationHub Demo</p>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="module-3.html#cb106-1" tabindex="-1"></a><span class="co"># Load AnnotationHub</span></span>
+<span id="cb106-2"><a href="module-3.html#cb106-2" tabindex="-1"></a><span class="fu">library</span>(AnnotationHub)</span>
+<span id="cb106-3"><a href="module-3.html#cb106-3" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;rtracklayer&quot;</span>)</span>
+<span id="cb106-4"><a href="module-3.html#cb106-4" tabindex="-1"></a><span class="co"># Create a hub object</span></span>
+<span id="cb106-5"><a href="module-3.html#cb106-5" tabindex="-1"></a>ah <span class="ot">&lt;-</span> <span class="fu">AnnotationHub</span>()</span>
+<span id="cb106-6"><a href="module-3.html#cb106-6" tabindex="-1"></a></span>
+<span id="cb106-7"><a href="module-3.html#cb106-7" tabindex="-1"></a><span class="co"># Search for human genome resources</span></span>
+<span id="cb106-8"><a href="module-3.html#cb106-8" tabindex="-1"></a><span class="fu">query</span>(ah, <span class="st">&quot;Homo sapiens&quot;</span>)</span>
+<span id="cb106-9"><a href="module-3.html#cb106-9" tabindex="-1"></a></span>
+<span id="cb106-10"><a href="module-3.html#cb106-10" tabindex="-1"></a><span class="co"># Access an annotation dataset by ID (example)</span></span>
+<span id="cb106-11"><a href="module-3.html#cb106-11" tabindex="-1"></a>ah[[<span class="st">&quot;AH83281&quot;</span>]]   <span class="co"># Loads GRCh38 GTF annotation into R</span></span></code></pre></div>
+<p>org.Hs.eg.db Demo</p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="module-3.html#cb107-1" tabindex="-1"></a><span class="co"># Install packages </span></span>
+<span id="cb107-2"><a href="module-3.html#cb107-2" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;AnnotationDbi&quot;</span>)</span>
+<span id="cb107-3"><a href="module-3.html#cb107-3" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;org.Hs.eg.db&quot;</span>)</span>
+<span id="cb107-4"><a href="module-3.html#cb107-4" tabindex="-1"></a></span>
+<span id="cb107-5"><a href="module-3.html#cb107-5" tabindex="-1"></a><span class="co"># load packages</span></span>
+<span id="cb107-6"><a href="module-3.html#cb107-6" tabindex="-1"></a><span class="fu">library</span>(org.Hs.eg.db)</span>
+<span id="cb107-7"><a href="module-3.html#cb107-7" tabindex="-1"></a><span class="fu">library</span>(AnnotationDbi)</span>
+<span id="cb107-8"><a href="module-3.html#cb107-8" tabindex="-1"></a></span>
+<span id="cb107-9"><a href="module-3.html#cb107-9" tabindex="-1"></a>ids <span class="ot">&lt;-</span> <span class="fu">rownames</span>(airway)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span>
+<span id="cb107-10"><a href="module-3.html#cb107-10" tabindex="-1"></a><span class="fu">mapIds</span>(org.Hs.eg.db,</span>
+<span id="cb107-11"><a href="module-3.html#cb107-11" tabindex="-1"></a>       <span class="at">keys =</span> ids,</span>
+<span id="cb107-12"><a href="module-3.html#cb107-12" tabindex="-1"></a>       <span class="at">keytype =</span> <span class="st">&quot;ENSEMBL&quot;</span>,</span>
+<span id="cb107-13"><a href="module-3.html#cb107-13" tabindex="-1"></a>       <span class="at">column =</span> <span class="st">&quot;SYMBOL&quot;</span>)</span></code></pre></div>
+</div>
+<div id="lab-3b-tasks" class="section level2 hasAnchor">
+<h2>Lab 3B Tasks<a href="module-3.html#lab-3b-tasks" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Task 1: Take the first 20 genes from airway. Map ENSEMBL IDs → gene symbols.</strong></p>
+<p>Retrieve gene descriptions</p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="module-3.html#cb108-1" tabindex="-1"></a><span class="fu">library</span>(airway)</span>
+<span id="cb108-2"><a href="module-3.html#cb108-2" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;airway&quot;</span>)</span>
+<span id="cb108-3"><a href="module-3.html#cb108-3" tabindex="-1"></a></span>
+<span id="cb108-4"><a href="module-3.html#cb108-4" tabindex="-1"></a><span class="fu">library</span>(org.Hs.eg.db)</span>
+<span id="cb108-5"><a href="module-3.html#cb108-5" tabindex="-1"></a><span class="fu">library</span>(AnnotationDbi)</span></code></pre></div>
+<p>Get first 20 ENSEMBL IDs from airway</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="module-3.html#cb109-1" tabindex="-1"></a>ids20 <span class="ot">&lt;-</span> <span class="fu">rownames</span>(airway)[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>]</span></code></pre></div>
+<p>Map ENSEMBL → Gene Symbol</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="module-3.html#cb110-1" tabindex="-1"></a>symbols <span class="ot">&lt;-</span> <span class="fu">mapIds</span>(org.Hs.eg.db,</span>
+<span id="cb110-2"><a href="module-3.html#cb110-2" tabindex="-1"></a>                  <span class="at">keys =</span> ids20,</span>
+<span id="cb110-3"><a href="module-3.html#cb110-3" tabindex="-1"></a>                  <span class="at">keytype =</span> <span class="st">&quot;ENSEMBL&quot;</span>,</span>
+<span id="cb110-4"><a href="module-3.html#cb110-4" tabindex="-1"></a>                  <span class="at">column =</span> <span class="st">&quot;SYMBOL&quot;</span>)</span></code></pre></div>
+<p>Map ENSEMBL → Full Gene Name</p>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="module-3.html#cb111-1" tabindex="-1"></a>descriptions <span class="ot">&lt;-</span> <span class="fu">mapIds</span>(org.Hs.eg.db,</span>
+<span id="cb111-2"><a href="module-3.html#cb111-2" tabindex="-1"></a>                       <span class="at">keys =</span> ids20,</span>
+<span id="cb111-3"><a href="module-3.html#cb111-3" tabindex="-1"></a>                       <span class="at">keytype =</span> <span class="st">&quot;ENSEMBL&quot;</span>,</span>
+<span id="cb111-4"><a href="module-3.html#cb111-4" tabindex="-1"></a>                       <span class="at">column =</span> <span class="st">&quot;GENENAME&quot;</span>)</span></code></pre></div>
+<p>Combine into a data frame</p>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="module-3.html#cb112-1" tabindex="-1"></a>annotated20 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ENSEMBL_ID =</span> ids20,</span>
+<span id="cb112-2"><a href="module-3.html#cb112-2" tabindex="-1"></a>                          <span class="at">Symbol =</span> symbols,</span>
+<span id="cb112-3"><a href="module-3.html#cb112-3" tabindex="-1"></a>                          <span class="at">Description =</span> descriptions)</span>
+<span id="cb112-4"><a href="module-3.html#cb112-4" tabindex="-1"></a></span>
+<span id="cb112-5"><a href="module-3.html#cb112-5" tabindex="-1"></a><span class="fu">head</span>(annotated20)</span></code></pre></div>
+<p><strong>Task 2: Subset airway to treated samples only. Select the first 5 genes.</strong></p>
+<p>Annotate them with symbols + full names</p>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="module-3.html#cb113-1" tabindex="-1"></a><span class="co"># Subset treated samples</span></span>
+<span id="cb113-2"><a href="module-3.html#cb113-2" tabindex="-1"></a>treated <span class="ot">&lt;-</span> airway[, airway<span class="sc">$</span>dex <span class="sc">==</span> <span class="st">&quot;trt&quot;</span>]</span>
+<span id="cb113-3"><a href="module-3.html#cb113-3" tabindex="-1"></a></span>
+<span id="cb113-4"><a href="module-3.html#cb113-4" tabindex="-1"></a><span class="co"># Get first 5 ENSEMBL IDs from treated dataset</span></span>
+<span id="cb113-5"><a href="module-3.html#cb113-5" tabindex="-1"></a>ids5 <span class="ot">&lt;-</span> <span class="fu">rownames</span>(treated)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span>
+<span id="cb113-6"><a href="module-3.html#cb113-6" tabindex="-1"></a></span>
+<span id="cb113-7"><a href="module-3.html#cb113-7" tabindex="-1"></a><span class="co"># Map ENSEMBL → Symbol</span></span>
+<span id="cb113-8"><a href="module-3.html#cb113-8" tabindex="-1"></a>symbols5 <span class="ot">&lt;-</span> <span class="fu">mapIds</span>(org.Hs.eg.db,</span>
+<span id="cb113-9"><a href="module-3.html#cb113-9" tabindex="-1"></a>                   <span class="at">keys =</span> ids5,</span>
+<span id="cb113-10"><a href="module-3.html#cb113-10" tabindex="-1"></a>                   <span class="at">keytype =</span> <span class="st">&quot;ENSEMBL&quot;</span>,</span>
+<span id="cb113-11"><a href="module-3.html#cb113-11" tabindex="-1"></a>                   <span class="at">column =</span> <span class="st">&quot;SYMBOL&quot;</span>)</span>
+<span id="cb113-12"><a href="module-3.html#cb113-12" tabindex="-1"></a></span>
+<span id="cb113-13"><a href="module-3.html#cb113-13" tabindex="-1"></a><span class="co"># Map ENSEMBL → Gene Name</span></span>
+<span id="cb113-14"><a href="module-3.html#cb113-14" tabindex="-1"></a>names5 <span class="ot">&lt;-</span> <span class="fu">mapIds</span>(org.Hs.eg.db,</span>
+<span id="cb113-15"><a href="module-3.html#cb113-15" tabindex="-1"></a>                 <span class="at">keys =</span> ids5,</span>
+<span id="cb113-16"><a href="module-3.html#cb113-16" tabindex="-1"></a>                 <span class="at">keytype =</span> <span class="st">&quot;ENSEMBL&quot;</span>,</span>
+<span id="cb113-17"><a href="module-3.html#cb113-17" tabindex="-1"></a>                 <span class="at">column =</span> <span class="st">&quot;GENENAME&quot;</span>)</span>
+<span id="cb113-18"><a href="module-3.html#cb113-18" tabindex="-1"></a></span>
+<span id="cb113-19"><a href="module-3.html#cb113-19" tabindex="-1"></a><span class="co"># Combine results</span></span>
+<span id="cb113-20"><a href="module-3.html#cb113-20" tabindex="-1"></a>annotated5 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ENSEMBL_ID =</span> ids5,</span>
+<span id="cb113-21"><a href="module-3.html#cb113-21" tabindex="-1"></a>                         <span class="at">Symbol =</span> symbols5,</span>
+<span id="cb113-22"><a href="module-3.html#cb113-22" tabindex="-1"></a>                         <span class="at">Full_Name =</span> names5)</span>
+<span id="cb113-23"><a href="module-3.html#cb113-23" tabindex="-1"></a></span>
+<span id="cb113-24"><a href="module-3.html#cb113-24" tabindex="-1"></a>annotated5</span></code></pre></div>
 
 </div>
 </div>

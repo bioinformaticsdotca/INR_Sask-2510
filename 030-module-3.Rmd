@@ -13,8 +13,274 @@
 
 
 
+## Lab 3A
+
+Install a package, e.g. GenomicRanges
+```{r, eval=FALSE, message=FALSE}
+BiocManager::install("GenomicRanges")
+```
+
+Load a package
+```{r, eval=FALSE, message=FALSE}
+library(GenomicRanges)
+library(SummarizedExperiment)
+```
+
+Create simple SummarizedExperiment
+```{r, eval=FALSE, message=FALSE}
+counts <- matrix(rpois(20, 10), ncol=4)
+colData <- DataFrame(condition=c("A","A","B","B"))
+rowData <- DataFrame(gene=letters[1:5])
+
+se <- SummarizedExperiment(assays=list(counts=counts),
+                           colData=colData,
+                           rowData=rowData)
+
+se
+```
+
+Demo 2: ALL dataset
+```{r, eval=FALSE, message=FALSE}
+BiocManager::install("ALL")
+library(ALL)
+data(ALL)
+ALL
+```
+
+## Lab 3A Tasks
+
+Extract and preview sample (patient) metadata
+```{r, eval=FALSE, message=FALSE}
+meta <- pData(ALL)
+head(meta)   # first 6 rows
+
+# Gender distribution
+table(meta$sex)
+
+# Mean age (ignoring missing values)
+mean(meta$age, na.rm = TRUE)
+```
+
+Visualization in Bioconductor
+```{r, eval=FALSE, message=FALSE}
+boxplot(exprs(ALL)[,1:10], las=2, main="Expression values (first 10 samples)")
+```
+
+Load All package and data
+```{r, eval=FALSE, message=FALSE}
+# BiocManager::install("ALL")
+library(SummarizedExperiment)
+library(ALL)
+data(ALL)
+```
+
+```{r, eval=FALSE, message=FALSE}
+# Subset patients < 20
+young_patients <- ALL[, pData(ALL)$age < 20]
+dim(young_patients)
+
+# Count patients by Immunophenotype (BT)
+barplot(table(pData(ALL)$BT), main="Patients by Immunophenotype (BT)", ylab="Patients", xlab="Immunophenotype (BT)")
+
+# PCA on first 50 genes
+expr <- exprs(ALL)[1:50, ]
+pca <- prcomp(t(expr), scale. = TRUE)
+plot(pca$x[,1:2], col = as.factor(pData(ALL)$BT),
+     pch=19, main="PCA of 50 genes")
+
+
+#Boxplot of Age by Sex
+boxplot(age ~ sex, data = pData(ALL),
+        main="Age Distribution by Sex", xlab="Sex", ylab="Age")
+
+# Challenge (Filter missing age & re-run PCA)
+ALL_clean <- ALL[, !is.na(pData(ALL)$age)]
+expr_clean <- exprs(ALL_clean)[1:50, ]
+pca_clean <- prcomp(t(expr_clean), scale. = TRUE)
+plot(pca_clean$x[,1:2], col = as.factor(pData(ALL_clean)$BT),
+     pch=19, main="PCA after removing NA ages")
+```
+
+## Lab 3B
+
+**Bioconductor Packages and Data sets**
+
+Install airway package
+```{r, eval=FALSE, message=FALSE}
+BiocManager::install("airway")
+
+# load package and data
+library("airway")
+data("airway")   # loads the dataset into your environment
+airway
+```
+
+Explore airway package
+```{r, eval=FALSE, message=FALSE}
+ex <- assay(airway)[1:5, 1:5]   # expression counts
+cols <- colData(airway)[1:5, ]    # sample metadata
+rows <- rowData(airway)[1:5, ]    # gene metadata
+```
+
+**Hands on tasks**
+
+Subsetting treated vs untreated
+```{r, eval=FALSE, message=FALSE}
+treated <- airway[, airway$dex == "trt"]
+untreated <- airway[, airway$dex == "untrt"]
+
+dim(treated)
+dim(untreated)
+```
+
+Count treated vs untreated
+```{r, eval=FALSE, message=FALSE}
+table(airway$dex)
+```
+
+Extract samples from a specific cell line
+```{r, eval=FALSE, message=FALSE}
+subset_cell <- airway[, airway$cell == "N061011"]
+```
+
+Get number of genes
+```{r, eval=FALSE, message=FALSE}
+nrow(airway)
+```
+
+ExperimentHub Demo
+
+```{r, eval=FALSE, message=FALSE}
+# Load ExperimentHub
+library(ExperimentHub)
+
+# Create a hub object
+eh <- ExperimentHub()
+
+# Search for RNA-seq datasets
+query(eh, "RNA-seq")
+
+# Access a specific dataset by ID (example)
+eh[["EH1234"]]   # Loads dataset into R
+```
+
+AnnotationHub Demo
+
+```{r, eval=FALSE, message=FALSE}
+# Load AnnotationHub
+library(AnnotationHub)
+library("rtracklayer")
+# Create a hub object
+ah <- AnnotationHub()
+
+# Search for human genome resources
+query(ah, "Homo sapiens")
+
+# Access an annotation dataset by ID (example)
+ah[["AH83281"]]   # Loads GRCh38 GTF annotation into R
+```
+
+org.Hs.eg.db Demo
+
+```{r, eval=FALSE, message=FALSE}
+# Install packages 
+BiocManager::install("AnnotationDbi")
+BiocManager::install("org.Hs.eg.db")
+
+# load packages
+library(org.Hs.eg.db)
+library(AnnotationDbi)
+
+ids <- rownames(airway)[1:5]
+mapIds(org.Hs.eg.db,
+       keys = ids,
+       keytype = "ENSEMBL",
+       column = "SYMBOL")
+```
+
+
+## Lab 3B Tasks
+
+**Task 1: Take the first 20 genes from airway. Map ENSEMBL IDs → gene symbols.**
+
+Retrieve gene descriptions
+```{r, eval=FALSE, message=FALSE}
+library(airway)
+data("airway")
+
+library(org.Hs.eg.db)
+library(AnnotationDbi)
+```
+
+Get first 20 ENSEMBL IDs from airway
+```{r, eval=FALSE, message=FALSE}
+ids20 <- rownames(airway)[1:20]
+```
+
+Map ENSEMBL → Gene Symbol
+```{r, eval=FALSE, message=FALSE}
+symbols <- mapIds(org.Hs.eg.db,
+                  keys = ids20,
+                  keytype = "ENSEMBL",
+                  column = "SYMBOL")
+```
+
+Map ENSEMBL → Full Gene Name
+```{r, eval=FALSE, message=FALSE}
+descriptions <- mapIds(org.Hs.eg.db,
+                       keys = ids20,
+                       keytype = "ENSEMBL",
+                       column = "GENENAME")
+```
+
+Combine into a data frame
+```{r, eval=FALSE, message=FALSE}
+annotated20 <- data.frame(ENSEMBL_ID = ids20,
+                          Symbol = symbols,
+                          Description = descriptions)
+
+head(annotated20)
+```
+
+**Task 2: Subset airway to treated samples only. Select the first 5 genes.**
+
+Annotate them with symbols + full names
+```{r, eval=FALSE, message=FALSE}
+# Subset treated samples
+treated <- airway[, airway$dex == "trt"]
+
+# Get first 5 ENSEMBL IDs from treated dataset
+ids5 <- rownames(treated)[1:5]
+
+# Map ENSEMBL → Symbol
+symbols5 <- mapIds(org.Hs.eg.db,
+                   keys = ids5,
+                   keytype = "ENSEMBL",
+                   column = "SYMBOL")
+
+# Map ENSEMBL → Gene Name
+names5 <- mapIds(org.Hs.eg.db,
+                 keys = ids5,
+                 keytype = "ENSEMBL",
+                 column = "GENENAME")
+
+# Combine results
+annotated5 <- data.frame(ENSEMBL_ID = ids5,
+                         Symbol = symbols5,
+                         Full_Name = names5)
+
+annotated5
+```
 
 
 
 
-## Lab 
+
+
+
+
+
+
+
+
+

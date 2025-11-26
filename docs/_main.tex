@@ -1843,7 +1843,328 @@ Combine plots into one figure
 
 \subsection{3B}\label{b-2}
 
-\section{Lab}\label{lab}
+\section{Lab 3A}\label{lab-3a}
+
+Install a package, e.g.~GenomicRanges
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{BiocManager}\SpecialCharTok{::}\FunctionTok{install}\NormalTok{(}\StringTok{"GenomicRanges"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Load a package
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(GenomicRanges)}
+\FunctionTok{library}\NormalTok{(SummarizedExperiment)}
+\end{Highlighting}
+\end{Shaded}
+
+Create simple SummarizedExperiment
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{counts }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{rpois}\NormalTok{(}\DecValTok{20}\NormalTok{, }\DecValTok{10}\NormalTok{), }\AttributeTok{ncol=}\DecValTok{4}\NormalTok{)}
+\NormalTok{colData }\OtherTok{\textless{}{-}} \FunctionTok{DataFrame}\NormalTok{(}\AttributeTok{condition=}\FunctionTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{,}\StringTok{"A"}\NormalTok{,}\StringTok{"B"}\NormalTok{,}\StringTok{"B"}\NormalTok{))}
+\NormalTok{rowData }\OtherTok{\textless{}{-}} \FunctionTok{DataFrame}\NormalTok{(}\AttributeTok{gene=}\NormalTok{letters[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{])}
+
+\NormalTok{se }\OtherTok{\textless{}{-}} \FunctionTok{SummarizedExperiment}\NormalTok{(}\AttributeTok{assays=}\FunctionTok{list}\NormalTok{(}\AttributeTok{counts=}\NormalTok{counts),}
+                           \AttributeTok{colData=}\NormalTok{colData,}
+                           \AttributeTok{rowData=}\NormalTok{rowData)}
+
+\NormalTok{se}
+\end{Highlighting}
+\end{Shaded}
+
+Demo 2: ALL dataset
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{BiocManager}\SpecialCharTok{::}\FunctionTok{install}\NormalTok{(}\StringTok{"ALL"}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(ALL)}
+\FunctionTok{data}\NormalTok{(ALL)}
+\NormalTok{ALL}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Lab 3A Tasks}\label{lab-3a-tasks}
+
+Extract and preview sample (patient) metadata
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{meta }\OtherTok{\textless{}{-}} \FunctionTok{pData}\NormalTok{(ALL)}
+\FunctionTok{head}\NormalTok{(meta)   }\CommentTok{\# first 6 rows}
+
+\CommentTok{\# Gender distribution}
+\FunctionTok{table}\NormalTok{(meta}\SpecialCharTok{$}\NormalTok{sex)}
+
+\CommentTok{\# Mean age (ignoring missing values)}
+\FunctionTok{mean}\NormalTok{(meta}\SpecialCharTok{$}\NormalTok{age, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Visualization in Bioconductor
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{(}\FunctionTok{exprs}\NormalTok{(ALL)[,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{], }\AttributeTok{las=}\DecValTok{2}\NormalTok{, }\AttributeTok{main=}\StringTok{"Expression values (first 10 samples)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Load All package and data
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# BiocManager::install("ALL")}
+\FunctionTok{library}\NormalTok{(SummarizedExperiment)}
+\FunctionTok{library}\NormalTok{(ALL)}
+\FunctionTok{data}\NormalTok{(ALL)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Subset patients \textless{} 20}
+\NormalTok{young\_patients }\OtherTok{\textless{}{-}}\NormalTok{ ALL[, }\FunctionTok{pData}\NormalTok{(ALL)}\SpecialCharTok{$}\NormalTok{age }\SpecialCharTok{\textless{}} \DecValTok{20}\NormalTok{]}
+\FunctionTok{dim}\NormalTok{(young\_patients)}
+
+\CommentTok{\# Count patients by Immunophenotype (BT)}
+\FunctionTok{barplot}\NormalTok{(}\FunctionTok{table}\NormalTok{(}\FunctionTok{pData}\NormalTok{(ALL)}\SpecialCharTok{$}\NormalTok{BT), }\AttributeTok{main=}\StringTok{"Patients by Immunophenotype (BT)"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"Patients"}\NormalTok{, }\AttributeTok{xlab=}\StringTok{"Immunophenotype (BT)"}\NormalTok{)}
+
+\CommentTok{\# PCA on first 50 genes}
+\NormalTok{expr }\OtherTok{\textless{}{-}} \FunctionTok{exprs}\NormalTok{(ALL)[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{50}\NormalTok{, ]}
+\NormalTok{pca }\OtherTok{\textless{}{-}} \FunctionTok{prcomp}\NormalTok{(}\FunctionTok{t}\NormalTok{(expr), }\AttributeTok{scale. =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(pca}\SpecialCharTok{$}\NormalTok{x[,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{], }\AttributeTok{col =} \FunctionTok{as.factor}\NormalTok{(}\FunctionTok{pData}\NormalTok{(ALL)}\SpecialCharTok{$}\NormalTok{BT),}
+     \AttributeTok{pch=}\DecValTok{19}\NormalTok{, }\AttributeTok{main=}\StringTok{"PCA of 50 genes"}\NormalTok{)}
+
+
+\CommentTok{\#Boxplot of Age by Sex}
+\FunctionTok{boxplot}\NormalTok{(age }\SpecialCharTok{\textasciitilde{}}\NormalTok{ sex, }\AttributeTok{data =} \FunctionTok{pData}\NormalTok{(ALL),}
+        \AttributeTok{main=}\StringTok{"Age Distribution by Sex"}\NormalTok{, }\AttributeTok{xlab=}\StringTok{"Sex"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"Age"}\NormalTok{)}
+
+\CommentTok{\# Challenge (Filter missing age \& re{-}run PCA)}
+\NormalTok{ALL\_clean }\OtherTok{\textless{}{-}}\NormalTok{ ALL[, }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(}\FunctionTok{pData}\NormalTok{(ALL)}\SpecialCharTok{$}\NormalTok{age)]}
+\NormalTok{expr\_clean }\OtherTok{\textless{}{-}} \FunctionTok{exprs}\NormalTok{(ALL\_clean)[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{50}\NormalTok{, ]}
+\NormalTok{pca\_clean }\OtherTok{\textless{}{-}} \FunctionTok{prcomp}\NormalTok{(}\FunctionTok{t}\NormalTok{(expr\_clean), }\AttributeTok{scale. =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{plot}\NormalTok{(pca\_clean}\SpecialCharTok{$}\NormalTok{x[,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{], }\AttributeTok{col =} \FunctionTok{as.factor}\NormalTok{(}\FunctionTok{pData}\NormalTok{(ALL\_clean)}\SpecialCharTok{$}\NormalTok{BT),}
+     \AttributeTok{pch=}\DecValTok{19}\NormalTok{, }\AttributeTok{main=}\StringTok{"PCA after removing NA ages"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Lab 3B}\label{lab-3b}
+
+\textbf{Bioconductor Packages and Data sets}
+
+Install airway package
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{BiocManager}\SpecialCharTok{::}\FunctionTok{install}\NormalTok{(}\StringTok{"airway"}\NormalTok{)}
+
+\CommentTok{\# load package and data}
+\FunctionTok{library}\NormalTok{(}\StringTok{"airway"}\NormalTok{)}
+\FunctionTok{data}\NormalTok{(}\StringTok{"airway"}\NormalTok{)   }\CommentTok{\# loads the dataset into your environment}
+\NormalTok{airway}
+\end{Highlighting}
+\end{Shaded}
+
+Explore airway package
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ex }\OtherTok{\textless{}{-}} \FunctionTok{assay}\NormalTok{(airway)[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{]   }\CommentTok{\# expression counts}
+\NormalTok{cols }\OtherTok{\textless{}{-}} \FunctionTok{colData}\NormalTok{(airway)[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{, ]    }\CommentTok{\# sample metadata}
+\NormalTok{rows }\OtherTok{\textless{}{-}} \FunctionTok{rowData}\NormalTok{(airway)[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{, ]    }\CommentTok{\# gene metadata}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Hands on tasks}
+
+Subsetting treated vs untreated
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{treated }\OtherTok{\textless{}{-}}\NormalTok{ airway[, airway}\SpecialCharTok{$}\NormalTok{dex }\SpecialCharTok{==} \StringTok{"trt"}\NormalTok{]}
+\NormalTok{untreated }\OtherTok{\textless{}{-}}\NormalTok{ airway[, airway}\SpecialCharTok{$}\NormalTok{dex }\SpecialCharTok{==} \StringTok{"untrt"}\NormalTok{]}
+
+\FunctionTok{dim}\NormalTok{(treated)}
+\FunctionTok{dim}\NormalTok{(untreated)}
+\end{Highlighting}
+\end{Shaded}
+
+Count treated vs untreated
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{table}\NormalTok{(airway}\SpecialCharTok{$}\NormalTok{dex)}
+\end{Highlighting}
+\end{Shaded}
+
+Extract samples from a specific cell line
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{subset\_cell }\OtherTok{\textless{}{-}}\NormalTok{ airway[, airway}\SpecialCharTok{$}\NormalTok{cell }\SpecialCharTok{==} \StringTok{"N061011"}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+Get number of genes
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{nrow}\NormalTok{(airway)}
+\end{Highlighting}
+\end{Shaded}
+
+ExperimentHub Demo
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Load ExperimentHub}
+\FunctionTok{library}\NormalTok{(ExperimentHub)}
+
+\CommentTok{\# Create a hub object}
+\NormalTok{eh }\OtherTok{\textless{}{-}} \FunctionTok{ExperimentHub}\NormalTok{()}
+
+\CommentTok{\# Search for RNA{-}seq datasets}
+\FunctionTok{query}\NormalTok{(eh, }\StringTok{"RNA{-}seq"}\NormalTok{)}
+
+\CommentTok{\# Access a specific dataset by ID (example)}
+\NormalTok{eh[[}\StringTok{"EH1234"}\NormalTok{]]   }\CommentTok{\# Loads dataset into R}
+\end{Highlighting}
+\end{Shaded}
+
+AnnotationHub Demo
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Load AnnotationHub}
+\FunctionTok{library}\NormalTok{(AnnotationHub)}
+\FunctionTok{library}\NormalTok{(}\StringTok{"rtracklayer"}\NormalTok{)}
+\CommentTok{\# Create a hub object}
+\NormalTok{ah }\OtherTok{\textless{}{-}} \FunctionTok{AnnotationHub}\NormalTok{()}
+
+\CommentTok{\# Search for human genome resources}
+\FunctionTok{query}\NormalTok{(ah, }\StringTok{"Homo sapiens"}\NormalTok{)}
+
+\CommentTok{\# Access an annotation dataset by ID (example)}
+\NormalTok{ah[[}\StringTok{"AH83281"}\NormalTok{]]   }\CommentTok{\# Loads GRCh38 GTF annotation into R}
+\end{Highlighting}
+\end{Shaded}
+
+org.Hs.eg.db Demo
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Install packages }
+\NormalTok{BiocManager}\SpecialCharTok{::}\FunctionTok{install}\NormalTok{(}\StringTok{"AnnotationDbi"}\NormalTok{)}
+\NormalTok{BiocManager}\SpecialCharTok{::}\FunctionTok{install}\NormalTok{(}\StringTok{"org.Hs.eg.db"}\NormalTok{)}
+
+\CommentTok{\# load packages}
+\FunctionTok{library}\NormalTok{(org.Hs.eg.db)}
+\FunctionTok{library}\NormalTok{(AnnotationDbi)}
+
+\NormalTok{ids }\OtherTok{\textless{}{-}} \FunctionTok{rownames}\NormalTok{(airway)[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{]}
+\FunctionTok{mapIds}\NormalTok{(org.Hs.eg.db,}
+       \AttributeTok{keys =}\NormalTok{ ids,}
+       \AttributeTok{keytype =} \StringTok{"ENSEMBL"}\NormalTok{,}
+       \AttributeTok{column =} \StringTok{"SYMBOL"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Lab 3B Tasks}\label{lab-3b-tasks}
+
+\textbf{Task 1: Take the first 20 genes from airway. Map ENSEMBL IDs → gene symbols.}
+
+Retrieve gene descriptions
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(airway)}
+\FunctionTok{data}\NormalTok{(}\StringTok{"airway"}\NormalTok{)}
+
+\FunctionTok{library}\NormalTok{(org.Hs.eg.db)}
+\FunctionTok{library}\NormalTok{(AnnotationDbi)}
+\end{Highlighting}
+\end{Shaded}
+
+Get first 20 ENSEMBL IDs from airway
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ids20 }\OtherTok{\textless{}{-}} \FunctionTok{rownames}\NormalTok{(airway)[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{20}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+Map ENSEMBL → Gene Symbol
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{symbols }\OtherTok{\textless{}{-}} \FunctionTok{mapIds}\NormalTok{(org.Hs.eg.db,}
+                  \AttributeTok{keys =}\NormalTok{ ids20,}
+                  \AttributeTok{keytype =} \StringTok{"ENSEMBL"}\NormalTok{,}
+                  \AttributeTok{column =} \StringTok{"SYMBOL"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Map ENSEMBL → Full Gene Name
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{descriptions }\OtherTok{\textless{}{-}} \FunctionTok{mapIds}\NormalTok{(org.Hs.eg.db,}
+                       \AttributeTok{keys =}\NormalTok{ ids20,}
+                       \AttributeTok{keytype =} \StringTok{"ENSEMBL"}\NormalTok{,}
+                       \AttributeTok{column =} \StringTok{"GENENAME"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Combine into a data frame
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{annotated20 }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{ENSEMBL\_ID =}\NormalTok{ ids20,}
+                          \AttributeTok{Symbol =}\NormalTok{ symbols,}
+                          \AttributeTok{Description =}\NormalTok{ descriptions)}
+
+\FunctionTok{head}\NormalTok{(annotated20)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Task 2: Subset airway to treated samples only. Select the first 5 genes.}
+
+Annotate them with symbols + full names
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Subset treated samples}
+\NormalTok{treated }\OtherTok{\textless{}{-}}\NormalTok{ airway[, airway}\SpecialCharTok{$}\NormalTok{dex }\SpecialCharTok{==} \StringTok{"trt"}\NormalTok{]}
+
+\CommentTok{\# Get first 5 ENSEMBL IDs from treated dataset}
+\NormalTok{ids5 }\OtherTok{\textless{}{-}} \FunctionTok{rownames}\NormalTok{(treated)[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{]}
+
+\CommentTok{\# Map ENSEMBL → Symbol}
+\NormalTok{symbols5 }\OtherTok{\textless{}{-}} \FunctionTok{mapIds}\NormalTok{(org.Hs.eg.db,}
+                   \AttributeTok{keys =}\NormalTok{ ids5,}
+                   \AttributeTok{keytype =} \StringTok{"ENSEMBL"}\NormalTok{,}
+                   \AttributeTok{column =} \StringTok{"SYMBOL"}\NormalTok{)}
+
+\CommentTok{\# Map ENSEMBL → Gene Name}
+\NormalTok{names5 }\OtherTok{\textless{}{-}} \FunctionTok{mapIds}\NormalTok{(org.Hs.eg.db,}
+                 \AttributeTok{keys =}\NormalTok{ ids5,}
+                 \AttributeTok{keytype =} \StringTok{"ENSEMBL"}\NormalTok{,}
+                 \AttributeTok{column =} \StringTok{"GENENAME"}\NormalTok{)}
+
+\CommentTok{\# Combine results}
+\NormalTok{annotated5 }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{ENSEMBL\_ID =}\NormalTok{ ids5,}
+                         \AttributeTok{Symbol =}\NormalTok{ symbols5,}
+                         \AttributeTok{Full\_Name =}\NormalTok{ names5)}
+
+\NormalTok{annotated5}
+\end{Highlighting}
+\end{Shaded}
 
 \chapter{Module 4}\label{module-4}
 
@@ -1853,7 +2174,7 @@ Combine plots into one figure
 
 \subsection{4B}\label{b-3}
 
-\section{Lab}\label{lab-1}
+\section{Lab}\label{lab}
 
   \bibliography{book.bib,packages.bib}
 
