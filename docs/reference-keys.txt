@@ -59,4 +59,7 @@ module-4
 lecture-3
 a-3
 b-3
-lab
+lab-4a
+lab-4a-tasks
+lab-4b
+mini-project

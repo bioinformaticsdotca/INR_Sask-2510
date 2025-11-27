@@ -12,10 +12,315 @@
 <iframe src="https://docs.google.com/presentation/d/1fQXC4YI7SkF28jHUF7wlzawYssiXtvEd/preview" width="640" height="480" allow="autoplay"></iframe>  
 
 
+## Lab 4A
+
+**Normalization and Preprocessing**
+
+Install and load DESeq2
+```{r, eval=FALSE, message=FALSE}
+BiocManager::install("DESeq2")
+library(DESeq2) # Load DESeq2
+```
+
+Create a DESeq2 dataset object
+```{r, eval=FALSE, message=FALSE}
+dds <- DESeqDataSet(airway, design = ~ dex)
+```
+
+Run the DESeq pipeline
+```{r, eval=FALSE, message=FALSE}
+dds <- DESeq(dds) 
+```
+
+Raw and normalized counts
+```{r, eval=FALSE, message=FALSE}
+# Normalized 
+norm_counts <- counts(dds, normalized=TRUE)
+head(norm_counts)
+
+# Raw
+norm_counts <- counts(dds, normalized=FALSE)
+head(norm_counts)
+```
+
+**How to use VST in DESeq2**
+
+Create a new transformed dataset
+```{r, eval=FALSE, message=FALSE}
+vsd <- vst(dds, blind=FALSE) # takes into account the experimental design
+# Us the transformed expression matrix 
+assay(vsd)[1:5, 1:5]
+```
+
+**Sample Clustering (Dendrogram/Heatmap)**
+
+```{r, eval=FALSE, message=FALSE}
+# install pheatmap
+BiocManager::install("pheatmap", force = T)
+
+# Load pheatmap
+library(pheatmap)
+
+# Calculate sample-to-sample distances
+sampleDists <- dist(t(assay(vsd)))
+
+# Convert distances into a matrix
+sampleDistMatrix <- as.matrix(sampleDists)
+
+# Heatmap of distances between samples
+pheatmap(sampleDistMatrix,
+         annotation_col = as.data.frame(colData(vsd)[, "dex", drop=FALSE]),
+         main = "Sample-to-sample distances")
+
+# PCA with DESeq2 VST Data colored by treatment (dex)
+plotPCA(vsd, intgroup="dex")
+```
 
 
+## Lab 4A Tasks
+
+Pretasks
+```{r, eval=FALSE, message=FALSE}
+# Load DESeq2
+library(DESeq2)
+library(airway)
+data("airway")
+
+# Create a DESeq2 dataset object
+dds <- DESeqDataSet(airway, design = ~ dex)
+
+# Run the DESeq pipeline
+dds <- DESeq(dds) 
+
+# creates a new transformed dataset
+vsd <- vst(dds, blind=FALSE) # takes into account the experimental design
+```
+
+**Task 1: Variance check (top variable genes)**
+```{r, eval=FALSE, message=FALSE}
+# Calculate variance for each gene
+geneVars <- rowVars(assay(vsd))
+
+# Top 10 most variable genes
+top10 <- head(order(geneVars, decreasing=TRUE), 10)
+rownames(vsd)[top10]
+```
+
+**Task 2: Custom PCA on top 500 genes**
+```{r, eval=FALSE, message=FALSE}
+library(ggplot2)
+
+# Select top 500 variable genes
+top500 <- head(order(geneVars, decreasing=TRUE), 500)
+mat <- assay(vsd)[top500, ]
+
+# Run PCA
+pca <- prcomp(t(mat), scale. = TRUE)
+
+# Create data frame for plotting
+pca_df <- as.data.frame(pca$x)
+pca_df$dex <- colData(vsd)$dex
+
+# PCA plot
+ggplot(pca_df, aes(x=PC1, y=PC2, color=dex)) +
+  geom_point(size=3) +
+  labs(title="PCA on Top 500 Variable Genes")
+```
+
+**Task 3: Challenge: Add cell line**
+```{r, eval=FALSE, message=FALSE}
+pca_df$cell <- colData(vsd)$cell
+
+ggplot(pca_df, aes(x=PC1, y=PC2, color=dex, shape=cell)) +
+  geom_point(size=3) +
+  labs(title="PCA: Treatment (color) vs Cell Line (shape)")
+```
+
+## Lab 4B
+
+**Bioconductor Packages and Data sets**
+
+Install airway package
+```{r, eval=FALSE, message=FALSE}
+BiocManager::install("airway")
+library(airway)
+library(DESeq2)
+```
+
+DGE Analysis 
+```{r, eval=FALSE, message=FALSE}
+dds <- DESeqDataSet(airway, design = ~ dex)
+dds <- DESeq(dds)
+```
+
+Extract DGE results
+```{r, eval=FALSE, message=FALSE}
+res <- results(dds)
+head(res)
+```
+
+Filter significant genes
+```{r, eval=FALSE, message=FALSE}
+sig_res <- res[which(res$padj < 0.05), ]
+head(sig_res)
+summary(sig_res)
+```
+
+**Visualization of DGE Results**
+
+```{r, eval=FALSE, message=FALSE}
+# Load required packages
+library(DESeq2)
+library(ggplot2)
+
+# Run DESeq2 analysis
+dds <- DESeqDataSet(airway, design = ~ dex)
+dds <- DESeq(dds)
+res <- results(dds)
+
+# Convert to data frame for plotting
+res_df <- as.data.frame(res)
+
+# Remove rows with missing p-values or fold change (optional but helps avoid warnings)
+res_df <- na.omit(res_df)
+
+# Create a new column indicating regulation direction
+res_df$Regulation <- "Not significant"
+res_df$Regulation[res_df$log2FoldChange > 1 & res_df$padj < 0.05] <- "Upregulated"
+res_df$Regulation[res_df$log2FoldChange < -1 & res_df$padj < 0.05] <- "Downregulated"
+```
+
+_Volcano plot_
+
+```{r, eval=FALSE, message=FALSE}
+ggplot(res_df, aes(x = log2FoldChange, y = -log10(padj), color = Regulation)) +
+  geom_point(alpha = 0.6, size = 1.5) +
+  geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "gray40") +
+  geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "gray40") +
+  scale_color_manual(values = c("Upregulated" = "red",
+                                "Downregulated" = "blue",
+                                "Not significant" = "gray70")) +
+  labs(title = "Volcano Plot: Treated vs Untreated",
+       x = "log2 Fold Change",
+       y = "-log10(Adjusted p-value)",
+       color = "Regulation") +
+  theme_minimal()
+
+```
+
+## Mini Project
+
+**Task 1: Load Required Libraries and Dataset**
+
+Load packages
+```{r, eval=FALSE, message=FALSE}
+library(DESeq2)
+library(airway)
+library(ggplot2)
+library(org.Hs.eg.db)
+library(AnnotationDbi)
+library(pheatmap)
 
 
+data("airway"). # Load data
 
+# Inspect dataset
+airway
+```
 
-## Lab 
+**Task 2: Preprocessing and Normalization**
+
+```{r, eval=FALSE, message=FALSE}
+# Create DESeq2 object
+dds <- DESeqDataSet(airway, design = ~ dex)
+
+# Run the DESeq2 pipeline (includes normalization)
+dds <- DESeq(dds)
+
+# Variance Stabilizing Transformation
+vsd <- vst(dds, blind = FALSE)
+```
+
+**Task 3: Differential Expression Analysis**
+
+```{r, eval=FALSE, message=FALSE}
+# Extract DE results
+res <- results(dds)
+summary(res)
+
+# Filter significant genes (adjusted p < 0.05)
+sig_res <- res[which(res$padj < 0.05), ]
+
+# Order by log2 fold change
+sig_res <- sig_res[order(sig_res$log2FoldChange, decreasing = TRUE), ]
+
+# Show top results
+head(sig_res)
+```
+
+**Task 4: Annotate Significant Genes**
+
+```{r, eval=FALSE, message=FALSE}
+# Take top 20 genes
+top_genes <- rownames(sig_res)[1:20]
+
+# Map to gene symbols and names
+symbols <- mapIds(org.Hs.eg.db,
+                  keys = top_genes,
+                  keytype = "ENSEMBL",
+                  column = "SYMBOL")
+names <- mapIds(org.Hs.eg.db,
+                keys = top_genes,
+                keytype = "ENSEMBL",
+                column = "GENENAME")
+
+annotated <- data.frame(ENSEMBL = top_genes,
+                        Symbol = symbols,
+                        Name = names)
+head(annotated)
+```
+
+**Task 5: Visualization**
+
+_A: PCA_
+```{r, eval=FALSE, message=FALSE}
+plotPCA(vsd, intgroup = "dex")
+```
+
+_B: Volcano plot_
+```{r, eval=FALSE, message=FALSE}
+res_df <- as.data.frame(res)
+res_df <- na.omit(res_df)
+res_df$Regulation <- "Not significant"
+res_df$Regulation[res_df$log2FoldChange > 1 & res_df$padj < 0.05] <- "Upregulated"
+res_df$Regulation[res_df$log2FoldChange < -1 & res_df$padj < 0.05] <- "Downregulated"
+
+ggplot(res_df, aes(x = log2FoldChange, y = -log10(padj), color = Regulation)) +
+  geom_point(alpha = 0.6, size = 1.5) +
+  geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "gray40") +
+  geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "gray40") +
+  scale_color_manual(values = c("Upregulated" = "red",
+                                "Downregulated" = "blue",
+                                "Not significant" = "gray70")) +
+  labs(title = "Volcano Plot: Treated vs Untreated",
+       x = "log2 Fold Change", y = "-log10(Adjusted p-value)") +
+  theme_minimal()
+```
+
+_C: Heatmap of Top Variable Genes_
+```{r, eval=FALSE, message=FALSE}
+topVarGenes <- head(order(rowVars(assay(vsd)), decreasing = TRUE), 30)
+pheatmap(assay(vsd)[topVarGenes, ],
+         scale = "row",
+         annotation_col = as.data.frame(colData(vsd)[, "dex", drop=FALSE]),
+         main = "Top 30 Variable Genes")
+```
+
+_D: Optional Challenge (Barplot of top 10 upregulated genes)_
+```{r, eval=FALSE, message=FALSE}
+top_up <- head(sig_res[order(sig_res$log2FoldChange, decreasing = TRUE), ], 10)
+barplot(top_up$log2FoldChange, names.arg = rownames(top_up),
+        las = 2, col = "tomato", main = "Top 10 Upregulated Genes",
+        ylab = "log2 Fold Change")
+```
+

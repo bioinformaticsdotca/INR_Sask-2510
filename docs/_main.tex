@@ -2174,7 +2174,382 @@ Annotate them with symbols + full names
 
 \subsection{4B}\label{b-3}
 
-\section{Lab}\label{lab}
+\section{Lab 4A}\label{lab-4a}
+
+\textbf{Normalization and Preprocessing}
+
+Install and load DESeq2
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{BiocManager}\SpecialCharTok{::}\FunctionTok{install}\NormalTok{(}\StringTok{"DESeq2"}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(DESeq2) }\CommentTok{\# Load DESeq2}
+\end{Highlighting}
+\end{Shaded}
+
+Create a DESeq2 dataset object
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dds }\OtherTok{\textless{}{-}} \FunctionTok{DESeqDataSet}\NormalTok{(airway, }\AttributeTok{design =} \SpecialCharTok{\textasciitilde{}}\NormalTok{ dex)}
+\end{Highlighting}
+\end{Shaded}
+
+Run the DESeq pipeline
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dds }\OtherTok{\textless{}{-}} \FunctionTok{DESeq}\NormalTok{(dds) }
+\end{Highlighting}
+\end{Shaded}
+
+Raw and normalized counts
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Normalized }
+\NormalTok{norm\_counts }\OtherTok{\textless{}{-}} \FunctionTok{counts}\NormalTok{(dds, }\AttributeTok{normalized=}\ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{head}\NormalTok{(norm\_counts)}
+
+\CommentTok{\# Raw}
+\NormalTok{norm\_counts }\OtherTok{\textless{}{-}} \FunctionTok{counts}\NormalTok{(dds, }\AttributeTok{normalized=}\ConstantTok{FALSE}\NormalTok{)}
+\FunctionTok{head}\NormalTok{(norm\_counts)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{How to use VST in DESeq2}
+
+Create a new transformed dataset
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vsd }\OtherTok{\textless{}{-}} \FunctionTok{vst}\NormalTok{(dds, }\AttributeTok{blind=}\ConstantTok{FALSE}\NormalTok{) }\CommentTok{\# takes into account the experimental design}
+\CommentTok{\# Us the transformed expression matrix }
+\FunctionTok{assay}\NormalTok{(vsd)[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Sample Clustering (Dendrogram/Heatmap)}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# install pheatmap}
+\NormalTok{BiocManager}\SpecialCharTok{::}\FunctionTok{install}\NormalTok{(}\StringTok{"pheatmap"}\NormalTok{, }\AttributeTok{force =}\NormalTok{ T)}
+
+\CommentTok{\# Load pheatmap}
+\FunctionTok{library}\NormalTok{(pheatmap)}
+
+\CommentTok{\# Calculate sample{-}to{-}sample distances}
+\NormalTok{sampleDists }\OtherTok{\textless{}{-}} \FunctionTok{dist}\NormalTok{(}\FunctionTok{t}\NormalTok{(}\FunctionTok{assay}\NormalTok{(vsd)))}
+
+\CommentTok{\# Convert distances into a matrix}
+\NormalTok{sampleDistMatrix }\OtherTok{\textless{}{-}} \FunctionTok{as.matrix}\NormalTok{(sampleDists)}
+
+\CommentTok{\# Heatmap of distances between samples}
+\FunctionTok{pheatmap}\NormalTok{(sampleDistMatrix,}
+         \AttributeTok{annotation\_col =} \FunctionTok{as.data.frame}\NormalTok{(}\FunctionTok{colData}\NormalTok{(vsd)[, }\StringTok{"dex"}\NormalTok{, }\AttributeTok{drop=}\ConstantTok{FALSE}\NormalTok{]),}
+         \AttributeTok{main =} \StringTok{"Sample{-}to{-}sample distances"}\NormalTok{)}
+
+\CommentTok{\# PCA with DESeq2 VST Data colored by treatment (dex)}
+\FunctionTok{plotPCA}\NormalTok{(vsd, }\AttributeTok{intgroup=}\StringTok{"dex"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Lab 4A Tasks}\label{lab-4a-tasks}
+
+Pretasks
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Load DESeq2}
+\FunctionTok{library}\NormalTok{(DESeq2)}
+\FunctionTok{library}\NormalTok{(airway)}
+\FunctionTok{data}\NormalTok{(}\StringTok{"airway"}\NormalTok{)}
+
+\CommentTok{\# Create a DESeq2 dataset object}
+\NormalTok{dds }\OtherTok{\textless{}{-}} \FunctionTok{DESeqDataSet}\NormalTok{(airway, }\AttributeTok{design =} \SpecialCharTok{\textasciitilde{}}\NormalTok{ dex)}
+
+\CommentTok{\# Run the DESeq pipeline}
+\NormalTok{dds }\OtherTok{\textless{}{-}} \FunctionTok{DESeq}\NormalTok{(dds) }
+
+\CommentTok{\# creates a new transformed dataset}
+\NormalTok{vsd }\OtherTok{\textless{}{-}} \FunctionTok{vst}\NormalTok{(dds, }\AttributeTok{blind=}\ConstantTok{FALSE}\NormalTok{) }\CommentTok{\# takes into account the experimental design}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Task 1: Variance check (top variable genes)}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Calculate variance for each gene}
+\NormalTok{geneVars }\OtherTok{\textless{}{-}} \FunctionTok{rowVars}\NormalTok{(}\FunctionTok{assay}\NormalTok{(vsd))}
+
+\CommentTok{\# Top 10 most variable genes}
+\NormalTok{top10 }\OtherTok{\textless{}{-}} \FunctionTok{head}\NormalTok{(}\FunctionTok{order}\NormalTok{(geneVars, }\AttributeTok{decreasing=}\ConstantTok{TRUE}\NormalTok{), }\DecValTok{10}\NormalTok{)}
+\FunctionTok{rownames}\NormalTok{(vsd)[top10]}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Task 2: Custom PCA on top 500 genes}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+
+\CommentTok{\# Select top 500 variable genes}
+\NormalTok{top500 }\OtherTok{\textless{}{-}} \FunctionTok{head}\NormalTok{(}\FunctionTok{order}\NormalTok{(geneVars, }\AttributeTok{decreasing=}\ConstantTok{TRUE}\NormalTok{), }\DecValTok{500}\NormalTok{)}
+\NormalTok{mat }\OtherTok{\textless{}{-}} \FunctionTok{assay}\NormalTok{(vsd)[top500, ]}
+
+\CommentTok{\# Run PCA}
+\NormalTok{pca }\OtherTok{\textless{}{-}} \FunctionTok{prcomp}\NormalTok{(}\FunctionTok{t}\NormalTok{(mat), }\AttributeTok{scale. =} \ConstantTok{TRUE}\NormalTok{)}
+
+\CommentTok{\# Create data frame for plotting}
+\NormalTok{pca\_df }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(pca}\SpecialCharTok{$}\NormalTok{x)}
+\NormalTok{pca\_df}\SpecialCharTok{$}\NormalTok{dex }\OtherTok{\textless{}{-}} \FunctionTok{colData}\NormalTok{(vsd)}\SpecialCharTok{$}\NormalTok{dex}
+
+\CommentTok{\# PCA plot}
+\FunctionTok{ggplot}\NormalTok{(pca\_df, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{PC1, }\AttributeTok{y=}\NormalTok{PC2, }\AttributeTok{color=}\NormalTok{dex)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{size=}\DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title=}\StringTok{"PCA on Top 500 Variable Genes"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Task 3: Challenge: Add cell line}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pca\_df}\SpecialCharTok{$}\NormalTok{cell }\OtherTok{\textless{}{-}} \FunctionTok{colData}\NormalTok{(vsd)}\SpecialCharTok{$}\NormalTok{cell}
+
+\FunctionTok{ggplot}\NormalTok{(pca\_df, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{PC1, }\AttributeTok{y=}\NormalTok{PC2, }\AttributeTok{color=}\NormalTok{dex, }\AttributeTok{shape=}\NormalTok{cell)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{size=}\DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title=}\StringTok{"PCA: Treatment (color) vs Cell Line (shape)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Lab 4B}\label{lab-4b}
+
+\textbf{Bioconductor Packages and Data sets}
+
+Install airway package
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{BiocManager}\SpecialCharTok{::}\FunctionTok{install}\NormalTok{(}\StringTok{"airway"}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(airway)}
+\FunctionTok{library}\NormalTok{(DESeq2)}
+\end{Highlighting}
+\end{Shaded}
+
+DGE Analysis
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dds }\OtherTok{\textless{}{-}} \FunctionTok{DESeqDataSet}\NormalTok{(airway, }\AttributeTok{design =} \SpecialCharTok{\textasciitilde{}}\NormalTok{ dex)}
+\NormalTok{dds }\OtherTok{\textless{}{-}} \FunctionTok{DESeq}\NormalTok{(dds)}
+\end{Highlighting}
+\end{Shaded}
+
+Extract DGE results
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{results}\NormalTok{(dds)}
+\FunctionTok{head}\NormalTok{(res)}
+\end{Highlighting}
+\end{Shaded}
+
+Filter significant genes
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sig\_res }\OtherTok{\textless{}{-}}\NormalTok{ res[}\FunctionTok{which}\NormalTok{(res}\SpecialCharTok{$}\NormalTok{padj }\SpecialCharTok{\textless{}} \FloatTok{0.05}\NormalTok{), ]}
+\FunctionTok{head}\NormalTok{(sig\_res)}
+\FunctionTok{summary}\NormalTok{(sig\_res)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Visualization of DGE Results}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Load required packages}
+\FunctionTok{library}\NormalTok{(DESeq2)}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+
+\CommentTok{\# Run DESeq2 analysis}
+\NormalTok{dds }\OtherTok{\textless{}{-}} \FunctionTok{DESeqDataSet}\NormalTok{(airway, }\AttributeTok{design =} \SpecialCharTok{\textasciitilde{}}\NormalTok{ dex)}
+\NormalTok{dds }\OtherTok{\textless{}{-}} \FunctionTok{DESeq}\NormalTok{(dds)}
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{results}\NormalTok{(dds)}
+
+\CommentTok{\# Convert to data frame for plotting}
+\NormalTok{res\_df }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(res)}
+
+\CommentTok{\# Remove rows with missing p{-}values or fold change (optional but helps avoid warnings)}
+\NormalTok{res\_df }\OtherTok{\textless{}{-}} \FunctionTok{na.omit}\NormalTok{(res\_df)}
+
+\CommentTok{\# Create a new column indicating regulation direction}
+\NormalTok{res\_df}\SpecialCharTok{$}\NormalTok{Regulation }\OtherTok{\textless{}{-}} \StringTok{"Not significant"}
+\NormalTok{res\_df}\SpecialCharTok{$}\NormalTok{Regulation[res\_df}\SpecialCharTok{$}\NormalTok{log2FoldChange }\SpecialCharTok{\textgreater{}} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ res\_df}\SpecialCharTok{$}\NormalTok{padj }\SpecialCharTok{\textless{}} \FloatTok{0.05}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"Upregulated"}
+\NormalTok{res\_df}\SpecialCharTok{$}\NormalTok{Regulation[res\_df}\SpecialCharTok{$}\NormalTok{log2FoldChange }\SpecialCharTok{\textless{}} \SpecialCharTok{{-}}\DecValTok{1} \SpecialCharTok{\&}\NormalTok{ res\_df}\SpecialCharTok{$}\NormalTok{padj }\SpecialCharTok{\textless{}} \FloatTok{0.05}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"Downregulated"}
+\end{Highlighting}
+\end{Shaded}
+
+\emph{Volcano plot}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(res\_df, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ log2FoldChange, }\AttributeTok{y =} \SpecialCharTok{{-}}\FunctionTok{log10}\NormalTok{(padj), }\AttributeTok{color =}\NormalTok{ Regulation)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.6}\NormalTok{, }\AttributeTok{size =} \FloatTok{1.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_vline}\NormalTok{(}\AttributeTok{xintercept =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{), }\AttributeTok{linetype =} \StringTok{"dashed"}\NormalTok{, }\AttributeTok{color =} \StringTok{"gray40"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_hline}\NormalTok{(}\AttributeTok{yintercept =} \SpecialCharTok{{-}}\FunctionTok{log10}\NormalTok{(}\FloatTok{0.05}\NormalTok{), }\AttributeTok{linetype =} \StringTok{"dashed"}\NormalTok{, }\AttributeTok{color =} \StringTok{"gray40"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"Upregulated"} \OtherTok{=} \StringTok{"red"}\NormalTok{,}
+                                \StringTok{"Downregulated"} \OtherTok{=} \StringTok{"blue"}\NormalTok{,}
+                                \StringTok{"Not significant"} \OtherTok{=} \StringTok{"gray70"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Volcano Plot: Treated vs Untreated"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"log2 Fold Change"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"{-}log10(Adjusted p{-}value)"}\NormalTok{,}
+       \AttributeTok{color =} \StringTok{"Regulation"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Mini Project}\label{mini-project}
+
+\textbf{Task 1: Load Required Libraries and Dataset}
+
+Load packages
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(DESeq2)}
+\FunctionTok{library}\NormalTok{(airway)}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(org.Hs.eg.db)}
+\FunctionTok{library}\NormalTok{(AnnotationDbi)}
+\FunctionTok{library}\NormalTok{(pheatmap)}
+
+
+\FunctionTok{data}\NormalTok{(}\StringTok{"airway"}\NormalTok{). }\CommentTok{\# Load data}
+
+\CommentTok{\# Inspect dataset}
+\NormalTok{airway}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Task 2: Preprocessing and Normalization}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Create DESeq2 object}
+\NormalTok{dds }\OtherTok{\textless{}{-}} \FunctionTok{DESeqDataSet}\NormalTok{(airway, }\AttributeTok{design =} \SpecialCharTok{\textasciitilde{}}\NormalTok{ dex)}
+
+\CommentTok{\# Run the DESeq2 pipeline (includes normalization)}
+\NormalTok{dds }\OtherTok{\textless{}{-}} \FunctionTok{DESeq}\NormalTok{(dds)}
+
+\CommentTok{\# Variance Stabilizing Transformation}
+\NormalTok{vsd }\OtherTok{\textless{}{-}} \FunctionTok{vst}\NormalTok{(dds, }\AttributeTok{blind =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Task 3: Differential Expression Analysis}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Extract DE results}
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{results}\NormalTok{(dds)}
+\FunctionTok{summary}\NormalTok{(res)}
+
+\CommentTok{\# Filter significant genes (adjusted p \textless{} 0.05)}
+\NormalTok{sig\_res }\OtherTok{\textless{}{-}}\NormalTok{ res[}\FunctionTok{which}\NormalTok{(res}\SpecialCharTok{$}\NormalTok{padj }\SpecialCharTok{\textless{}} \FloatTok{0.05}\NormalTok{), ]}
+
+\CommentTok{\# Order by log2 fold change}
+\NormalTok{sig\_res }\OtherTok{\textless{}{-}}\NormalTok{ sig\_res[}\FunctionTok{order}\NormalTok{(sig\_res}\SpecialCharTok{$}\NormalTok{log2FoldChange, }\AttributeTok{decreasing =} \ConstantTok{TRUE}\NormalTok{), ]}
+
+\CommentTok{\# Show top results}
+\FunctionTok{head}\NormalTok{(sig\_res)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Task 4: Annotate Significant Genes}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Take top 20 genes}
+\NormalTok{top\_genes }\OtherTok{\textless{}{-}} \FunctionTok{rownames}\NormalTok{(sig\_res)[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{20}\NormalTok{]}
+
+\CommentTok{\# Map to gene symbols and names}
+\NormalTok{symbols }\OtherTok{\textless{}{-}} \FunctionTok{mapIds}\NormalTok{(org.Hs.eg.db,}
+                  \AttributeTok{keys =}\NormalTok{ top\_genes,}
+                  \AttributeTok{keytype =} \StringTok{"ENSEMBL"}\NormalTok{,}
+                  \AttributeTok{column =} \StringTok{"SYMBOL"}\NormalTok{)}
+\NormalTok{names }\OtherTok{\textless{}{-}} \FunctionTok{mapIds}\NormalTok{(org.Hs.eg.db,}
+                \AttributeTok{keys =}\NormalTok{ top\_genes,}
+                \AttributeTok{keytype =} \StringTok{"ENSEMBL"}\NormalTok{,}
+                \AttributeTok{column =} \StringTok{"GENENAME"}\NormalTok{)}
+
+\NormalTok{annotated }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{ENSEMBL =}\NormalTok{ top\_genes,}
+                        \AttributeTok{Symbol =}\NormalTok{ symbols,}
+                        \AttributeTok{Name =}\NormalTok{ names)}
+\FunctionTok{head}\NormalTok{(annotated)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Task 5: Visualization}
+
+\emph{A: PCA}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plotPCA}\NormalTok{(vsd, }\AttributeTok{intgroup =} \StringTok{"dex"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\emph{B: Volcano plot}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{res\_df }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(res)}
+\NormalTok{res\_df }\OtherTok{\textless{}{-}} \FunctionTok{na.omit}\NormalTok{(res\_df)}
+\NormalTok{res\_df}\SpecialCharTok{$}\NormalTok{Regulation }\OtherTok{\textless{}{-}} \StringTok{"Not significant"}
+\NormalTok{res\_df}\SpecialCharTok{$}\NormalTok{Regulation[res\_df}\SpecialCharTok{$}\NormalTok{log2FoldChange }\SpecialCharTok{\textgreater{}} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ res\_df}\SpecialCharTok{$}\NormalTok{padj }\SpecialCharTok{\textless{}} \FloatTok{0.05}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"Upregulated"}
+\NormalTok{res\_df}\SpecialCharTok{$}\NormalTok{Regulation[res\_df}\SpecialCharTok{$}\NormalTok{log2FoldChange }\SpecialCharTok{\textless{}} \SpecialCharTok{{-}}\DecValTok{1} \SpecialCharTok{\&}\NormalTok{ res\_df}\SpecialCharTok{$}\NormalTok{padj }\SpecialCharTok{\textless{}} \FloatTok{0.05}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"Downregulated"}
+
+\FunctionTok{ggplot}\NormalTok{(res\_df, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ log2FoldChange, }\AttributeTok{y =} \SpecialCharTok{{-}}\FunctionTok{log10}\NormalTok{(padj), }\AttributeTok{color =}\NormalTok{ Regulation)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.6}\NormalTok{, }\AttributeTok{size =} \FloatTok{1.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_vline}\NormalTok{(}\AttributeTok{xintercept =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{), }\AttributeTok{linetype =} \StringTok{"dashed"}\NormalTok{, }\AttributeTok{color =} \StringTok{"gray40"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_hline}\NormalTok{(}\AttributeTok{yintercept =} \SpecialCharTok{{-}}\FunctionTok{log10}\NormalTok{(}\FloatTok{0.05}\NormalTok{), }\AttributeTok{linetype =} \StringTok{"dashed"}\NormalTok{, }\AttributeTok{color =} \StringTok{"gray40"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"Upregulated"} \OtherTok{=} \StringTok{"red"}\NormalTok{,}
+                                \StringTok{"Downregulated"} \OtherTok{=} \StringTok{"blue"}\NormalTok{,}
+                                \StringTok{"Not significant"} \OtherTok{=} \StringTok{"gray70"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Volcano Plot: Treated vs Untreated"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"log2 Fold Change"}\NormalTok{, }\AttributeTok{y =} \StringTok{"{-}log10(Adjusted p{-}value)"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\emph{C: Heatmap of Top Variable Genes}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{topVarGenes }\OtherTok{\textless{}{-}} \FunctionTok{head}\NormalTok{(}\FunctionTok{order}\NormalTok{(}\FunctionTok{rowVars}\NormalTok{(}\FunctionTok{assay}\NormalTok{(vsd)), }\AttributeTok{decreasing =} \ConstantTok{TRUE}\NormalTok{), }\DecValTok{30}\NormalTok{)}
+\FunctionTok{pheatmap}\NormalTok{(}\FunctionTok{assay}\NormalTok{(vsd)[topVarGenes, ],}
+         \AttributeTok{scale =} \StringTok{"row"}\NormalTok{,}
+         \AttributeTok{annotation\_col =} \FunctionTok{as.data.frame}\NormalTok{(}\FunctionTok{colData}\NormalTok{(vsd)[, }\StringTok{"dex"}\NormalTok{, }\AttributeTok{drop=}\ConstantTok{FALSE}\NormalTok{]),}
+         \AttributeTok{main =} \StringTok{"Top 30 Variable Genes"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\emph{D: Optional Challenge (Barplot of top 10 upregulated genes)}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{top\_up }\OtherTok{\textless{}{-}} \FunctionTok{head}\NormalTok{(sig\_res[}\FunctionTok{order}\NormalTok{(sig\_res}\SpecialCharTok{$}\NormalTok{log2FoldChange, }\AttributeTok{decreasing =} \ConstantTok{TRUE}\NormalTok{), ], }\DecValTok{10}\NormalTok{)}
+\FunctionTok{barplot}\NormalTok{(top\_up}\SpecialCharTok{$}\NormalTok{log2FoldChange, }\AttributeTok{names.arg =} \FunctionTok{rownames}\NormalTok{(top\_up),}
+        \AttributeTok{las =} \DecValTok{2}\NormalTok{, }\AttributeTok{col =} \StringTok{"tomato"}\NormalTok{, }\AttributeTok{main =} \StringTok{"Top 10 Upregulated Genes"}\NormalTok{,}
+        \AttributeTok{ylab =} \StringTok{"log2 Fold Change"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
 
   \bibliography{book.bib,packages.bib}
 
